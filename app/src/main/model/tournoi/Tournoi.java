@@ -5,7 +5,8 @@
 package main.model.tournoi;
 
 import java.util.Calendar;
-import main.exceptions.ErreurDatefermetureTournoi;
+
+import main.erreurs.ErreurDatefermetureTournoi;
 
 /**
  * 
