@@ -43,7 +43,6 @@ public abstract class Tournoi {
 		if(calendrierFermeture.before(this.dateOuverture)) {
 			throw new ErreurDatefermetureTournoi(calendrierFermeture);
 		}
-		
 		this.dateFermeture = calendrierFermeture;
 	}
 
