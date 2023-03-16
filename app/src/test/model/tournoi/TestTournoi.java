@@ -26,8 +26,8 @@ public class TestTournoi {
 		tousLesTypesDeTournoi = new ArrayList<>();
 		
 		// entrée de tous les types de tournoi
-		tousLesTypesDeTournoi.add(new LooserBracket("testTournoiLooserBracket"));
-		tousLesTypesDeTournoi.add(new Poule("testTournoiPoule"));
+		tousLesTypesDeTournoi.add(new LooserBracket("testTournoiLooserBracket", 4));
+		tousLesTypesDeTournoi.add(new Poule("testTournoiPoule", 4));
 	}
 	
 	@Test
