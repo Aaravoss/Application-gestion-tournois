@@ -4,8 +4,9 @@
  */
 package main.model.tournoi;
 
+import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.util.List;
 import main.erreurs.ErreurDatefermetureTournoi;
 
 /**
@@ -17,9 +18,12 @@ public abstract class Tournoi {
 	private String nom;
 	private Calendar dateOuverture;
 	private Calendar dateFermeture;
+	private List tours;
 
 	/**
-	 * Créer un nouveau tournoi et affecte automatiquement la date d'ouverture
+	 * Créer un nouveau tournoi et
+	 * affecte automatiquement la date d'ouverture
+	 * 
 	 * @param nom du tournoi
 	 * @param nombreDEquipeACreer
 	 * @author Morgan Nayet
@@ -29,6 +33,7 @@ public abstract class Tournoi {
 		this.nom = nom;
 		this.dateOuverture = Calendar.getInstance();
 		this.dateFermeture = null;
+		this.tours = new ArrayList<Tour>();
 	}
 	
 	/**
