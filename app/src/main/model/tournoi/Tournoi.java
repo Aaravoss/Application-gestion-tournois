@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import main.erreurs.ErreurDatefermetureTournoi;
+import main.model.tour.Tour;
 
 /**
  * 
