@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import main.erreurs.ErreurDatefermetureTournoi;
+import main.model.equipe.Equipe;
 import main.model.tour.Tour;
 
 /**
@@ -20,6 +21,7 @@ public abstract class Tournoi {
 	private Calendar dateOuverture;
 	private Calendar dateFermeture;
 	private List tours;
+	private Equipe[] equipes;
 
 	/**
 	 * Créer un nouveau tournoi et
@@ -29,12 +31,13 @@ public abstract class Tournoi {
 	 * @param nombreDEquipeACreer
 	 * @author Morgan Nayet
 	 */
-	public Tournoi(String nom) {
+	public Tournoi(String nom, int nombreDEquipeACreer) {
 		
 		this.nom = nom;
 		this.dateOuverture = Calendar.getInstance();
 		this.dateFermeture = null;
 		this.tours = new ArrayList<Tour>();
+		this.equipes = new Equipe[nombreDEquipeACreer];
 	}
 	
 	/**

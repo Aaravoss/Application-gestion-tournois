@@ -17,9 +17,9 @@ public class Poule extends Tournoi {
 	 * @param nom du tournoi
 	 * @author Morgan Nayet
 	 */
-	public Poule(String nom) {
+	public Poule(String nom, int nombreDEquipeACreer) {
 		
-		super(nom);
+		super(nom, nombreDEquipeACreer);
 	}
 
 }
