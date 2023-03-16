@@ -4,12 +4,18 @@
  */
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+import main.model.tournoi.Tournoi;
+
 /**
  * Lance l'application
  * @author Morgan Nayet
  */
 public class GestionTournois {
 
+	private static List tournois;
+	
 	/**
 	 * Lance l'application et
 	 * ferme l'application quand l'utilisateur le décide
@@ -17,6 +23,7 @@ public class GestionTournois {
 	 */
 	public static void main(String[] args) {
 
+		tournois = new ArrayList<Tournoi>();
 		lancerApplication();
 	}
 
