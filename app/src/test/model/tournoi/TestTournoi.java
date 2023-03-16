@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 /**
- * 
+ * Classe de tests JUnit de Tournoi
  * @author Morgan Nayet
  */
 public class TestTournoi {
