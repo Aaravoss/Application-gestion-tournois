@@ -1,4 +1,4 @@
-package com.example.ihmmenu;
+package main.view.ihmmenu;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -9,9 +9,6 @@ import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
-
-import java.io.IOException;
 
 public class IHMMenu extends Application {
 
