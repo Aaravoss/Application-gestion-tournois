@@ -10,9 +10,6 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-
-import java.io.IOException;
-
 public class IHMMenu extends Application {
 
     private static double TAILLE_ECRAN_X = 1440;
