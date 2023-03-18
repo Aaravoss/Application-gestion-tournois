@@ -1,4 +1,4 @@
-package com.example.ihmmenu;
+package main.view.ihmmenu;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;

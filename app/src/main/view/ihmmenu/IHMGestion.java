@@ -1,19 +1,16 @@
-package com.example.ihmmenu;
+package main.view.ihmmenu;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
-
-import java.io.IOException;
-
-public class IHMMenu extends Application {
+public class IHMGestion extends Application {
 
     private static double TAILLE_ECRAN_X = 1440;
     private static double TAILLE_ECRAN_Y = 924;
@@ -25,7 +22,7 @@ public class IHMMenu extends Application {
         Group root = new Group();
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
 
-        Label titre = new Label("Bienvenue sur l'application \n de gestion de tournoi");
+        Label titre = new Label("Gestion des tournois");
         titre.setFont(new Font("Cambria", 80));
         titre.setLayoutX(TAILLE_ECRAN_X /5);
         titre.setLayoutY(100);
@@ -40,8 +37,8 @@ public class IHMMenu extends Application {
         btnGestion.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                IHMGestion page = new IHMGestion();
-                page.start(stage);
+                //IHMCreationTournoi page = new IHMCreationTournoi();
+                //page.start(stage);
             }
         });
 
