@@ -93,5 +93,17 @@ public abstract class Tournoi {
 		return this.equipes;
 	}
 	
-	
+	/**
+	 * Setter des equipes
+	 * Insère 1 à 1 les nouvelles équipes 
+	 * dans la limite disponible dans le tournoi
+	 * 
+	 * @param nouvsEquipes
+	 */
+	public void setEquipes(String[] nouvsEquipes) {
+		
+		for(int i = 0 ; i < this.equipes.length ; i++) {
+			this.equipes[i] = new Equipe(nouvsEquipes[i]);
+		}
+	}
 }

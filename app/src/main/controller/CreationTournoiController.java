@@ -5,10 +5,14 @@
 package main.controller;
 
 import javafx.stage.Stage;
+import main.GestionTournois;
+import main.model.tournoi.Tournoi;
 import main.model.tournoi.type.LooserBracket;
 import main.model.tournoi.type.Poule;
 import main.view.ihmmenu.IHMCreationLoserBracket;
 import main.view.ihmmenu.IHMCreationPoule;
+import main.view.ihmmenu.IHMGestion;
+
 import static main.utils.BusinessConstants.TYPE_LOSER_BRACKET;
 import static main.utils.BusinessConstants.TYPE_POULE;
 
@@ -41,5 +45,14 @@ public class CreationTournoiController {
 				throw new Exception("Mauvais type de tournoi fourni ! Erreur = " 
 						+ typeTournoi);
 		}
+	}
+	
+	public void attribuerEquipes(Stage stage, Tournoi tournoi, String[] nomEquipes) {
+		
+		//sauvegarde du tournoi
+		tournoi.setEquipes(nomEquipes);
+		GestionTournois.sauvegarderTournois(tournoi);
+		
+		new IHMGestion().start(stage);
 	}
 }
