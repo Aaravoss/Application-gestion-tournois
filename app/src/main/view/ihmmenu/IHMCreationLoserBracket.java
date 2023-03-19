@@ -13,18 +13,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import main.model.tournoi.type.LooserBracket;
+import static main.utils.BusinessConstants.*;
 
 public class IHMCreationLoserBracket extends Application {
 
-    private int nbParticipants;
-    private static double TAILLE_ECRAN_X = 1440;
-    private static double TAILLE_ECRAN_Y = 924;
-    private static double TAILLE_BTN_X = 100;
-    private static double TAILLE_BTN_Y = 30;
+    private LooserBracket tournoi;
     private static Font TEXTE = new Font("Cambria", 30);
 
-    public IHMCreationLoserBracket(int nbParticipants) {
-        this.nbParticipants = nbParticipants;
+    public IHMCreationLoserBracket(LooserBracket tournoi) {
+        this.tournoi = tournoi;
     }
 
     @Override
@@ -46,7 +44,7 @@ public class IHMCreationLoserBracket extends Application {
         listeMatch.setPadding(new Insets(50,50,50,50));
         listeMatch.setAlignment(Pos.CENTER);
         listeMatch.setLayoutY(300);
-        int nbMatch = this.nbParticipants / 2;
+        int nbMatch = this.tournoi.getEquipes().length / 2;
         for (int i = 0; i < nbMatch ; i++ ) {
             GridPane gridMatch = new GridPane();
             gridMatch.setHgap(3);

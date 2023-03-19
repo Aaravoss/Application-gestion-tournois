@@ -13,20 +13,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import main.model.tournoi.type.Poule;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import static main.utils.BusinessConstants.*;
 
 public class IHMCreationPoule extends Application {
-    private int nbParticipants;
-    private static double TAILLE_ECRAN_X = 1440;
-    private static double TAILLE_ECRAN_Y = 924;
-    private static double TAILLE_BTN_X = 100;
-    private static double TAILLE_BTN_Y = 30;
+    private Poule tournoi;
     private static Font TEXTE = new Font("Cambria", 30);
 
-    public IHMCreationPoule(int nbParticipants) {
-        this.nbParticipants = nbParticipants;
+    public IHMCreationPoule(Poule tournoi) {
+        this.tournoi = tournoi;
     }
 
     @Override
@@ -69,7 +67,7 @@ public class IHMCreationPoule extends Application {
         hBoxPoule.setLayoutY(TAILLE_ECRAN_Y/2);
 
         int nbParticipant;
-        nbParticipant = this.nbParticipants;
+        nbParticipant = this.tournoi.getEquipes().length;
         btnPoule.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -81,7 +79,7 @@ public class IHMCreationPoule extends Application {
                     VboxPouleP.setBorder(new Border(new BorderStroke(Color.BLACK,
                             BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-                    Label labelPoule = new Label("Poule " + (a+1));
+                    Label labelPoule = new Label(TYPE_POULE + " " + (a+1));
                     VboxPouleP.getChildren().add(labelPoule);
 
                     int nbParticipantParPoule;

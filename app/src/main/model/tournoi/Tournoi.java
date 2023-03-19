@@ -84,4 +84,14 @@ public abstract class Tournoi {
 				: Calendar.getInstance(this.dateOuverture.getTimeZone())
 				;
 	}
+
+	/**
+	 * Getter des equipes
+	 * @return the equipes
+	 */
+	public Equipe[] getEquipes() {
+		return this.equipes;
+	}
+	
+	
 }

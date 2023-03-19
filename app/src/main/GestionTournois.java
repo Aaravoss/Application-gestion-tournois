@@ -7,6 +7,7 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 import main.model.tournoi.Tournoi;
+import main.view.ihmmenu.IHMMenu;
 
 /**
  * Lance l'application
@@ -15,6 +16,10 @@ import main.model.tournoi.Tournoi;
 public class GestionTournois {
 
 	private static List tournois;
+	
+	public static void sauvegarderTournois(Tournoi tournoi) {
+		tournois.add(tournoi);
+	}
 	
 	/**
 	 * Lance l'application et
@@ -32,6 +37,6 @@ public class GestionTournois {
 	 */
 	private static void lancerApplication() {
 		
-		//TODO lancer l'ihm
+		IHMMenu.main(null);
 	}
 }

@@ -10,17 +10,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import main.controller.CreationTournoiController;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import static main.utils.BusinessConstants.*;
 
 public class IHMCreationTournoi extends Application {
 
-    private static double TAILLE_ECRAN_X = 1440;
-    private static double TAILLE_ECRAN_Y = 924;
-    private static double TAILLE_BTN_X = 100;
-    private static double TAILLE_BTN_Y = 30;
-    private static Font TEXTE = new Font("Cambria", 30);
+    private static final Font TEXTE = new Font("Cambria", 30);
 
     @Override
     public void start(Stage stage)  {
@@ -59,10 +57,8 @@ public class IHMCreationTournoi extends Application {
         ComboBox<String> comboBoxTypeT = new ComboBox<String>();
         comboBoxTypeT.setPrefWidth(350);
         comboBoxTypeT.setPrefHeight(30);
-        String typePoule = new String("Poule");
-        String typeLoserBracket = new String("LoserBracket");
         comboBoxTypeT.setPadding(new Insets(5,5,5,5));
-        comboBoxTypeT.getItems().addAll(typePoule, typeLoserBracket);
+        comboBoxTypeT.getItems().addAll(TYPE_POULE, TYPE_LOSER_BRACKET);
         hboxTypeT.getChildren().addAll(labelTypeT,comboBoxTypeT);
 
         HBox hboxParticipants = new HBox();
@@ -87,14 +83,31 @@ public class IHMCreationTournoi extends Application {
         btnConfirmer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if( !textFieldNomT.equals(null) && !textFieldNbParticipants.equals(null) && comboBoxTypeT.getValue().equals("Poule")) {
-                    IHMCreationPoule page = new IHMCreationPoule(Integer.parseInt(textFieldNbParticipants.getText()));
-                    page.start(stage);
-                } else if (!textFieldNomT.equals(null) && !textFieldNbParticipants.equals(null) && comboBoxTypeT.getValue().equals("LoserBracket")) {
-                    IHMCreationLoserBracket page = new IHMCreationLoserBracket(Integer.parseInt(textFieldNbParticipants.getText()));
-                    page.start(stage);
+                if( !textFieldNomT.equals(null) && !textFieldNbParticipants.equals(null)
+                	&& !"".equals(textFieldNomT.getText()) && !"".equals(textFieldNbParticipants.getText())) {
+                	
+                	String typeTournoi;
+                	
+                	typeTournoi = "";
+                	if(comboBoxTypeT.getValue().equals("Poule")) {
+                        //IHMCreationPoule page = new IHMCreationPoule(Integer.parseInt(textFieldNbParticipants.getText()));
+                        //page.start(stage);
+                		typeTournoi = "Poule";
+                        
+                	} else if (comboBoxTypeT.getValue().equals("LoserBracket")) {
+                        //IHMCreationLoserBracket page = new IHMCreationLoserBracket(Integer.parseInt(textFieldNbParticipants.getText()));
+                        //page.start(stage);
+                		typeTournoi = "LoserBracket";
+                	}
+                	
+                	// Création du tournoi
+                	try {
+						new CreationTournoiController().creerTournoi(typeTournoi, textFieldNomT.getText(), Integer.parseInt(textFieldNbParticipants.getText()), stage);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                 }
-
             }
         });
 
