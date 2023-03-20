@@ -6,6 +6,8 @@ package main.model.tour;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import main.model.equipe.Equipe;
 import main.model.match.Match;
 
 /**
@@ -29,4 +31,23 @@ public class Tour {
 		this.matchs = new ArrayList<Match>();
 	}
 
+	/**
+	 * Setter des matchs du tour courant
+	 * @param equipes participants au tour courant
+	 * @param nbEquipesParMatch nombre d'équipes participant à chaque match
+	 */
+	public void setMatchs(Equipe[] equipes, int nbEquipesParMatch) {
+		
+		Match match;
+		
+		match = new Match();
+		for(int i = 0 ; i < equipes.length ; i++) {
+			for(int y = 0 ; y < nbEquipesParMatch ; y++) {
+				i++;
+				match.addEquipe(equipes[i]);
+			}
+			this.matchs.add(match);
+			match = new Match();
+		}
+	}
 }

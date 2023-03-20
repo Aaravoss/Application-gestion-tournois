@@ -119,6 +119,7 @@ public class IHMCreationPoule extends Application {
             public void handle(ActionEvent actionEvent) {
                 IHMGestion page = new IHMGestion();
                 page.start(stage);
+                //TODO remplacer ça par le controleur
             }
         });
 

@@ -47,6 +47,13 @@ public class CreationTournoiController {
 		}
 	}
 	
+	/**
+	 * Attribue les équipes au tournoi
+	 * 
+	 * @param stage 
+	 * @param tournoi en cour de création
+	 * @param nomEquipes ensemble des noms de toutes les équipes du tournoi
+	 */
 	public void attribuerEquipes(Stage stage, Tournoi tournoi, String[] nomEquipes) {
 		
 		//sauvegarde du tournoi
@@ -54,5 +61,11 @@ public class CreationTournoiController {
 		GestionTournois.sauvegarderTournois(tournoi);
 		
 		new IHMGestion().start(stage);
+	}
+	
+	public void atribuerMatchs1erTour(Stage stage, Tournoi tournoi, String[] nomsEquipes) {
+		
+		tournoi.addNewTour("1er tour");
+		tournoi.tour
 	}
 }

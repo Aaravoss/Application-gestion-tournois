@@ -22,4 +22,12 @@ public class Match {
 	public Match() {
 		this.equipes = new ArrayList<Equipe>();
 	}
+	
+	/**
+	 * Setter des équipes particiants au match
+	 * @param equipe ajoutée au match
+	 */
+	public void addEquipe(Equipe equipe) {
+		this.equipes.add(equipe);
+	}
 }

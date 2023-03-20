@@ -18,6 +18,6 @@ public class LooserBracket extends Tournoi {
 	 * @author Morgan Nayet
 	 */
 	public LooserBracket(String nom, int nombreDEquipeACreer) {
-		super(nom, nombreDEquipeACreer);
+		super(nom, nombreDEquipeACreer, 2);
 	}
 }

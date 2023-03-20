@@ -12,14 +12,24 @@ import main.model.tournoi.Tournoi;
  */
 public class Poule extends Tournoi {
 
+	private int nbGagnantParPoule;
+	
 	/**
 	 * Constructeur d'un tournoi de type Poule
 	 * @param nom du tournoi
 	 * @author Morgan Nayet
 	 */
-	public Poule(String nom, int nombreDEquipeACreer) {
+	public Poule(String nom, int nombreDEquipeACreer, int nbEquipesParMatch,
+				 int nbGagnantParPoule) {
 		
-		super(nom, nombreDEquipeACreer);
+		super(nom, nombreDEquipeACreer, nbEquipesParMatch);
+		this.nbGagnantParPoule = nbGagnantParPoule;
 	}
-
+	
+	/**
+	 * Getter du nombre de gagnants par poule
+	 */
+	public int getNbGagnantParPoule() {
+		return this.nbGagnantParPoule;
+	}
 }
