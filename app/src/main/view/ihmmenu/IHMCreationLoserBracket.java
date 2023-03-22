@@ -27,6 +27,7 @@ public class IHMCreationLoserBracket extends Application {
 
     public IHMCreationLoserBracket(LooserBracket tournoi) {
         this.tournoi = tournoi;
+        this.participants = new ArrayList<>();
     }
     
     private boolean isMatchsRemplis() {
@@ -105,7 +106,7 @@ public class IHMCreationLoserBracket extends Application {
             			nomsEquipes[i] = participants.get(i).getText();
             		}
             		
-            		new CreationTournoiController().attribuerEquipes(stage, tournoi, nomsEquipes);
+            		new CreationTournoiController().attribuerEquipes(stage, tournoi, nomsEquipes, 2, 1);
             	}
             }
         });

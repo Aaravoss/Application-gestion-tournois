@@ -90,13 +90,9 @@ public class IHMCreationTournoi extends Application {
                 	
                 	typeTournoi = "";
                 	if(comboBoxTypeT.getValue().equals("Poule")) {
-                        //IHMCreationPoule page = new IHMCreationPoule(Integer.parseInt(textFieldNbParticipants.getText()));
-                        //page.start(stage);
                 		typeTournoi = "Poule";
                         
                 	} else if (comboBoxTypeT.getValue().equals("LoserBracket")) {
-                        //IHMCreationLoserBracket page = new IHMCreationLoserBracket(Integer.parseInt(textFieldNbParticipants.getText()));
-                        //page.start(stage);
                 		typeTournoi = "LoserBracket";
                 	}
                 	

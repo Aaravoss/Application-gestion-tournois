@@ -9,13 +9,13 @@ import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import static main.utils.BusinessConstants.TAILLE_BTN_MENU_X;
+import static main.utils.BusinessConstants.TAILLE_BTN_MENU_Y;
+import static main.utils.BusinessConstants.TAILLE_ECRAN_X;
+import static main.utils.BusinessConstants.TAILLE_ECRAN_Y;
 
 public class IHMMenu extends Application {
 
-    private static double TAILLE_ECRAN_X = 1440;
-    private static double TAILLE_ECRAN_Y = 924;
-    private static double TAILLE_BTN_X = 400;
-    private static double TAILLE_BTN_Y = 200;
     @Override
     public void start(Stage stage) {
         stage.setTitle("Menu");
@@ -31,7 +31,7 @@ public class IHMMenu extends Application {
         Button btnGestion = new Button();
         btnGestion.setLayoutX(TAILLE_ECRAN_X /6);
         btnGestion.setLayoutY(TAILLE_ECRAN_Y /2);
-        btnGestion.setPrefSize(TAILLE_BTN_X, TAILLE_BTN_Y);
+        btnGestion.setPrefSize(TAILLE_BTN_MENU_X, TAILLE_BTN_MENU_Y);
         btnGestion.setText("Gérer les tournois");
         btnGestion.setFont(new Font("Cambria", 30));
         btnGestion.setOnAction(new EventHandler<ActionEvent>() {
@@ -44,9 +44,9 @@ public class IHMMenu extends Application {
 
 
         Button btnCreation = new Button();
-        btnCreation.setLayoutX(TAILLE_ECRAN_X - TAILLE_ECRAN_X /6 - TAILLE_BTN_X);
+        btnCreation.setLayoutX(TAILLE_ECRAN_X - TAILLE_ECRAN_X /6 - TAILLE_BTN_MENU_X);
         btnCreation.setLayoutY(TAILLE_ECRAN_Y /2);
-        btnCreation.setPrefSize(TAILLE_BTN_X, TAILLE_BTN_Y);
+        btnCreation.setPrefSize(TAILLE_BTN_MENU_X, TAILLE_BTN_MENU_Y);
         btnCreation.setText("Créer un tournoi");
         btnCreation.setFont(new Font("Cambria", 30));
         btnCreation.setOnAction(new EventHandler<ActionEvent>() {

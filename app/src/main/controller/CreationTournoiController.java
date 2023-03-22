@@ -6,13 +6,13 @@ package main.controller;
 
 import javafx.stage.Stage;
 import main.GestionTournois;
+import main.model.tour.Tour;
 import main.model.tournoi.Tournoi;
 import main.model.tournoi.type.LooserBracket;
 import main.model.tournoi.type.Poule;
 import main.view.ihmmenu.IHMCreationLoserBracket;
 import main.view.ihmmenu.IHMCreationPoule;
 import main.view.ihmmenu.IHMGestion;
-
 import static main.utils.BusinessConstants.TYPE_LOSER_BRACKET;
 import static main.utils.BusinessConstants.TYPE_POULE;
 
@@ -54,18 +54,31 @@ public class CreationTournoiController {
 	 * @param tournoi en cour de création
 	 * @param nomEquipes ensemble des noms de toutes les équipes du tournoi
 	 */
-	public void attribuerEquipes(Stage stage, Tournoi tournoi, String[] nomEquipes) {
+	public void attribuerEquipes(Stage stage, Tournoi tournoi, String[] nomEquipes,
+								int nbEquipesParMatch, int nbGagnantParMatch) {
 		
-		//sauvegarde du tournoi
+		//re-création des objets avec le nb d'équipes et de gagnants par match
+		if (tournoi instanceof Poule) {
+			
+			tournoi = new Poule(tournoi.getNom(), tournoi.getEquipes().length, 
+					nbEquipesParMatch, nbGagnantParMatch);
+		}
+		
+		//création des équipes
 		tournoi.setEquipes(nomEquipes);
+		
+		this.atribuerMatchs1erTour(stage, tournoi);
 		GestionTournois.sauvegarderTournois(tournoi);
 		
 		new IHMGestion().start(stage);
 	}
 	
-	public void atribuerMatchs1erTour(Stage stage, Tournoi tournoi, String[] nomsEquipes) {
+	public void atribuerMatchs1erTour(Stage stage, Tournoi tournoi) {
 		
-		tournoi.addNewTour("1er tour");
-		tournoi.tour
+		Tour tour;
+		
+		tour = new Tour("1er tour");
+		tour.setMatchs(tournoi.getEquipes(), tournoi.getNbEquipesParMatch());
+		tournoi.addNewTour(tour);
 	}
 }

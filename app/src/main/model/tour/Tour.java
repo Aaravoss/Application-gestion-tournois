@@ -38,16 +38,17 @@ public class Tour {
 	 */
 	public void setMatchs(Equipe[] equipes, int nbEquipesParMatch) {
 		
-		Match match;
-		
-		match = new Match();
 		for(int i = 0 ; i < equipes.length ; i++) {
-			for(int y = 0 ; y < nbEquipesParMatch ; y++) {
-				i++;
-				match.addEquipe(equipes[i]);
-			}
-			this.matchs.add(match);
+			
+			Match match;
+			int y;
+			
 			match = new Match();
+			for(y = 0 ; y < nbEquipesParMatch ; y++) {
+				match.addEquipe(equipes[i+y]);
+			}
+			i += y-1; //sinon à la fin de la boucle y = 2
+			this.matchs.add(match);
 		}
 	}
 }

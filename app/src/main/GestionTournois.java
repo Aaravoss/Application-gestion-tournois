@@ -5,7 +5,6 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.List;
 import main.model.tournoi.Tournoi;
 import main.view.ihmmenu.IHMMenu;
 
@@ -15,10 +14,14 @@ import main.view.ihmmenu.IHMMenu;
  */
 public class GestionTournois {
 
-	private static List tournois;
+	private static ArrayList<Tournoi> tournois;
 	
 	public static void sauvegarderTournois(Tournoi tournoi) {
 		tournois.add(tournoi);
+	}
+	
+	public static ArrayList<Tournoi> getTournois() {
+		return tournois;
 	}
 	
 	/**

@@ -13,20 +13,35 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import main.controller.CreationTournoiController;
 import main.model.tournoi.type.Poule;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import static main.utils.BusinessConstants.*;
 
+import java.util.ArrayList;
+
 public class IHMCreationPoule extends Application {
+	
     private Poule tournoi;
+    private ArrayList<TextField> participants;
     private static Font TEXTE = new Font("Cambria", 30);
 
     public IHMCreationPoule(Poule tournoi) {
         this.tournoi = tournoi;
     }
 
+    private boolean isMatchsRemplis() {
+    	
+    	for(TextField tf : this.participants) {
+    		if(tf == null || "".equals(tf)) {
+    			return false;
+    		}
+    	}
+    	return true;
+    }
+    
     @Override
     public void start(Stage stage)  {
 
@@ -117,9 +132,24 @@ public class IHMCreationPoule extends Application {
         btnConfirmer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                IHMGestion page = new IHMGestion();
-                page.start(stage);
+            	
+            	if(isMatchsRemplis()) {
+            		
+            		String[] nomsEquipes;
+            		
+            		nomsEquipes = new String[participants.size()];
+            		
+            		for(int i = 0 ; i < participants.size() ; i++) {
+            			nomsEquipes[i] = participants.get(i).getText();
+            		}
+            		
+            		new CreationTournoiController().attribuerEquipes(stage, tournoi, nomsEquipes, 2, 1);
+            	}
+
                 //TODO remplacer ça par le controleur
+            	new CreationTournoiController()
+            	.attribuerEquipes(stage, tournoi, null, 
+            			nbParticipant, nbParticipant);
             }
         });
 
