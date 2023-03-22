@@ -2,14 +2,14 @@
  * @author Morgan Nayet              								19 Feb 2023
  * Copyrights
  */
-package main.model.tournoi;
+package src.main.model.tournoi;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import main.erreurs.ErreurDatefermetureTournoi;
-import main.model.equipe.Equipe;
-import main.model.tour.Tour;
+import src.main.erreurs.ErreurDatefermetureTournoi;
+import src.main.model.equipe.Equipe;
+import src.main.model.tour.Tour;
 
 /**
  * 

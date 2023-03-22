@@ -1,4 +1,4 @@
-package main.view.ihmmenu;
+package src.main.view;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -13,12 +13,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import main.controller.CreationTournoiController;
-import main.model.tournoi.type.Poule;
+import src.main.controller.CreationTournoiController;
+import src.main.model.tournoi.type.Poule;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import static main.utils.BusinessConstants.*;
+import static src.main.utils.BusinessConstants.*;
 
 import java.util.ArrayList;
 

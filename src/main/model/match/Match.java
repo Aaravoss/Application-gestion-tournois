@@ -2,11 +2,11 @@
  * @author Morgan Nayet              								16 Mar 2023
  * Copyrights
  */
-package main.model.match;
+package src.main.model.match;
 
 import java.util.ArrayList;
 import java.util.List;
-import main.model.equipe.Equipe;
+import src.main.model.equipe.Equipe;
 
 /**
  * 

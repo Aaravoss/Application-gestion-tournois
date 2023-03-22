@@ -2,12 +2,12 @@
  * @author Morgan Nayet              19 Feb 2023
  * Copyrights
  */
-package test.model.tournoi;
+package src.test.model.tournoi;
 
 import java.util.ArrayList;
-import main.model.tournoi.Tournoi;
-import main.model.tournoi.type.LooserBracket;
-import main.model.tournoi.type.Poule;
+import src.main.model.tournoi.Tournoi;
+import src.main.model.tournoi.type.LooserBracket;
+import src.main.model.tournoi.type.Poule;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

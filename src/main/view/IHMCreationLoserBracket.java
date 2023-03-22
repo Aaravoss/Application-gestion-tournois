@@ -1,4 +1,4 @@
-package main.view.ihmmenu;
+package src.main.view;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -13,9 +13,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import main.controller.CreationTournoiController;
-import main.model.tournoi.type.LooserBracket;
-import static main.utils.BusinessConstants.*;
+import src.main.controller.CreationTournoiController;
+import src.main.model.tournoi.type.LooserBracket;
+import static src.main.utils.BusinessConstants.*;
 
 import java.util.ArrayList;
 
