@@ -2,7 +2,7 @@
  * @author Morgan Nayet              22 Mar 2023
  * Copyrights
  */
-package main.exceptions;
+package src.main.exceptions;
 
 /**
  * 

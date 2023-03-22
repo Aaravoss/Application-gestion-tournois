@@ -2,9 +2,9 @@
  * @author Morgan Nayet              19 Feb 2023
  * Copyrights
  */
-package main.model.tournoi.type;
+package src.main.model.tournoi.type;
 
-import main.model.tournoi.Tournoi;
+import src.main.model.tournoi.Tournoi;
 
 /**
  * 

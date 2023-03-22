@@ -1,4 +1,4 @@
-package main.view.ihmmenu;
+package src.main.view;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -10,11 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import main.controller.CreationTournoiController;
+import src.main.controller.CreationTournoiController;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import static main.utils.BusinessConstants.*;
+import static src.main.utils.BusinessConstants.*;
 
 public class IHMCreationTournoi extends Application {
 

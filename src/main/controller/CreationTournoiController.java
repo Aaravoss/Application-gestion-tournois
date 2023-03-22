@@ -2,20 +2,20 @@
  * @author Morgan Nayet              								16 Mar 2023
  * Copyrights
  */
-package main.controller;
+package src.main.controller;
 
 import javafx.stage.Stage;
-import main.GestionTournois;
-import main.exceptions.TournoiException;
-import main.model.tour.Tour;
-import main.model.tournoi.Tournoi;
-import main.model.tournoi.type.LooserBracket;
-import main.model.tournoi.type.Poule;
-import main.view.ihmmenu.IHMCreationLoserBracket;
-import main.view.ihmmenu.IHMCreationPoule;
-import main.view.ihmmenu.IHMGestion;
-import static main.utils.BusinessConstants.TYPE_LOSER_BRACKET;
-import static main.utils.BusinessConstants.TYPE_POULE;
+import src.main.GestionTournois;
+import src.main.exceptions.TournoiException;
+import src.main.model.tour.Tour;
+import src.main.model.tournoi.Tournoi;
+import src.main.model.tournoi.type.LooserBracket;
+import src.main.model.tournoi.type.Poule;
+import src.main.view.IHMCreationLoserBracket;
+import src.main.view.IHMCreationPoule;
+import src.main.view.IHMGestion;
+import static src.main.utils.BusinessConstants.TYPE_LOSER_BRACKET;
+import static src.main.utils.BusinessConstants.TYPE_POULE;
 
 /**
  * 

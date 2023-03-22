@@ -2,7 +2,7 @@
  * @author Morgan Nayet              								16 Mar 2023
  * Copyrights
  */
-package main.model.equipe;
+package src.main.model.equipe;
 
 /**
  * 
