@@ -10,16 +10,14 @@ import main.model.tournoi.Tournoi;
  * 
  * @author Morgan Nayet
  */
-public class Poule extends Tournoi {
+public class LooserBracket extends Tournoi {
 
 	/**
-	 * Constructeur d'un tournoi de type Poule
+	 * Constructeur d'un tournoi de type LooserBracket
 	 * @param nom du tournoi
 	 * @author Morgan Nayet
 	 */
-	public Poule(String nom, int nombreDEquipeACreer) {
-		
-		super(nom, nombreDEquipeACreer);
+	public LooserBracket(String nom, int nombreDEquipeACreer) {
+		super(nom, nombreDEquipeACreer, 2, 1);
 	}
-
 }

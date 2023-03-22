@@ -13,18 +13,31 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import main.controller.CreationTournoiController;
+import main.model.tournoi.type.LooserBracket;
+import static main.utils.BusinessConstants.*;
+
+import java.util.ArrayList;
 
 public class IHMCreationLoserBracket extends Application {
 
-    private int nbParticipants;
-    private static double TAILLE_ECRAN_X = 1440;
-    private static double TAILLE_ECRAN_Y = 924;
-    private static double TAILLE_BTN_X = 100;
-    private static double TAILLE_BTN_Y = 30;
+    private LooserBracket tournoi;
+    private ArrayList<TextField> participants;
     private static Font TEXTE = new Font("Cambria", 30);
 
-    public IHMCreationLoserBracket(int nbParticipants) {
-        this.nbParticipants = nbParticipants;
+    public IHMCreationLoserBracket(LooserBracket tournoi) {
+        this.tournoi = tournoi;
+        this.participants = new ArrayList<>();
+    }
+    
+    private boolean isMatchsRemplis() {
+    	
+    	for(TextField tf : this.participants) {
+    		if(tf == null || "".equals(tf)) {
+    			return false;
+    		}
+    	}
+    	return true;
     }
 
     @Override
@@ -40,13 +53,14 @@ public class IHMCreationLoserBracket extends Application {
         titre.setLayoutX(TAILLE_ECRAN_X /5);
         titre.setLayoutY(100);
 
+        this.participants = new ArrayList<>();
         GridPane listeMatch = new GridPane();
         listeMatch.setHgap(3);
         listeMatch.setVgap(10);
         listeMatch.setPadding(new Insets(50,50,50,50));
         listeMatch.setAlignment(Pos.CENTER);
         listeMatch.setLayoutY(300);
-        int nbMatch = this.nbParticipants / 2;
+        int nbMatch = this.tournoi.getEquipes().length / 2;
         for (int i = 0; i < nbMatch ; i++ ) {
             GridPane gridMatch = new GridPane();
             gridMatch.setHgap(3);
@@ -54,8 +68,10 @@ public class IHMCreationLoserBracket extends Application {
             gridMatch.setPadding(new Insets(10,10,10,10));
             Label match = new Label("Match " + (i+1));
             TextField textParticipant1 = new TextField();
+            this.participants.add(textParticipant1);
             Label vs = new Label("VS");
             TextField textParticipant2 = new TextField();
+            this.participants.add(textParticipant2);
             gridMatch.add(match, 1,0);
             gridMatch.add(textParticipant1, 0,1);
             gridMatch.add(vs, 1,1);
@@ -63,10 +79,12 @@ public class IHMCreationLoserBracket extends Application {
             double ligne = i/3;
             double colonne = i%gridMatch.getHgap();
             listeMatch.add(gridMatch, (int) colonne , (int) ligne );
+            
         }
 
 
-
+        
+        
 
         Button btnConfirmer = new Button();
         btnConfirmer.setLayoutX(TAILLE_ECRAN_X - TAILLE_BTN_X * 2 - TAILLE_ECRAN_X * 0.10);
@@ -77,8 +95,19 @@ public class IHMCreationLoserBracket extends Application {
         btnConfirmer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                IHMGestion page = new IHMGestion();
-                page.start(stage);
+
+            	if(isMatchsRemplis()) {
+            		
+            		String[] nomsEquipes;
+            		
+            		nomsEquipes = new String[participants.size()];
+            		
+            		for(int i = 0 ; i < participants.size() ; i++) {
+            			nomsEquipes[i] = participants.get(i).getText();
+            		}
+            		
+            		new CreationTournoiController().attribuerEquipes(stage, tournoi, nomsEquipes, 2, 1);
+            	}
             }
         });
 

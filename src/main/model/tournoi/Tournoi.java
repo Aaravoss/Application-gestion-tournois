@@ -22,6 +22,8 @@ public abstract class Tournoi {
 	private Calendar dateFermeture;
 	private List tours;
 	private Equipe[] equipes;
+	private int nbEquipesParMatch;
+	private int nbGagnantParMatch;
 
 	/**
 	 * Créer un nouveau tournoi et
@@ -31,13 +33,20 @@ public abstract class Tournoi {
 	 * @param nombreDEquipeACreer
 	 * @author Morgan Nayet
 	 */
-	public Tournoi(String nom, int nombreDEquipeACreer) {
+	protected Tournoi(String nom, int nombreDEquipeACreer) {
 		
 		this.nom = nom;
 		this.dateOuverture = Calendar.getInstance();
 		this.dateFermeture = null;
 		this.tours = new ArrayList<Tour>();
 		this.equipes = new Equipe[nombreDEquipeACreer];
+	}
+	
+	protected Tournoi(String nom, int nombreDEquipeACreer, int nbEquipesParMatch, 
+			int nbGagnantParMatch) {
+		this(nom, nombreDEquipeACreer);
+		this.nbEquipesParMatch = nbEquipesParMatch;
+		this.nbGagnantParMatch = nbGagnantParMatch;
 	}
 	
 	/**
@@ -83,5 +92,55 @@ public abstract class Tournoi {
 				? null 
 				: Calendar.getInstance(this.dateOuverture.getTimeZone())
 				;
+	}
+
+	/**
+	 * Getter des equipes
+	 * @return the equipes
+	 */
+	public Equipe[] getEquipes() {
+		return this.equipes;
+	}
+	
+	/**
+	 * Setter des equipes
+	 * Insère 1 à 1 les nouvelles équipes 
+	 * dans la limite disponible dans le tournoi
+	 * 
+	 * @param nouvsEquipes
+	 */
+	public void setEquipes(String[] nouvsEquipes) {
+		
+		for(int i = 0 ; i < this.equipes.length ; i++) {
+			this.equipes[i] = new Equipe(nouvsEquipes[i]);
+		}
+	}
+	
+	/**
+	 * Setter pour ajouter un nouveau tour
+	 * @param tour
+	 */
+	public void addNewTour(Tour tour) {
+		
+		this.tours.add(tour);
+	}
+
+	/** 
+	 * tours attribute getter
+	 * 
+	 * @return le dernier tour
+	 * 		   ou null si pas de tours créés
+	 */
+	public Tour getTourCourant() {
+		return (Tour) this.tours.get(this.tours.size());
+	}
+
+	/** 
+	 * nbEquipesParMatch attribute getter
+	 * 
+	 * @return the nbEquipesParMatch
+	 */
+	public int getNbEquipesParMatch() {
+		return this.nbEquipesParMatch;
 	}
 }
