@@ -33,7 +33,7 @@ public abstract class Tournoi {
 	 * @param nombreDEquipeACreer
 	 * @author Morgan Nayet
 	 */
-	public Tournoi(String nom, int nombreDEquipeACreer) {
+	protected Tournoi(String nom, int nombreDEquipeACreer) {
 		
 		this.nom = nom;
 		this.dateOuverture = Calendar.getInstance();
@@ -42,7 +42,7 @@ public abstract class Tournoi {
 		this.equipes = new Equipe[nombreDEquipeACreer];
 	}
 	
-	public Tournoi(String nom, int nombreDEquipeACreer, int nbEquipesParMatch, 
+	protected Tournoi(String nom, int nombreDEquipeACreer, int nbEquipesParMatch, 
 			int nbGagnantParMatch) {
 		this(nom, nombreDEquipeACreer);
 		this.nbEquipesParMatch = nbEquipesParMatch;

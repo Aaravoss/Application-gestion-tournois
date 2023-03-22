@@ -6,6 +6,7 @@ package main.controller;
 
 import javafx.stage.Stage;
 import main.GestionTournois;
+import main.exceptions.TournoiException;
 import main.model.tour.Tour;
 import main.model.tournoi.Tournoi;
 import main.model.tournoi.type.LooserBracket;
@@ -27,10 +28,11 @@ public class CreationTournoiController {
 	 * 
 	 * @param nom du tournoi
 	 * @param nombreDEquipeACreer composant le tournoi
+	 * @author Morgan Nayet
 	 */
 	public void creerTournoi(String typeTournoi, String nom, 
 			int nombreEquipeACreer, Stage stage)  
-			throws Exception {
+			throws TournoiException {
 		
 		switch(typeTournoi) {
 			case TYPE_LOSER_BRACKET :
@@ -42,7 +44,7 @@ public class CreationTournoiController {
 				.start(stage);
 				break;
 			default :
-				throw new Exception("Mauvais type de tournoi fourni ! Erreur = " 
+				throw new TournoiException("Mauvais type de tournoi fourni ! Erreur = " 
 						+ typeTournoi);
 		}
 	}
@@ -53,6 +55,7 @@ public class CreationTournoiController {
 	 * @param stage 
 	 * @param tournoi en cour de création
 	 * @param nomEquipes ensemble des noms de toutes les équipes du tournoi
+	 * @author Morgan Nayet
 	 */
 	public void attribuerEquipes(Stage stage, Tournoi tournoi, String[] nomEquipes,
 								int nbEquipesParMatch, int nbGagnantParMatch) {
@@ -73,6 +76,12 @@ public class CreationTournoiController {
 		new IHMGestion().start(stage);
 	}
 	
+	/**
+	 * Répartition des équipes dans les différents matchs qui se dérouleront au 1er tour
+	 * @param stage
+	 * @param tournoi en cours de création
+	 * @author Morgan Nayet
+	 */
 	public void atribuerMatchs1erTour(Stage stage, Tournoi tournoi) {
 		
 		Tour tour;
