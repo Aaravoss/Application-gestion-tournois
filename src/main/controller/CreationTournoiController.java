@@ -5,7 +5,7 @@
 package src.main.controller;
 
 import javafx.stage.Stage;
-import src.main.GestionTournois;
+import main.GestionTournois;
 import src.main.exceptions.TournoiException;
 import src.main.model.tour.Tour;
 import src.main.model.tournoi.Tournoi;
