@@ -1,4 +1,4 @@
-package src.main.view;
+package main.view;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -10,11 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import src.main.controller.CreationTournoiController;
+import main.controller.CreationTournoiController;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import static src.main.utils.BusinessConstants.*;
+import static main.utils.BusinessConstants.*;
 
 public class IHMCreationTournoi extends Application {
 
@@ -117,7 +117,7 @@ public class IHMCreationTournoi extends Application {
         btnAnnuler.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                IHMMenu page = new IHMMenu();
+                main.view.IHMMenu page = new main.view.IHMMenu();
                 page.start(stage);
             }
         });

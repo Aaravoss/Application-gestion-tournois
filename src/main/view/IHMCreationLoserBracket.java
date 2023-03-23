@@ -1,4 +1,4 @@
-package src.main.view;
+package main.view;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -13,19 +13,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import src.main.controller.CreationTournoiController;
-import src.main.model.tournoi.type.LooserBracket;
-import static src.main.utils.BusinessConstants.*;
+import main.controller.CreationTournoiController;
+
+import static main.utils.BusinessConstants.*;
 
 import java.util.ArrayList;
 
 public class IHMCreationLoserBracket extends Application {
 
-    private LooserBracket tournoi;
+    private main.model.tournoi.type.LoserBracket tournoi;
     private ArrayList<TextField> participants;
     private static Font TEXTE = new Font("Cambria", 30);
 
-    public IHMCreationLoserBracket(LooserBracket tournoi) {
+    public IHMCreationLoserBracket(main.model.tournoi.type.LoserBracket tournoi) {
         this.tournoi = tournoi;
         this.participants = new ArrayList<>();
     }
@@ -43,7 +43,7 @@ public class IHMCreationLoserBracket extends Application {
     @Override
     public void start(Stage stage)  {
 
-        stage.setTitle("Création d'un tournoi \n Loser Bracket");
+        stage.setTitle("Création d'un tournoi Loser Bracket");
         Group root = new Group();
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
 
@@ -120,7 +120,7 @@ public class IHMCreationLoserBracket extends Application {
         btnAnnuler.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                IHMCreationTournoi page = new IHMCreationTournoi();
+                main.view.IHMCreationTournoi page = new main.view.IHMCreationTournoi();
                 page.start(stage);
             }
         });

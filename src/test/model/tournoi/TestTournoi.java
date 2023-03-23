@@ -5,9 +5,8 @@
 package src.test.model.tournoi;
 
 import java.util.ArrayList;
-import src.main.model.tournoi.Tournoi;
-import src.main.model.tournoi.type.LooserBracket;
-import src.main.model.tournoi.type.Poule;
+import main.model.tournoi.Tournoi;
+import main.model.tournoi.type.Poule;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -26,7 +25,7 @@ public class TestTournoi {
 		tousLesTypesDeTournoi = new ArrayList<>();
 		
 		// entrée de tous les types de tournoi
-		tousLesTypesDeTournoi.add(new LooserBracket("testTournoiLooserBracket", 4));
+		tousLesTypesDeTournoi.add(new main.model.tournoi.type.LoserBracket("testTournoiLooserBracket", 4));
 		tousLesTypesDeTournoi.add(new Poule("testTournoiPoule", 4));
 	}
 	

@@ -1,4 +1,4 @@
-package src.main.view;
+package main.view;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -13,12 +13,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import src.main.controller.CreationTournoiController;
-import src.main.model.tournoi.type.Poule;
+import main.controller.CreationTournoiController;
+import main.model.tournoi.type.Poule;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import static src.main.utils.BusinessConstants.*;
+import static main.utils.BusinessConstants.*;
 
 import java.util.ArrayList;
 
@@ -45,7 +45,7 @@ public class IHMCreationPoule extends Application {
     @Override
     public void start(Stage stage)  {
 
-        stage.setTitle("Création d'un tournoi \n Poule");
+        stage.setTitle("Création d'un tournoi Poule");
         Group root = new Group();
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
 
@@ -162,7 +162,7 @@ public class IHMCreationPoule extends Application {
         btnAnnuler.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                IHMCreationTournoi page = new IHMCreationTournoi();
+                main.view.IHMCreationTournoi page = new main.view.IHMCreationTournoi();
                 page.start(stage);
             }
         });

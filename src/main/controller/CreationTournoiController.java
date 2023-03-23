@@ -2,20 +2,19 @@
  * @author Morgan Nayet              								16 Mar 2023
  * Copyrights
  */
-package src.main.controller;
+package main.controller;
 
 import javafx.stage.Stage;
-import src.main.GestionTournois;
-import src.main.exceptions.TournoiException;
-import src.main.model.tour.Tour;
-import src.main.model.tournoi.Tournoi;
-import src.main.model.tournoi.type.LooserBracket;
-import src.main.model.tournoi.type.Poule;
-import src.main.view.IHMCreationLoserBracket;
-import src.main.view.IHMCreationPoule;
-import src.main.view.IHMGestion;
-import static src.main.utils.BusinessConstants.TYPE_LOSER_BRACKET;
-import static src.main.utils.BusinessConstants.TYPE_POULE;
+import main.GestionTournois;
+import main.exceptions.TournoiException;
+import main.model.tour.Tour;
+import main.model.tournoi.Tournoi;
+import main.model.tournoi.type.Poule;
+import main.view.IHMCreationLoserBracket;
+import main.view.IHMCreationPoule;
+import main.view.IHMGestion;
+import static main.utils.BusinessConstants.TYPE_LOSER_BRACKET;
+import static main.utils.BusinessConstants.TYPE_POULE;
 
 /**
  * 
@@ -36,7 +35,7 @@ public class CreationTournoiController {
 		
 		switch(typeTournoi) {
 			case TYPE_LOSER_BRACKET :
-				new IHMCreationLoserBracket(new LooserBracket(nom, nombreEquipeACreer))
+				new IHMCreationLoserBracket(new main.model.tournoi.type.LoserBracket(nom, nombreEquipeACreer))
 					.start(stage);
 				break;
 			case TYPE_POULE :

@@ -2,7 +2,7 @@
  * @author Morgan Nayet              19 Feb 2023
  * Copyrights
  */
-package src.main.erreurs;
+package main.erreurs;
 
 import java.util.Calendar;
 
