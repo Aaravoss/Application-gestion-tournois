@@ -2,7 +2,7 @@
  * @author Morgan Nayet              								19 Mar 2023
  * Copyrights
  */
-package src.main.utils;
+package main.utils;
 
 /**
  * Définit les constantes des différentes règles de l'application

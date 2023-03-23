@@ -2,13 +2,13 @@
  * @author Morgan Nayet              								16 Mar 2023
  * Copyrights
  */
-package src.main.model.tour;
+package main.model.tour;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import src.main.model.equipe.Equipe;
-import src.main.model.match.Match;
+import main.model.equipe.Equipe;
+import main.model.match.Match;
 
 /**
  * 
@@ -45,10 +45,19 @@ public class Tour {
 			
 			match = new Match();
 			for(y = 0 ; y < nbEquipesParMatch ; y++) {
-				match.addEquipe(equipes[i+y]);
+				match.addEquipeAndScore(equipes[i+y]);
 			}
 			i += y-1; //sinon à la fin de la boucle y = 2
 			this.matchs.add(match);
 		}
+	}
+
+	public List<Match> getMatchs() {
+
+		return this.matchs;
+	}
+
+	public String getNom() {
+		return this.nom;
 	}
 }

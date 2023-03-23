@@ -1,4 +1,4 @@
-package src.main.view;
+package main.view;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -9,10 +9,10 @@ import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import static src.main.utils.BusinessConstants.TAILLE_BTN_MENU_X;
-import static src.main.utils.BusinessConstants.TAILLE_BTN_MENU_Y;
-import static src.main.utils.BusinessConstants.TAILLE_ECRAN_X;
-import static src.main.utils.BusinessConstants.TAILLE_ECRAN_Y;
+import static main.utils.BusinessConstants.TAILLE_BTN_MENU_X;
+import static main.utils.BusinessConstants.TAILLE_BTN_MENU_Y;
+import static main.utils.BusinessConstants.TAILLE_ECRAN_X;
+import static main.utils.BusinessConstants.TAILLE_ECRAN_Y;
 
 public class IHMMenu extends Application {
 
@@ -37,7 +37,7 @@ public class IHMMenu extends Application {
         btnGestion.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                IHMGestion page = new IHMGestion();
+                main.view.IHMGestion page = new main.view.IHMGestion();
                 page.start(stage);
             }
         });
@@ -52,7 +52,7 @@ public class IHMMenu extends Application {
         btnCreation.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                IHMCreationTournoi page = new IHMCreationTournoi();
+                main.view.IHMCreationTournoi page = new main.view.IHMCreationTournoi();
                 page.start(stage);
             }
         });

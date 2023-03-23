@@ -2,11 +2,11 @@
  * @author Morgan Nayet             								18 Feb 2023
  * Copyrights
  */
-package src.main;
+package main;
 
 import java.util.ArrayList;
-import src.main.model.tournoi.Tournoi;
-import src.main.view.IHMMenu;
+import main.model.tournoi.Tournoi;
+import main.view.IHMMenu;
 
 /**
  * Lance l'application

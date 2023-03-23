@@ -2,7 +2,7 @@
  * @author Morgan Nayet              								16 Mar 2023
  * Copyrights
  */
-package src.main.model.equipe;
+package main.model.equipe;
 
 /**
  * 
@@ -20,6 +20,10 @@ public class Equipe {
 	public Equipe(String nom) {
 
 		this.nom = nom;
+	}
+
+	public String getNom() {
+		return this.nom;
 	}
 
 }

@@ -2,14 +2,14 @@
  * @author Morgan Nayet              								19 Feb 2023
  * Copyrights
  */
-package src.main.model.tournoi;
+package main.model.tournoi;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import src.main.erreurs.ErreurDatefermetureTournoi;
-import src.main.model.equipe.Equipe;
-import src.main.model.tour.Tour;
+import main.erreurs.ErreurDatefermetureTournoi;
+import main.model.equipe.Equipe;
+import main.model.tour.Tour;
 
 /**
  * 
@@ -20,7 +20,7 @@ public abstract class Tournoi {
 	private String nom;
 	private Calendar dateOuverture;
 	private Calendar dateFermeture;
-	private List tours;
+	private List<Tour> tours;
 	private Equipe[] equipes;
 	private int nbEquipesParMatch;
 	private int nbGagnantParMatch;
@@ -132,7 +132,7 @@ public abstract class Tournoi {
 	 * 		   ou null si pas de tours créés
 	 */
 	public Tour getTourCourant() {
-		return (Tour) this.tours.get(this.tours.size());
+		return (Tour) this.tours.get(this.tours.size()-1);
 	}
 
 	/** 
@@ -142,5 +142,9 @@ public abstract class Tournoi {
 	 */
 	public int getNbEquipesParMatch() {
 		return this.nbEquipesParMatch;
+	}
+
+	public List<Tour> getTours() {
+		return this.tours;
 	}
 }

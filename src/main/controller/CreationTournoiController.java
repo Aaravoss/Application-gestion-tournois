@@ -9,7 +9,6 @@ import main.GestionTournois;
 import main.exceptions.TournoiException;
 import main.model.tour.Tour;
 import main.model.tournoi.Tournoi;
-import main.model.tournoi.type.LooserBracket;
 import main.model.tournoi.type.Poule;
 import main.view.IHMCreationLoserBracket;
 import main.view.IHMCreationPoule;
@@ -36,7 +35,7 @@ public class CreationTournoiController {
 		
 		switch(typeTournoi) {
 			case TYPE_LOSER_BRACKET :
-				new IHMCreationLoserBracket(new LooserBracket(nom, nombreEquipeACreer))
+				new IHMCreationLoserBracket(new main.model.tournoi.type.LoserBracket(nom, nombreEquipeACreer))
 					.start(stage);
 				break;
 			case TYPE_POULE :
