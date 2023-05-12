@@ -47,4 +47,17 @@ public class Match {
 	}
 
 	public List<Equipe> getEquipes() { return this.equipes; }
+
+	public Equipe getVainqueur(){
+
+		Equipe vainqueur;
+
+		vainqueur = this.equipes.get(0);
+		for(int i = 1 ; i < this.equipes.size() ; i++){
+			if (this.scores.get(i-1).getScore() < this.scores.get(i).getScore()){
+				vainqueur = this.equipes.get(i);
+			}
+		}
+		return vainqueur;
+	}
 }

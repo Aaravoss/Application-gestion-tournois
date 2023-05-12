@@ -42,4 +42,7 @@ public class Score {
 		return (equipe == this.equipe);
 	}
 
+	public int getScore(){
+		return this.score;
+	}
 }
