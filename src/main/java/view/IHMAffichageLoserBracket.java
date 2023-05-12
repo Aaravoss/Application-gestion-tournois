@@ -1,5 +1,6 @@
 package view;
 
+import controller.GestionTournoiController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,9 +26,12 @@ import java.util.List;
 public class IHMAffichageLoserBracket extends Application {
 
     private Tournoi tournoi;
+    private ArrayList<TextField> scores;
 
     public IHMAffichageLoserBracket(model.tournoi.Tournoi tournoi) {
+
         this.tournoi = tournoi;
+        this.scores = new ArrayList<>();
     }
 
     @Override
@@ -67,6 +71,7 @@ public class IHMAffichageLoserBracket extends Application {
                 double colonne = i%gridMatch.getHgap();
                 gridMatch.add(labelEquipe,(int) ligne, (int) colonne );
                 gridMatch.add(textFieldScore, (int) ligne+1, (int) colonne);
+                this.scores.add(textFieldScore);
                 i++;
             }
 
@@ -86,8 +91,18 @@ public class IHMAffichageLoserBracket extends Application {
         btnConfirmer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                view.IHMGestion page = new  view.IHMGestion();
-                page.start(stage);
+
+                int[] scoresEquipes;
+
+                scoresEquipes = new int[scores.size()];
+
+                for(int i = 0 ; i < scores.size() ; i++) {
+
+                    scoresEquipes[i] = "".equals(scores.get(i).getText()) ? 0 : (int) Integer.parseInt(scores.get(i).getText());
+                }
+
+                new GestionTournoiController().gererTournoi(stage, tournoi, scoresEquipes);
+
             }
         });
 
@@ -100,6 +115,7 @@ public class IHMAffichageLoserBracket extends Application {
         btnAnnuler.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+
                 view.IHMGestion page = new  view.IHMGestion();
                 page.start(stage);
             }
