@@ -9,6 +9,7 @@ import java.util.List;
 
 import model.equipe.Equipe;
 import model.match.Match;
+import model.score.Score;
 
 /**
  * 
@@ -59,5 +60,14 @@ public class Tour {
 
 	public String getNom() {
 		return this.nom;
+	}
+
+	public Score getScore(Equipe equipe) {
+		for(Object match : this.matchs) {
+			if(((Match)match).getScore(equipe) != null ) {
+				return ((Match) match).getScore(equipe);
+			}
+		}
+		return null;
 	}
 }

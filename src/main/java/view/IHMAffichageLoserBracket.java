@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import model.tour.Tour;
 import model.tournoi.Tournoi;
 import static utils.BusinessConstants.TAILLE_ECRAN_X;
 import static utils.BusinessConstants.TAILLE_ECRAN_Y;
@@ -45,42 +46,67 @@ public class IHMAffichageLoserBracket extends Application {
         titre.setLayoutX(TAILLE_ECRAN_X /5);
         titre.setLayoutY(100);
 
-        GridPane listeMatch = new GridPane();
-        listeMatch.setHgap(3);
-        listeMatch.setVgap(10);
-        listeMatch.setPadding(new Insets(50,50,50,50));
-        listeMatch.setAlignment(Pos.CENTER);
-        listeMatch.setLayoutX(50);
-        listeMatch.setLayoutY(250);
-        List<model.match.Match> listeMatchs = tournoi.getTourCourant().getMatchs();
-        Label labelTour = new Label(tournoi.getTourCourant().getNom());
-        listeMatch.add(labelTour, 0,0 );
-        int i;
-        for (int j = 0; j < listeMatchs.size(); j++) {
-            GridPane gridMatch = new GridPane();
-            gridMatch.setHgap(listeMatchs.size());
-            gridMatch.setVgap(2);
-            gridMatch.setPadding(new Insets(10,10,10,10));
+
+        int x = 50;
+        for(Tour tour : tournoi.getTours()) {
+            GridPane listeMatch = new GridPane();
+            listeMatch.setHgap(3);
+            listeMatch.setVgap(10);
+            listeMatch.setPadding(new Insets(50,50,50,50));
+            listeMatch.setAlignment(Pos.CENTER);
+            listeMatch.setLayoutX(x);
+            listeMatch.setLayoutY(250);
+            List<model.match.Match> listeMatchs = tour.getMatchs();
+            Label labelTour = new Label(tour.getNom());
+            listeMatch.add(labelTour, 0,0 );
+            int i;
+            for (int j = 0; j < listeMatchs.size(); j++) {
+                GridPane gridMatch = new GridPane();
+                gridMatch.setHgap(listeMatchs.size());
+                gridMatch.setVgap(2);
+                gridMatch.setPadding(new Insets(10,10,10,10));
 
 
-            i = 0;
-            for(model.equipe.Equipe equipe : listeMatchs.get(j).getEquipes() ) {
-                Label labelEquipe = new Label(equipe.getNom());
-                TextField textFieldScore = new TextField();
-                double ligne = i/gridMatch.getHgap();
-                double colonne = i%gridMatch.getHgap();
-                gridMatch.add(labelEquipe,(int) ligne, (int) colonne );
-                gridMatch.add(textFieldScore, (int) ligne+1, (int) colonne);
-                this.scores.add(textFieldScore);
-                i++;
+                i = 0;
+                for(model.equipe.Equipe equipe : listeMatchs.get(j).getEquipes() ) {
+                    if(tour == tournoi.getTourCourant()) {
+                        Label labelEquipe = new Label(equipe.getNom());
+                        TextField textFieldScore = new TextField();
+                        double ligne;
+                        double colonne;
+                        if(gridMatch.getHgap() == 1){
+                            ligne = i/gridMatch.getHgap();
+                            colonne = 1;
+                        } else {
+                            ligne = i/gridMatch.getHgap();
+                            colonne = i%gridMatch.getHgap();
+                        }
+                        gridMatch.add(labelEquipe,(int) ligne, (int) colonne );
+                        gridMatch.add(textFieldScore, (int) ligne+1, (int) colonne);
+                        this.scores.add(textFieldScore);
+                        i++;
+                    } else {
+                        Label labelEquipe = new Label(equipe.getNom());
+                        Label labelScore = new Label(""+ tour.getScore(equipe).getScore());
+                        double ligne = i/gridMatch.getHgap();
+                        double colonne = i%gridMatch.getHgap();
+                        gridMatch.add(labelEquipe,(int) ligne, (int) colonne );
+                        gridMatch.add(labelScore, (int) ligne+1, (int) colonne);
+                        i++;
+                    }
+
+                }
+
+                double ligne = j/gridMatch.getHgap();
+                double colonne = j%gridMatch.getHgap();
+                listeMatch.add(gridMatch, (int) ligne , (int) colonne +1);
+
+
             }
-
-            double ligne = j/gridMatch.getHgap();
-            double colonne = j%gridMatch.getHgap();
-            listeMatch.add(gridMatch, (int) ligne , (int) colonne +1);
-
-
+            x += 300;
+            root.getChildren().add(listeMatch);
         }
+
 
         Button btnConfirmer = new Button();
         btnConfirmer.setLayoutX(TAILLE_ECRAN_X - TAILLE_BTN_X * 2 - TAILLE_ECRAN_X * 0.10);
@@ -121,7 +147,7 @@ public class IHMAffichageLoserBracket extends Application {
             }
         });
 
-        root.getChildren().addAll(titre,listeMatch, btnConfirmer, btnAnnuler);
+        root.getChildren().addAll(titre, btnConfirmer, btnAnnuler);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

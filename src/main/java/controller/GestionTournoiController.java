@@ -56,7 +56,7 @@ public class GestionTournoiController {
         for (int i = 0 ; i < selectionnees.length ; i++){
             selectionnees[i] = tournoi.getTourCourant().getMatchs().get(i).getVainqueur();
         }
-        nouveauTour = new Tour("Tour " + tournoi.getTours().size());
+        nouveauTour = new Tour("Tour " + (tournoi.getTours().size() + 1));
         nouveauTour.setMatchs(selectionnees ,tournoi.getNbEquipesParMatch());
 
         tournoi.addNewTour(nouveauTour);

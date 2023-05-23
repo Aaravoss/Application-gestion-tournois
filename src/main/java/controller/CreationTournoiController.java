@@ -85,7 +85,7 @@ public class CreationTournoiController {
 		
 		Tour tour;
 		
-		tour = new Tour("1er tour");
+		tour = new Tour("Tour 1");
 		tour.setMatchs(tournoi.getEquipes(), tournoi.getNbEquipesParMatch());
 		tournoi.addNewTour(tour);
 	}
