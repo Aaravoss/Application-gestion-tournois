@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,10 +17,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.tour.Tour;
 import model.tournoi.Tournoi;
-import static utils.BusinessConstants.TAILLE_ECRAN_X;
-import static utils.BusinessConstants.TAILLE_ECRAN_Y;
-import static utils.BusinessConstants.TAILLE_BTN_X;
-import static utils.BusinessConstants.TAILLE_BTN_Y;
+import static utils.BusinessConstants.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,9 +40,9 @@ public class IHMAffichageLoserBracket extends Application {
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
 
         Label titre = new Label("Affichage tournoi Loser Bracket");
-        titre.setFont(new Font("Cambria", 80));
+        titre.setFont(new Font("Cambria", TAILLE_TITRE));
         titre.setLayoutX(TAILLE_ECRAN_X /5);
-        titre.setLayoutY(100);
+        titre.setLayoutY(50);
 
 
         int x = 50;
@@ -55,7 +53,7 @@ public class IHMAffichageLoserBracket extends Application {
             listeMatch.setPadding(new Insets(50,50,50,50));
             listeMatch.setAlignment(Pos.CENTER);
             listeMatch.setLayoutX(x);
-            listeMatch.setLayoutY(250);
+            listeMatch.setLayoutY(100);
             List<model.match.Match> listeMatchs = tour.getMatchs();
             Label labelTour = new Label(tour.getNom());
             listeMatch.add(labelTour, 0,0 );
@@ -75,8 +73,8 @@ public class IHMAffichageLoserBracket extends Application {
                         double ligne;
                         double colonne;
                         if(gridMatch.getHgap() == 1){
-                            ligne = i/gridMatch.getHgap();
-                            colonne = 1;
+                            ligne = 1;
+                            colonne = i/gridMatch.getHgap();
                         } else {
                             ligne = i/gridMatch.getHgap();
                             colonne = i%gridMatch.getHgap();
@@ -128,6 +126,12 @@ public class IHMAffichageLoserBracket extends Application {
                 }
 
                 new GestionTournoiController().gererTournoi(stage, tournoi, scoresEquipes);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Confirmation");
+                alert.setHeaderText(null);
+                alert.setContentText("Les scores du tour courant ont bien été enregistrés. Un nouveau tour a été créé. ");
+
+                alert.showAndWait();
 
             }
         });

@@ -50,10 +50,10 @@ public class IHMCreationLoserBracket extends Application {
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
 
 
-        Label titre = new Label("Création d'un tournoi \n Loser Bracket");
-        titre.setFont(new Font("Cambria", 80));
-        titre.setLayoutX(TAILLE_ECRAN_X /5);
-        titre.setLayoutY(100);
+        Label titre = new Label("Création d'un tournoi Loser Bracket");
+        titre.setFont(new Font("Cambria", TAILLE_TITRE));
+        titre.setLayoutX(TAILLE_ECRAN_X /6);
+        titre.setLayoutY(50);
 
         this.participants = new ArrayList<>();
         GridPane listeMatch = new GridPane();
@@ -61,7 +61,7 @@ public class IHMCreationLoserBracket extends Application {
         listeMatch.setVgap(10);
         listeMatch.setPadding(new Insets(50,50,50,50));
         listeMatch.setAlignment(Pos.CENTER);
-        listeMatch.setLayoutY(300);
+        listeMatch.setLayoutY(100);
         int nbMatch = this.tournoi.getEquipes().length / 2;
         for (int i = 0; i < nbMatch ; i++ ) {
             GridPane gridMatch = new GridPane();

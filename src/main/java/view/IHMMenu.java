@@ -13,6 +13,7 @@ import static utils.BusinessConstants.TAILLE_BTN_MENU_X;
 import static utils.BusinessConstants.TAILLE_BTN_MENU_Y;
 import static utils.BusinessConstants.TAILLE_ECRAN_X;
 import static utils.BusinessConstants.TAILLE_ECRAN_Y;
+import static utils.BusinessConstants.TAILLE_TITRE;
 
 public class IHMMenu extends Application {
 
@@ -23,9 +24,9 @@ public class IHMMenu extends Application {
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
 
         Label titre = new Label("Bienvenue sur l'application \n de gestion de tournoi");
-        titre.setFont(new Font("Cambria", 80));
+        titre.setFont(new Font("Cambria", TAILLE_TITRE));
         titre.setLayoutX(TAILLE_ECRAN_X /5);
-        titre.setLayoutY(100);
+        titre.setLayoutY(50);
 
 
         Button btnGestion = new Button();

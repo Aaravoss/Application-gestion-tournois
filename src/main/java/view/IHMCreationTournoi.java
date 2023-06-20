@@ -1,6 +1,7 @@
 package view;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -29,7 +30,7 @@ public class IHMCreationTournoi extends Application {
 
 
         Label titre = new Label("Création d'un tournoi");
-        titre.setFont(new Font("Cambria", 80));
+        titre.setFont(new Font("Cambria", TAILLE_TITRE));
         titre.setLayoutX(TAILLE_ECRAN_X /5);
         titre.setLayoutY(100);
 
@@ -60,19 +61,35 @@ public class IHMCreationTournoi extends Application {
         comboBoxTypeT.setPadding(new Insets(5,5,5,5));
         comboBoxTypeT.getItems().addAll(TYPE_POULE, TYPE_LOSER_BRACKET);
         hboxTypeT.getChildren().addAll(labelTypeT,comboBoxTypeT);
-
+        vbox.getChildren().addAll(hboxNomT, hboxTypeT);
         HBox hboxParticipants = new HBox();
         hboxParticipants.setSpacing(150);
         Label labelNbParticipants = new Label("Nombre de participants");
         labelNbParticipants.setFont(TEXTE);
-        TextField textFieldNbParticipants = new TextField();
-        textFieldNbParticipants.setPrefWidth(350);
-        textFieldNbParticipants.setPrefHeight(30);
-        textFieldNbParticipants.setFont(new Font("Cambria", 20));
-        textFieldNbParticipants.setPadding(new Insets(5,5,5,5));
-        hboxParticipants.getChildren().addAll(labelNbParticipants, textFieldNbParticipants);
+        ComboBox<Integer> comboBoxNbParticipants= new ComboBox<Integer>();
+        comboBoxTypeT.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                comboBoxNbParticipants.setPrefWidth(350);
+                comboBoxNbParticipants.setPrefHeight(30);
+                comboBoxNbParticipants.setPadding(new Insets(5,5,5,5));
+                ObservableList tampon = comboBoxNbParticipants.getItems();
+                try {
+                    if(TYPE_LOSER_BRACKET.equals(comboBoxTypeT.getValue())) {
+                        tampon.setAll(4,8,16,32);
 
-        vbox.getChildren().addAll(hboxNomT, hboxTypeT, hboxParticipants);
+                    } else {
+                        tampon.setAll(5);
+                    }
+                } catch (IllegalArgumentException e) {
+                    //DO NOTHING !! Une exception est lancée lorsqu'on veut modifier la liste
+                }
+                comboBoxNbParticipants.setItems(tampon);
+                hboxParticipants.getChildren().addAll(labelNbParticipants, comboBoxNbParticipants);
+                vbox.getChildren().addAll(hboxParticipants);
+            }
+        });
+
 
         Button btnConfirmer = new Button();
         btnConfirmer.setLayoutX(TAILLE_ECRAN_X - TAILLE_BTN_X * 2 - TAILLE_ECRAN_X * 0.10);
@@ -83,8 +100,8 @@ public class IHMCreationTournoi extends Application {
         btnConfirmer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if( !textFieldNomT.equals(null) && !textFieldNbParticipants.equals(null)
-                	&& !"".equals(textFieldNomT.getText()) && !"".equals(textFieldNbParticipants.getText())) {
+                if( !textFieldNomT.equals(null) && !comboBoxNbParticipants.getValue().equals(0)
+                	&& !"".equals(textFieldNomT.getText()) && !"".equals(comboBoxNbParticipants.getValue())) {
                 	
                 	String typeTournoi;
                 	
@@ -98,7 +115,7 @@ public class IHMCreationTournoi extends Application {
                 	
                 	// Création du tournoi
                 	try {
-						new CreationTournoiController().creerTournoi(typeTournoi, textFieldNomT.getText(), Integer.parseInt(textFieldNbParticipants.getText()), stage);
+						new CreationTournoiController().creerTournoi(typeTournoi, textFieldNomT.getText(), comboBoxNbParticipants.getValue(), stage);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
