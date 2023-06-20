@@ -4,6 +4,7 @@
  */
 package model.tournoi;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -15,7 +16,7 @@ import model.tour.Tour;
  * 
  * @author Morgan Nayet
  */
-public abstract class Tournoi {
+public abstract class Tournoi implements Serializable {
 
 	private String nom;
 	private Calendar dateOuverture;

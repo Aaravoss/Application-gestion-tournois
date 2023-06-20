@@ -4,6 +4,7 @@
  */
 package model.match;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import model.equipe.Equipe;
@@ -13,7 +14,7 @@ import model.score.Score;
  * 
  * @author Morgan Nayet
  */
-public class Match {
+public class Match implements Serializable {
 	
 	private List<Equipe> equipes;
 	private List<Score> scores;

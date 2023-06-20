@@ -11,7 +11,7 @@ package utils;
 public class BusinessConstants {
 
 	public static final double TAILLE_ECRAN_X = 1440;
-	public static final double TAILLE_ECRAN_Y = 924;
+	public static final double TAILLE_ECRAN_Y = 700;
 	public static final double TAILLE_BTN_X = 100;
 	public static final double TAILLE_BTN_Y = 30;
 	public static final double TAILLE_BTN_MENU_X = 400;
