@@ -10,17 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import static utils.BusinessConstants.*;
 import javafx.stage.WindowEvent;
 import model.tournoi.Tournoi;
-
 import java.util.ArrayList;
 
 public class IHMAffichagePoule extends Application {
-
-    private static double TAILLE_ECRAN_X = 1440;
-    private static double TAILLE_ECRAN_Y = 924;
-    private static double TAILLE_BTN_X = 100;
-    private static double TAILLE_BTN_Y = 30;
 
     @Override
     public void start(Stage stage) {

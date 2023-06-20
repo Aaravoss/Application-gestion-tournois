@@ -53,7 +53,7 @@ public class IHMCreationPoule extends Application {
 
 
         Label titre = new Label("Création d'un tournoi avec poules");
-        titre.setFont(new Font("Cambria", 80));
+        titre.setFont(new Font("Cambria", TAILLE_TITRE));
         titre.setLayoutX(TAILLE_ECRAN_X * 0.1);
         titre.setLayoutY(100);
 

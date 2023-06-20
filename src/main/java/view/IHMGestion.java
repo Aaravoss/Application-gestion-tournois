@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static utils.BusinessConstants.*;
-import static utils.BusinessConstants.TAILLE_BTN_Y;
 
 public class IHMGestion extends Application {
 	
@@ -45,7 +44,7 @@ public class IHMGestion extends Application {
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
 
         Label titre = new Label("Listes des tournois existants");
-        titre.setFont(new Font("Cambria", 80));
+        titre.setFont(new Font("Cambria", TAILLE_TITRE));
         titre.setLayoutX(TAILLE_ECRAN_X /5);
         titre.setLayoutY(100);
 
