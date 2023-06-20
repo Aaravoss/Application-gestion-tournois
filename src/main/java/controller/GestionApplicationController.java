@@ -1,5 +1,6 @@
 package controller;
 
+import model.tour.Tour;
 import model.tournoi.Tournoi;
 
 import java.io.*;
@@ -13,7 +14,28 @@ public class GestionApplicationController {
      */
     public void initialisationApplication() {
 
-        //extraireEtat()
+        chargerDonnees();
+    }
+
+    private void chargerDonnees() {
+
+        try {
+            ObjectInputStream reader = new ObjectInputStream(new FileInputStream("sauv"));
+            Object lu;
+
+            lu = reader.readObject();
+            while (lu != null) {
+                if (lu instanceof Tournoi) {
+                    app.GestionTournois.getTournois().add((Tournoi) lu);
+                }
+                lu = reader.readObject();
+            }
+            reader.close();
+        } catch (IOException e) {
+            //loading fonctionnel mais throw une erreur java.io.EOFException pour rien TODO analyse à continier
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void fermerApplication() {

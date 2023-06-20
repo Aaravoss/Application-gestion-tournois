@@ -4,6 +4,8 @@ package app;/*
  */
 
 import java.util.ArrayList;
+
+import controller.GestionApplicationController;
 import model.tournoi.Tournoi;
 import view.IHMMenu;
 
@@ -38,7 +40,8 @@ public class GestionTournois {
 	 * Lance l'ihm correspondant au menu d'accueil de l'application
 	 */
 	private static void lancerApplication() {
-		
+
+		new GestionApplicationController().initialisationApplication();
 		IHMMenu.main(null);
 	}
 }
