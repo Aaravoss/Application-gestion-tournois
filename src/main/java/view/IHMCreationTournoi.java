@@ -77,22 +77,18 @@ public class IHMCreationTournoi extends Application {
                 comboBoxNbParticipants.setPrefHeight(30);
                 comboBoxNbParticipants.setPadding(new Insets(5,5,5,5));
                 ObservableList tampon = comboBoxNbParticipants.getItems();
-                try {
-                    if(TYPE_LOSER_BRACKET.equals(comboBoxTypeT.getValue())) {
-                        tampon.setAll(4,8,16,32);
 
-                    } else {
-                        tampon.setAll(5);
-                    }
-                } catch (IllegalArgumentException e) {
-                    //DO NOTHING !! Une exception est lancée lorsqu'on veut modifier la liste
+                if(TYPE_LOSER_BRACKET.equals(comboBoxTypeT.getValue())) {
+                    tampon.setAll(4,8,16,32);
+
+                } else {
+                    tampon.setAll(5);
                 }
                 comboBoxNbParticipants.setItems(tampon);
-                hboxParticipants.getChildren().addAll(labelNbParticipants, comboBoxNbParticipants);
-                vbox.getChildren().addAll(hboxParticipants);
             }
         });
-
+        hboxParticipants.getChildren().addAll(labelNbParticipants, comboBoxNbParticipants);
+        vbox.getChildren().addAll(hboxParticipants);
 
         Button btnConfirmer = new Button();
         btnConfirmer.setLayoutX(TAILLE_ECRAN_X - TAILLE_BTN_X * 2 - TAILLE_ECRAN_X * 0.10);
