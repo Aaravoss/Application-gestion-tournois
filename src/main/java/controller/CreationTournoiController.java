@@ -24,9 +24,11 @@ public class CreationTournoiController {
 
 	/**
 	 * Fourni un tournoi à l'ihm spécialisée dans le type de tournoi désiré
-	 * 
+	 *
+	 * @param typeTournoi
 	 * @param nom du tournoi
-	 * @param nombreDEquipeACreer composant le tournoi
+	 * @param nombreEquipeACreer composant le tournoi
+	 * @param stage l'état de l'application transféré
 	 * @author Morgan Nayet
 	 */
 	public void creerTournoi(String typeTournoi, String nom, 

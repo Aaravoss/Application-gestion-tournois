@@ -4,6 +4,7 @@
  */
 package model.tour;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import model.score.Score;
  * 
  * @author Morgan Nayet
  */
-public class Tour {
+public class Tour implements Serializable {
 	
 	private String nom;
 	private List matchs;

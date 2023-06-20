@@ -4,11 +4,13 @@
  */
 package model.equipe;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Morgan Nayet
  */
-public class Equipe {
+public class Equipe implements Serializable {
 
 	private String nom;
 	

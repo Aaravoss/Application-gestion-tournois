@@ -4,16 +4,12 @@
  */
 package controller;
 
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.equipe.Equipe;
 import model.match.Match;
 import model.score.Score;
 import model.tour.Tour;
 import model.tournoi.Tournoi;
-import model.tournoi.type.LoserBracket;
-
-import java.util.ArrayList;
 
 /**
  * 

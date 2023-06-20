@@ -1,5 +1,6 @@
 package view;
 
+import controller.GestionApplicationController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,6 +10,8 @@ import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.WindowEvent;
+
 import static utils.BusinessConstants.TAILLE_BTN_MENU_X;
 import static utils.BusinessConstants.TAILLE_BTN_MENU_Y;
 import static utils.BusinessConstants.TAILLE_ECRAN_X;
@@ -56,6 +59,11 @@ public class IHMMenu extends Application {
                 view.IHMCreationTournoi page = new view.IHMCreationTournoi();
                 page.start(stage);
             }
+        });
+
+        // quand on quitte (l'application ? ou la fenêtre ?), la fermeture est lancée
+        stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, e -> {
+            new GestionApplicationController().fermerApplication();
         });
 
         root.getChildren().addAll(titre,btnGestion, btnCreation);

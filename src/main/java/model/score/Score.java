@@ -4,6 +4,7 @@
  */
 package model.score;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import model.equipe.Equipe;
@@ -15,7 +16,7 @@ import model.equipe.Equipe;
  * @author Morgan Nayet
  * @author Carolane Pulval-Dady
  */
-public class Score {
+public class Score implements Serializable {
 	
 	private int score;
 	private Equipe equipe;

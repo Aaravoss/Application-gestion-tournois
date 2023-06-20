@@ -1,5 +1,6 @@
 package view;
 
+import controller.GestionApplicationController;
 import controller.GestionTournoiController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.tour.Tour;
+import javafx.stage.WindowEvent;
 import model.tournoi.Tournoi;
 import static utils.BusinessConstants.*;
 
@@ -149,6 +151,11 @@ public class IHMAffichageLoserBracket extends Application {
                 view.IHMGestion page = new  view.IHMGestion();
                 page.start(stage);
             }
+        });
+
+        // quand on quitte (l'application ? ou la fenêtre ?), la fermeture est lancée
+        stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, e -> {
+            new GestionApplicationController().fermerApplication();
         });
 
         root.getChildren().addAll(titre, btnConfirmer, btnAnnuler);
