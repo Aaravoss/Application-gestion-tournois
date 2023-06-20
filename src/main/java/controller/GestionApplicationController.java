@@ -1,6 +1,9 @@
 package controller;
 
-import java.io.PrintWriter;
+import model.tournoi.Tournoi;
+
+import java.io.*;
+import java.util.List;
 
 public class GestionApplicationController {
 
@@ -8,18 +11,27 @@ public class GestionApplicationController {
      * Charge les tournois enregistrés dans le fichier de sauvegarde
      * ou créé ce fichier s'il est introuvable
      */
-    public void initialisation(){
+    public void initialisationApplication() {
 
         //extraireEtat()
     }
 
-    public void fermerApplication(){
+    public void fermerApplication() {
 
-        //sauvegarderEtat()
+        sauvegarderEtatApplication();
     }
 
-    private void sauvegarderEtatApplication(){
+    private void sauvegarderEtatApplication() {
 
-        PrintWriter writer
+        try {
+            ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream("sauv"));
+            for (Tournoi tournoi : app.GestionTournois.getTournois()) {
+                writer.writeObject(tournoi);
+            }
+            writer.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

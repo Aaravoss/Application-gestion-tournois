@@ -1,5 +1,6 @@
 package view;
 
+import controller.GestionApplicationController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,6 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import model.tournoi.Tournoi;
+
+import java.util.ArrayList;
 
 public class IHMAffichagePoule extends Application {
 
@@ -62,6 +67,11 @@ public class IHMAffichagePoule extends Application {
                 view.IHMCreationTournoi page = new  view.IHMCreationTournoi();
                 page.start(stage);
             }
+        });
+
+        // quand on quitte (l'application ? ou la fenêtre ?), la fermeture est lancée
+        stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, e -> {
+            new GestionApplicationController().fermerApplication();
         });
 
         root.getChildren().addAll(titre,btnConfirmer, btnAnnuler);
