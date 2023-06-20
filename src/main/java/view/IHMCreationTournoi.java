@@ -84,12 +84,12 @@ public class IHMCreationTournoi extends Application {
                     } else {
                         tampon.setAll(5);
                     }
+                    comboBoxNbParticipants.setItems(tampon);
+                    hboxParticipants.getChildren().addAll(labelNbParticipants, comboBoxNbParticipants);
+                    vbox.getChildren().addAll(hboxParticipants);
                 } catch (IllegalArgumentException e) {
                     //DO NOTHING !! Une exception est lancée lorsqu'on veut modifier la liste
                 }
-                comboBoxNbParticipants.setItems(tampon);
-                hboxParticipants.getChildren().addAll(labelNbParticipants, comboBoxNbParticipants);
-                vbox.getChildren().addAll(hboxParticipants);
             }
         });
 
