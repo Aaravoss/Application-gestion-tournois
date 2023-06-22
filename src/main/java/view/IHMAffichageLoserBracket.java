@@ -165,10 +165,11 @@ public class IHMAffichageLoserBracket extends Application {
                     scoresEquipesLB[i] = "".equals(scoresLB.get(i).getText()) ? 0 : (int) Integer.parseInt(scoresLB.get(i).getText());
                 }
 
-                new GestionTournoiController().gererTournoi(stage, tournoi, scoresEquipesWB);
+                new GestionTournoiController().affecterScores(stage, tournoi,scoresEquipesWB);
                 if(((LoserBracket)tournoi).getLoserBracket().getTourCourant() != null) {
-                    new GestionTournoiController().gererTournoi(stage, ((LoserBracket)tournoi).getLoserBracket(), scoresEquipesLB);
+                    new GestionTournoiController().affecterScores(stage, ((LoserBracket)tournoi).getLoserBracket(),scoresEquipesLB);
                 }
+                new GestionTournoiController().gererTournoi(stage, tournoi);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Confirmation");
