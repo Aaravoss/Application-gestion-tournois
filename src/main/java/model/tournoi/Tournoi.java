@@ -116,6 +116,11 @@ public abstract class Tournoi implements Serializable {
 			this.equipes[i] = new Equipe(nouvsEquipes[i]);
 		}
 	}
+
+	public void setEquipes(Equipe[] nouvsEquipes){
+
+		this.equipes = nouvsEquipes;
+	}
 	
 	/**
 	 * Setter pour ajouter un nouveau tour
@@ -133,7 +138,7 @@ public abstract class Tournoi implements Serializable {
 	 * 		   ou null si pas de tours créés
 	 */
 	public Tour getTourCourant() {
-		return (Tour) this.tours.get(this.tours.size()-1);
+		return this.tours.size() == 0 ? null : (Tour) this.tours.get(this.tours.size()-1);
 	}
 
 	/** 

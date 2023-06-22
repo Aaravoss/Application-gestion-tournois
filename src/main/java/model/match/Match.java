@@ -61,4 +61,24 @@ public class Match implements Serializable {
 		}
 		return vainqueur;
 	}
+
+	/**
+	 * Récupère l'équipe ayant fais le score le plus bas
+	 * Utilisable en l'état que pour les tournois de type LooserBracket
+	 *
+	 * @return le perdant avec le score le plus bas
+	 * @author Morgan Nayet
+	 */
+	public Equipe getPerdant(){
+
+		Equipe perdant;
+
+		perdant = this.equipes.get(0);
+		for(int i = 1 ; i < this.equipes.size() ; i++){
+			if (this.scores.get(i-1).getScore() > this.scores.get(i).getScore()){
+				perdant = this.equipes.get(i);
+			}
+		}
+		return perdant;
+	}
 }
