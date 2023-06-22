@@ -26,10 +26,20 @@ public class GestionTournoiController {
      *
      * @param stage page de l'IHM de l'application
      * @param tournoi dont on va mettre les scores à jour
-     * @param scores à lier aux matchs du tour courant
      * @author Morgan Nayet
      */
-    public void gererTournoi(Stage stage, Tournoi tournoi, int[] scores) {
+    public void gererTournoi(Stage stage, Tournoi tournoi) {
+
+        // si le tour courant est fini, on créé le nouveau tour avec les gagnants
+        if (isTousLesScoresModifies(tournoi) && (tournoi instanceof LoserBracket ? isTousLesScoresModifies(((LoserBracket) tournoi).getLoserBracket()) : true)){
+            creerNouveauTour(tournoi);
+        }
+
+        view.IHMGestion page = new  view.IHMGestion();
+        page.start(stage);
+    }
+
+    public void affecterScores(Stage stage, Tournoi tournoi, int[] scores){
 
         int indice;
 
@@ -39,11 +49,6 @@ public class GestionTournoiController {
                 score.setScore(scores[indice]);
                 indice++;
             }
-        }
-
-        // si le tour courant est fini, on créé le nouveau tour avec les gagnants
-        if (isTousLesScoresModifies(tournoi) && (tournoi instanceof LoserBracket ? isTousLesScoresModifies(((LoserBracket) tournoi).getLoserBracket()) : true)){
-            creerNouveauTour(tournoi);
         }
 
         view.IHMGestion page = new  view.IHMGestion();
