@@ -71,7 +71,7 @@ public class CreationTournoiController {
 		//création des équipes
 		tournoi.setEquipes(nomEquipes);
 		
-		this.atribuerMatchs1erTour(stage, tournoi);
+		this.atribuerMatchs1erTour(tournoi);
 		GestionTournois.sauvegarderTournois(tournoi);
 		
 		new IHMGestion().start(stage);
@@ -79,11 +79,10 @@ public class CreationTournoiController {
 	
 	/**
 	 * Répartition des équipes dans les différents matchs qui se dérouleront au 1er tour
-	 * @param stage
 	 * @param tournoi en cours de création
 	 * @author Morgan Nayet
 	 */
-	public void atribuerMatchs1erTour(Stage stage, Tournoi tournoi) {
+	public void atribuerMatchs1erTour(Tournoi tournoi) {
 		
 		Tour tour;
 		
@@ -91,4 +90,6 @@ public class CreationTournoiController {
 		tour.setMatchs(tournoi.getEquipes(), tournoi.getNbEquipesParMatch());
 		tournoi.addNewTour(tour);
 	}
+
+
 }
