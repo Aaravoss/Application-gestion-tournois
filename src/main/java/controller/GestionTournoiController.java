@@ -30,6 +30,7 @@ public class GestionTournoiController {
      */
     public void gererTournoi(Stage stage, Tournoi tournoi) {
 
+
         Equipe[] perdantsPourLoserBracket;
 
         perdantsPourLoserBracket = null;
@@ -48,6 +49,7 @@ public class GestionTournoiController {
             if (loserBracket.getTourCourant() == null || loserBracket.getTourCourant().getMatchs().size() > 1) {
                 creerNouveauTourLooserBracket(((LoserBracket) tournoi).getLoserBracket(), perdantsPourLoserBracket);
             }
+
         }
 
         view.IHMGestion page = new  view.IHMGestion();
