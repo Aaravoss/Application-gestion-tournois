@@ -11,29 +11,30 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import controller.CreationTournoiController;
 import javafx.stage.WindowEvent;
-import model.tournoi.Tournoi;
-import model.tournoi.type.LoserBracket;
-
+import model.tournoi.type.Classique;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import static utils.BusinessConstants.*;
 
 import java.util.ArrayList;
 
-public class IHMCreationLoserBracket extends Application {
-
-    private LoserBracket tournoi;
+public class IHMCreationTournoiClassique extends Application {
+	
+    private Classique tournoi;
     private ArrayList<TextField> participants;
     private static Font TEXTE = new Font("Cambria", 30);
 
-    public IHMCreationLoserBracket(LoserBracket tournoi) {
+    public IHMCreationTournoiClassique(Classique tournoi) {
         this.tournoi = tournoi;
         this.participants = new ArrayList<>();
     }
-
 
     private boolean isMatchsRemplis() {
     	
@@ -44,19 +45,19 @@ public class IHMCreationLoserBracket extends Application {
     	}
     	return true;
     }
-
+    
     @Override
     public void start(Stage stage)  {
 
-        stage.setTitle("Création d'un tournoi Loser Bracket");
+        stage.setTitle("Création d'un tournoi classique");
         Group root = new Group();
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
 
 
-        Label titre = new Label("Création d'un tournoi Loser Bracket");
+        Label titre = new Label("Création d'un tournoi classique");
         titre.setFont(new Font("Cambria", TAILLE_TITRE));
-        titre.setLayoutX(TAILLE_ECRAN_X /6);
-        titre.setLayoutY(50);
+        titre.setLayoutX(TAILLE_ECRAN_X * 0.1);
+        titre.setLayoutY(100);
 
         this.participants = new ArrayList<>();
         GridPane listeMatch = new GridPane();
@@ -84,12 +85,8 @@ public class IHMCreationLoserBracket extends Application {
             double ligne = i/3;
             double colonne = i%gridMatch.getHgap();
             listeMatch.add(gridMatch, (int) colonne , (int) ligne );
-            
+
         }
-
-
-        
-        
 
         Button btnConfirmer = new Button();
         btnConfirmer.setLayoutX(TAILLE_ECRAN_X - TAILLE_BTN_X * 2 - TAILLE_ECRAN_X * 0.10);
@@ -100,19 +97,18 @@ public class IHMCreationLoserBracket extends Application {
         btnConfirmer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                if(isMatchsRemplis()) {
 
-            	if(isMatchsRemplis()) {
-            		
-            		String[] nomsEquipes;
-            		
-            		nomsEquipes = new String[participants.size()];
-            		
-            		for(int i = 0 ; i < participants.size() ; i++) {
-            			nomsEquipes[i] = participants.get(i).getText();
-            		}
-            		
-            		new CreationTournoiController().attribuerEquipes(stage, tournoi, nomsEquipes, 2, 1);
-            	}
+                    String[] nomsEquipes;
+
+                    nomsEquipes = new String[participants.size()];
+
+                    for(int i = 0 ; i < participants.size() ; i++) {
+                        nomsEquipes[i] = participants.get(i).getText();
+                    }
+
+                    new CreationTournoiController().attribuerEquipes(stage, tournoi, nomsEquipes, 2, 1);
+                }
             }
         });
 
@@ -145,3 +141,4 @@ public class IHMCreationLoserBracket extends Application {
         launch();
     }
 }
+

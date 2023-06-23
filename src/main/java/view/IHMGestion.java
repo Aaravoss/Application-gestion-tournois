@@ -10,33 +10,34 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import app.GestionTournois;
 import javafx.stage.WindowEvent;
 import model.tournoi.Tournoi;
+import model.tournoi.type.Classique;
+import model.tournoi.type.LoserBracket;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static utils.BusinessConstants.*;
 
 public class IHMGestion extends Application {
-	
-	private ArrayList<Tournoi> tournois;
-    
-	//stub
-	public IHMGestion() {
-    	this.tournois = GestionTournois.getTournois();
-	}
+
+    private ArrayList<Tournoi> tournois;
+
+    //stub
+    public IHMGestion() {
+
+        this.tournois = GestionTournois.getTournois();
+    }
 	
 	/*
     public IHMGestion(ArrayList<Tournoi> tournois) {
     	this.tournois = tournois;
     }*/
-    
+
     @Override
     public void start(Stage stage) {
         stage.setTitle("Gestion des tournois");
@@ -45,44 +46,58 @@ public class IHMGestion extends Application {
 
         Label titre = new Label("Listes des tournois existants");
         titre.setFont(new Font("Cambria", TAILLE_TITRE));
-        titre.setLayoutX(TAILLE_ECRAN_X /5);
-        titre.setLayoutY(100);
+        titre.setLayoutX(TAILLE_ECRAN_X / 5);
+        titre.setLayoutY(50);
 
-
-        GridPane listeTournoi = new GridPane();
-        listeTournoi.setHgap(3);
-        listeTournoi.setVgap(10);
-        listeTournoi.setPadding(new Insets(50,50,50,50));
-        listeTournoi.setAlignment(Pos.CENTER);
-        listeTournoi.setLayoutX(50);
-        listeTournoi.setLayoutY(250);
-        int i;
-        i = 0;
+        GridPane listeTournoiLB = new GridPane();
+        listeTournoiLB.setLayoutY(150);
+        listeTournoiLB.setLayoutX(10);
+        Label labelLB = new Label("Tournois LoserBracket");
+        labelLB.setStyle("-fx-font-weight: bold");
+        listeTournoiLB.addRow(0, labelLB);
         for (Tournoi tournoi : this.tournois) {
-            Button btnTournoi = new Button();
-            btnTournoi.setPrefSize(200, 100);
-            btnTournoi.setText(tournoi.getNom());
-            btnTournoi.setFont(new Font("Cambria", 10));
-            btnTournoi.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    if(tournoi instanceof model.tournoi.type.LoserBracket) {
-                        view.IHMAffichageLoserBracket page = new view.IHMAffichageLoserBracket(tournoi);
-                        page.start(stage);
-                    } else if(tournoi instanceof model.tournoi.type.Poule) {
-                        view.IHMAffichagePoule page = new view.IHMAffichagePoule();
-                        page.start(stage);
+            if (tournoi instanceof LoserBracket) {
+                Button btnTournoi = new Button();
+                btnTournoi.setPrefSize(200, 100);
+                btnTournoi.setText(tournoi.getNom());
+                btnTournoi.setFont(new Font("Cambria", 10));
+                listeTournoiLB.addRow(1, btnTournoi);
+                btnTournoi.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        if (tournoi instanceof model.tournoi.type.LoserBracket) {
+                            view.IHMAffichageLoserBracket page = new view.IHMAffichageLoserBracket(tournoi);
+                            page.start(stage);
+                        }
                     }
-
-                }
-            });
-            double ligne = i/listeTournoi.getHgap();
-            double colonne = i%listeTournoi.getHgap();
-            listeTournoi.add(btnTournoi, (int) colonne , (int) ligne );
-            i++;
-
+                });
+            }
         }
 
+        GridPane listeTournoiC = new GridPane();
+        listeTournoiC.setLayoutY(400);
+        listeTournoiC.setLayoutX(20);
+        Label labelC = new Label("Tournois classiques");
+        labelC.setStyle("-fx-font-weight: bold");
+        listeTournoiC.addRow(0, labelC);
+        for (Tournoi tournoiC : this.tournois) {
+            if (tournoiC instanceof Classique) {
+                Button btnTournoi = new Button();
+                btnTournoi.setPrefSize(200, 100);
+                btnTournoi.setText(tournoiC.getNom());
+                btnTournoi.setFont(new Font("Cambria", 10));
+                listeTournoiC.addRow(1, btnTournoi);
+                btnTournoi.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        if (tournoiC instanceof Classique) {
+                            IHMAffichageTournoiClassique page = new IHMAffichageTournoiClassique(tournoiC);
+                            page.start(stage);
+                        }
+                    }
+                });
+            }
+        }
 
         Button btnAnnuler = new Button();
         btnAnnuler.setLayoutX(TAILLE_ECRAN_X - TAILLE_BTN_X - TAILLE_ECRAN_X * 0.05);
@@ -103,13 +118,13 @@ public class IHMGestion extends Application {
             new GestionApplicationController().fermerApplication();
         });
 
-        root.getChildren().addAll(titre,listeTournoi, btnAnnuler);
+        root.getChildren().addAll(titre, listeTournoiLB, listeTournoiC, btnAnnuler);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main (String[]args){
         launch();
     }
 }

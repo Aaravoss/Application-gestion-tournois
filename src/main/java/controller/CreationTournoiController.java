@@ -9,12 +9,12 @@ import app.GestionTournois;
 import exceptions.TournoiException;
 import model.tour.Tour;
 import model.tournoi.Tournoi;
-import model.tournoi.type.Poule;
+import model.tournoi.type.Classique;
 import view.IHMCreationLoserBracket;
-import view.IHMCreationPoule;
+import view.IHMCreationTournoiClassique;
 import view.IHMGestion;
 import static utils.BusinessConstants.TYPE_LOSER_BRACKET;
-import static utils.BusinessConstants.TYPE_POULE;
+import static utils.BusinessConstants.TYPE_CLASSIQUE;
 
 /**
  * 
@@ -40,8 +40,8 @@ public class CreationTournoiController {
 				new IHMCreationLoserBracket(new model.tournoi.type.LoserBracket(nom, nombreEquipeACreer))
 					.start(stage);
 				break;
-			case TYPE_POULE :
-				new IHMCreationPoule(new Poule(nom, nombreEquipeACreer))
+			case TYPE_CLASSIQUE :
+				new IHMCreationTournoiClassique(new Classique(nom, nombreEquipeACreer))
 				.start(stage);
 				break;
 			default :
@@ -62,9 +62,9 @@ public class CreationTournoiController {
 								int nbEquipesParMatch, int nbGagnantParMatch) {
 		
 		//re-création des objets avec le nb d'équipes et de gagnants par match
-		if (tournoi instanceof Poule) {
+		if (tournoi instanceof Classique) {
 			
-			tournoi = new Poule(tournoi.getNom(), tournoi.getEquipes().length, 
+			tournoi = new Classique(tournoi.getNom(), tournoi.getEquipes().length,
 					nbEquipesParMatch, nbGagnantParMatch);
 		}
 		

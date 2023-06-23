@@ -62,7 +62,7 @@ public class IHMCreationTournoi extends Application {
         comboBoxTypeT.setPrefWidth(350);
         comboBoxTypeT.setPrefHeight(30);
         comboBoxTypeT.setPadding(new Insets(5,5,5,5));
-        comboBoxTypeT.getItems().addAll(TYPE_POULE, TYPE_LOSER_BRACKET);
+        comboBoxTypeT.getItems().addAll(TYPE_CLASSIQUE, TYPE_LOSER_BRACKET);
         hboxTypeT.getChildren().addAll(labelTypeT,comboBoxTypeT);
         vbox.getChildren().addAll(hboxNomT, hboxTypeT);
         HBox hboxParticipants = new HBox();
@@ -81,8 +81,8 @@ public class IHMCreationTournoi extends Application {
                 if(TYPE_LOSER_BRACKET.equals(comboBoxTypeT.getValue())) {
                     tampon.setAll(4,8,16,32);
 
-                } else {
-                    tampon.setAll(5);
+                } else if(TYPE_CLASSIQUE.equals(comboBoxTypeT.getValue())){
+                    tampon.setAll(4,8,16,32);
                 }
                 comboBoxNbParticipants.setItems(tampon);
             }
@@ -105,8 +105,8 @@ public class IHMCreationTournoi extends Application {
                 	String typeTournoi;
                 	
                 	typeTournoi = "";
-                	if(comboBoxTypeT.getValue().equals("Poule")) {
-                		typeTournoi = "Poule";
+                	if(comboBoxTypeT.getValue().equals("Classique")) {
+                		typeTournoi = "Classique";
                         
                 	} else if (comboBoxTypeT.getValue().equals("LoserBracket")) {
                 		typeTournoi = "LoserBracket";
