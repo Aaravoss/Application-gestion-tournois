@@ -6,13 +6,11 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -42,13 +40,15 @@ public class IHMAffichageLoserBracket extends Application {
 
     @Override
     public void start(Stage stage) {
+        ScrollPane root = new ScrollPane();
+        root.setFitToHeight(true);
         stage.setTitle("Affichage tournoi Loser Bracket");
-        Group root = new Group();
+        Group page = new Group();
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
 
         Label titre = new Label("Affichage tournoi Loser Bracket");
         titre.setFont(new Font("Cambria", TAILLE_TITRE));
-        titre.setLayoutX(TAILLE_ECRAN_X /5);
+        titre.setLayoutX(0);
         titre.setLayoutY(10);
 
 
@@ -59,10 +59,11 @@ public class IHMAffichageLoserBracket extends Application {
             listeMatch.setPadding(new Insets(50,50,50,50));
             listeMatch.setAlignment(Pos.CENTER);
             listeMatch.setLayoutX(x);
-            listeMatch.setLayoutY(60);
+            listeMatch.setLayoutY(30);
             List<model.match.Match> listeMatchs = tour.getMatchs();
             Label labelTour = new Label(tour.getNom());
-            listeMatch.add(labelTour, 0,0 );
+            labelTour.setStyle("-fx-font-weight: bold");
+            listeMatch.addColumn(nbTour, labelTour);
             for (int nbMatch = 0; nbMatch < listeMatchs.size(); nbMatch++) {
                 GridPane gridMatch = new GridPane();
                 gridMatch.setHgap(listeMatchs.size());
@@ -72,15 +73,23 @@ public class IHMAffichageLoserBracket extends Application {
                     if(tour == tournoi.getTourCourant()) {
                         HBox hBoxMatch = new HBox();
                         hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+                        hBoxMatch.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
                         Label labelEquipe = new Label(equipe.getNom());
+                        labelEquipe.setPadding(new Insets(5,5,5,5));
+                        labelEquipe.setTextFill(Color.WHITE);
                         TextField textFieldScore = new TextField();
                         hBoxMatch.getChildren().addAll(labelEquipe, textFieldScore);
                         gridMatch.addColumn(nbTour,hBoxMatch);
                         this.scoresWB.add(textFieldScore);
                     } else {
                         Label labelEquipe = new Label(equipe.getNom());
+                        labelEquipe.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+                        labelEquipe.setTextFill(Color.WHITE);
+                        labelEquipe.setPadding(new Insets(5,5,5,5));
                         Label labelScore = new Label(""+ tour.getScore(equipe).getScore());
+                        labelScore.setPadding(new Insets(5,5,5,5));
                         HBox hBoxMatch = new HBox();
+                        hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
                         hBoxMatch.getChildren().addAll(labelEquipe, labelScore);
                         gridMatch.addColumn(nbTour,hBoxMatch);
                     }
@@ -88,25 +97,26 @@ public class IHMAffichageLoserBracket extends Application {
                 listeMatch.addColumn(nbTour, gridMatch);
             }
 
-            x += 300;
-            root.getChildren().add(listeMatch);
+            x += 100;
+            page.getChildren().add(listeMatch);
             nbTour++;
         }
 
 
         if (nbTour >= 2 && tournoi instanceof LoserBracket) {
             Tournoi tournoiLB = ((LoserBracket) tournoi).getLoserBracket();
-            double xLB = TAILLE_ECRAN_X - 300;
             int nbTourLB = 0;
+            double xLB= TAILLE_ECRAN_X - 250;;
             for(Tour tourLB : tournoiLB.getTours()) {
                 GridPane listeMatch = new GridPane();
                 listeMatch.setPadding(new Insets(50,50,50,50));
                 listeMatch.setAlignment(Pos.CENTER);
                 listeMatch.setLayoutX(xLB);
-                listeMatch.setLayoutY(60);
+                listeMatch.setLayoutY(30);
                 List<model.match.Match> listeMatchs = tourLB.getMatchs();
                 Label labelTour = new Label(tourLB.getNom());
-                listeMatch.add(labelTour, 0,0 );
+                labelTour.setStyle("-fx-font-weight: bold");
+                listeMatch.addColumn(nbTourLB, labelTour);
                 for (int nbMatch = 0; nbMatch < listeMatchs.size(); nbMatch++) {
                     GridPane gridMatch = new GridPane();
                     gridMatch.setHgap(listeMatchs.size());
@@ -116,24 +126,34 @@ public class IHMAffichageLoserBracket extends Application {
                         if(tourLB == tournoiLB.getTourCourant()) {
                             HBox hBoxMatch = new HBox();
                             hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+                            hBoxMatch.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
                             Label labelEquipe = new Label(equipe.getNom());
+                            labelEquipe.setTextFill(Color.WHITE);
+                            labelEquipe.setPadding(new Insets(5,5,5,5));
                             TextField textFieldScore = new TextField();
                             hBoxMatch.getChildren().addAll(labelEquipe, textFieldScore);
                             gridMatch.addColumn(nbTourLB,hBoxMatch);
                             this.scoresLB.add(textFieldScore);
                         } else {
+                            listeMatch.setLayoutX(xLB + 100);
                             Label labelEquipe = new Label(equipe.getNom());
+                            labelEquipe.setTextFill(Color.WHITE);
+                            labelEquipe.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+                            labelEquipe.setPadding(new Insets(5,5,5,5));
                             Label labelScore = new Label(""+ tourLB.getScore(equipe).getScore());
+                            labelScore.setPadding(new Insets(5,5,5,5));
                             HBox hBoxMatch = new HBox();
+                            hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
                             hBoxMatch.getChildren().addAll(labelEquipe, labelScore);
                             gridMatch.addColumn(nbTourLB,hBoxMatch);
                         }
                     }
+
                     listeMatch.addColumn(nbTourLB, gridMatch);
                 }
 
-                xLB -= 300;
-                root.getChildren().add(listeMatch);
+                xLB -= 100;
+                page.getChildren().add(listeMatch);
                 nbTourLB++;
             }
 
@@ -141,7 +161,7 @@ public class IHMAffichageLoserBracket extends Application {
 
         Button btnConfirmer = new Button();
         btnConfirmer.setLayoutX(TAILLE_ECRAN_X - TAILLE_BTN_X * 2 - TAILLE_ECRAN_X * 0.10);
-        btnConfirmer.setLayoutY(TAILLE_ECRAN_Y - TAILLE_BTN_Y - TAILLE_ECRAN_Y * 0.05);
+        btnConfirmer.setLayoutY(25);
         btnConfirmer.setPrefSize(TAILLE_BTN_X, TAILLE_BTN_Y);
         btnConfirmer.setText("Confirmer");
         btnConfirmer.setFont(new Font("Cambria", 10));
@@ -183,7 +203,7 @@ public class IHMAffichageLoserBracket extends Application {
 
         Button btnAnnuler = new Button();
         btnAnnuler.setLayoutX(TAILLE_ECRAN_X - TAILLE_BTN_X - TAILLE_ECRAN_X * 0.05);
-        btnAnnuler.setLayoutY(TAILLE_ECRAN_Y - TAILLE_BTN_Y - TAILLE_ECRAN_Y * 0.05);
+        btnAnnuler.setLayoutY(25);
         btnAnnuler.setPrefSize(TAILLE_BTN_X, TAILLE_BTN_Y);
         btnAnnuler.setText("Annuler");
         btnAnnuler.setFont(new Font("Cambria", 10));
@@ -201,7 +221,8 @@ public class IHMAffichageLoserBracket extends Application {
             new GestionApplicationController().fermerApplication();
         });
 
-        root.getChildren().addAll(titre, btnConfirmer, btnAnnuler);
+        page.getChildren().addAll(titre, btnConfirmer, btnAnnuler);
+        root.setContent(page);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
