@@ -30,9 +30,26 @@ public class GestionTournoiController {
      */
     public void gererTournoi(Stage stage, Tournoi tournoi) {
 
+
+        Equipe[] perdantsPourLoserBracket;
+
+        perdantsPourLoserBracket = null;
         // si le tour courant est fini, on créé le nouveau tour avec les gagnants
-        if (isTousLesScoresModifies(tournoi) && (tournoi instanceof LoserBracket ? isTousLesScoresModifies(((LoserBracket) tournoi).getLoserBracket()) : true)){
-            creerNouveauTour(tournoi);
+        if (isTousLesScoresModifies(tournoi)){
+            if (tournoi.getTourCourant().getMatchs().size() > 1) {
+                perdantsPourLoserBracket = creerNouveauTour(tournoi);
+            }
+        }
+
+        if (tournoi instanceof LoserBracket && isTousLesScoresModifies(((LoserBracket) tournoi).getLoserBracket())){
+            LoserBracket loserBracket;
+
+            loserBracket = ((LoserBracket) tournoi).getLoserBracket();
+
+            if (loserBracket.getTourCourant() == null || loserBracket.getTourCourant().getMatchs().size() > 1) {
+                creerNouveauTourLooserBracket(((LoserBracket) tournoi).getLoserBracket(), perdantsPourLoserBracket);
+            }
+
         }
 
         view.IHMGestion page = new  view.IHMGestion();
@@ -55,7 +72,12 @@ public class GestionTournoiController {
         page.start(stage);
     }
 
-    private void creerNouveauTour(Tournoi tournoi){
+    /**
+     *
+     * @param tournoi
+     * @return les équipes perdantes
+     */
+    private Equipe[] creerNouveauTour(Tournoi tournoi){
 
         Tour nouveauTour;
         Equipe[] selectionnees;
@@ -66,17 +88,16 @@ public class GestionTournoiController {
             selectionnees[i] = tournoi.getTourCourant().getMatchs().get(i).getVainqueur();
         }
 
-        // création nouveau tour LooserBracket pour tournoi de type looserBracket
-        if (tournoi instanceof LoserBracket && ((LoserBracket) tournoi).getLoserBracket() != null){
-            Equipe[] selectionneesLooserBracket;
-            selectionneesLooserBracket = new Equipe[selectionnees.length];
+        Equipe[] perdants;
 
+        perdants = null;
+        //si le tour courant du tournoi n'est pas la finale, on ajoute les équipes
+        if(tournoi.getTourCourant().getMatchs().size() > 1) {
+            perdants = new Equipe[selectionnees.length];
             // Récupère les perdants pour les mettre dans la looser bracket
-            for (int i = 0 ; i < selectionneesLooserBracket.length ; i++){
-                selectionneesLooserBracket[i] = tournoi.getTourCourant().getMatchs().get(i).getPerdant();
+            for (int i = 0; i < perdants.length; i++) {
+                perdants[i] = tournoi.getTourCourant().getMatchs().get(i).getPerdant();
             }
-
-            creerNouveauTourLooserBracket(((LoserBracket) tournoi).getLoserBracket(), selectionneesLooserBracket);
         }
 
         //création nouveau tour du tournoi
@@ -84,15 +105,26 @@ public class GestionTournoiController {
         nouveauTour.setMatchs(selectionnees ,tournoi.getNbEquipesParMatch());
 
         tournoi.addNewTour(nouveauTour);
+
+        return perdants;
     }
 
-    private void creerNouveauTourLooserBracket(Tournoi tournoi, Equipe[] equipesAAjouterAuTournoi){
+    private void creerNouveauTourLooserBracket(Tournoi tournoi, Equipe[] equipesAAjouterAuTournoi) {
 
         Tour nouveauTour;
         Equipe[] selectionnees;
 
+        //cas où le tournoi WinnerBracket est en finale et on ne peut pas rajouter le perdant de la finale dans la LooserBracket
+        if(equipesAAjouterAuTournoi == null){
+
+            selectionnees = new Equipe[tournoi.getTourCourant().getMatchs().size()];
+
+            for (int i = 0 ; i < selectionnees.length ; i++){
+                selectionnees[i] = tournoi.getTourCourant().getMatchs().get(i).getVainqueur();
+            }
+
         //cas du premier tour de tournoi et donc première insertion des équipes dans le looser bracket
-        if (tournoi.getTours().size() == 0){
+        } else if (tournoi.getTours().size() == 0){
 
             selectionnees = new Equipe[equipesAAjouterAuTournoi.length];
 
@@ -106,8 +138,9 @@ public class GestionTournoiController {
 
             selectionnees = new Equipe[tournoi.getTourCourant().getMatchs().size() + equipesAAjouterAuTournoi.length];
 
+
             //remplissage des équipes séléctionnées avec mélange des gagnants LooserBracket et perdant WinnerBracket
-            for (int i = 0 ; i < selectionnees.length ; i++){
+            for (int i = 0 ; i < selectionnees.length/2 ; i++){
                 selectionnees[i*2] = tournoi.getTourCourant().getMatchs().get(i).getVainqueur();
                 selectionnees[i*2+1] = equipesAAjouterAuTournoi[i];
             }
