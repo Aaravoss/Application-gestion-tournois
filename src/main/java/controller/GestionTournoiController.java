@@ -34,16 +34,22 @@ public class GestionTournoiController {
         Equipe[] perdantsPourLoserBracket;
 
         perdantsPourLoserBracket = null;
+
         // si le tour courant est fini, on créé le nouveau tour avec les gagnants
         if (isTousLesScoresModifies(tournoi)){
             if (!(tournoi instanceof LoserBracket)){
                 if (tournoi.getTourCourant().getMatchs().size() > 1) {
                     creerNouveauTour(tournoi);
+                } else if (tournoi.getTourCourant().getMatchs().size() == 1){
+                    determinerFinale(tournoi);
                 }
             } else {
                 if (tournoi.getTourCourant().getMatchs().size() > 1
                     && tournoi.getTourCourant().getMatchs().size() == ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().size()) {
                     perdantsPourLoserBracket = creerNouveauTour(tournoi);
+                } else if (tournoi.getTourCourant().getMatchs().size() == 1
+                        && tournoi.getTourCourant().getMatchs().size() == ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().size()) {
+                    determinerFinale(tournoi);
                 }
             }
         }
@@ -61,6 +67,25 @@ public class GestionTournoiController {
 
         view.IHMGestion page = new  view.IHMGestion();
         page.start(stage);
+    }
+
+    private void determinerFinale(Tournoi tournoi){
+
+        Tour nouveauTour;
+
+        // Déterminaison du vainqueur
+        Equipe[] vainqueur = {tournoi.getTourCourant().getMatchs().get(0).getVainqueur()};
+
+        // Création dernier tour du tournoi
+        nouveauTour = new Tour(tournoi.getNom() + " - Vainqueur");
+        nouveauTour.setMatchs(vainqueur ,1); // création d'un unique match stockant uniquement le vainqueur
+
+        tournoi.addNewTour(nouveauTour);
+        tournoi.fermer();
+
+        if (tournoi instanceof LoserBracket && ((LoserBracket) tournoi).getLoserBracket() != null){
+            determinerFinale(((LoserBracket) tournoi).getLoserBracket());
+        }
     }
 
     public void affecterScores(Stage stage, Tournoi tournoi, int[] scores){
