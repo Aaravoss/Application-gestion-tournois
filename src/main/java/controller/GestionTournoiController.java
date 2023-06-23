@@ -36,8 +36,15 @@ public class GestionTournoiController {
         perdantsPourLoserBracket = null;
         // si le tour courant est fini, on créé le nouveau tour avec les gagnants
         if (isTousLesScoresModifies(tournoi)){
-            if (tournoi.getTourCourant().getMatchs().size() > 1) {
-                perdantsPourLoserBracket = creerNouveauTour(tournoi);
+            if (!(tournoi instanceof LoserBracket)){
+                if (tournoi.getTourCourant().getMatchs().size() > 1) {
+                    creerNouveauTour(tournoi);
+                }
+            } else {
+                if (tournoi.getTourCourant().getMatchs().size() > 1
+                    && tournoi.getTourCourant().getMatchs().size() == ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().size()) {
+                    perdantsPourLoserBracket = creerNouveauTour(tournoi);
+                }
             }
         }
 
