@@ -61,7 +61,7 @@ public class LoserBracket extends Tournoi {
 	public void fermer() {
 
 		super.fermer();
-		if (this.tournoisPerdants != null) {
+		if (this.tournoisPerdants != null && !this.tournoisPerdants.isFerme()) {
 			this.tournoisPerdants.fermer();
 		}
 	}
