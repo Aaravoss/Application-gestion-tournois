@@ -45,10 +45,13 @@ public class GestionTournoiController {
                 }
             } else {
                 if (tournoi.getTourCourant().getMatchs().size() > 1
-                    && (((LoserBracket) tournoi).getLoserBracket().getTourCourant() == null || tournoi.getTourCourant().getMatchs().size() == ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().size())) {
+                    && (((LoserBracket) tournoi).getLoserBracket().getTourCourant() == null || tournoi.getTourCourant().getMatchs().size() == ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().size())
+                ) {
                     perdantsPourLoserBracket = creerNouveauTour(tournoi);
                 } else if (tournoi.getTourCourant().getMatchs().size() == 1
-                        && tournoi.getTourCourant().getMatchs().size() == ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().size()) {
+                        && tournoi.getTourCourant().getMatchs().size() == ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().size()
+                        && !((LoserBracket) tournoi).getLoserBracket().isFerme()
+                ) {
 
                     Equipe[] finalistes = new Equipe[tournoi.getNbEquipesParMatch()]; // 2 pour les LooserBracket
                     Tour nouveauTour;
@@ -63,7 +66,7 @@ public class GestionTournoiController {
                     ((LoserBracket) tournoi).getLoserBracket().fermer();
 
                 } else if (tournoi.getTourCourant().getMatchs().size() == 1
-                        && ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().size() == 0) {
+                        && ((LoserBracket) tournoi).getLoserBracket().isFerme()) {
                     determinerFinale(tournoi);
                 }
             }
