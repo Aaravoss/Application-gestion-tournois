@@ -14,6 +14,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import model.equipe.Equipe;
 import model.tour.Tour;
 import javafx.stage.WindowEvent;
 import model.tournoi.Tournoi;
@@ -51,7 +52,7 @@ public class IHMAffichageTournoi extends Application {
         Group page = new Group();
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
 
-        Label titre = new Label("Affichage tournoi  " + this.tournoi.getNom());
+        Label titre = new Label("Tournoi  " + this.tournoi.getNom());
         titre.setFont(new Font("Cambria", TAILLE_TITRE));
         titre.setLayoutX(0);
         titre.setLayoutY(10);
@@ -80,7 +81,7 @@ public class IHMAffichageTournoi extends Application {
                             listeMatch.setLayoutX(x + 100);
                             Label labelEquipe = new Label(equipe.getNom());
                             labelEquipe.setTextFill(Color.WHITE);
-                            labelEquipe.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+                            labelEquipe.setBackground(new Background(new BackgroundFill(Color.GOLDENROD, CornerRadii.EMPTY, Insets.EMPTY)));
                             labelEquipe.setPadding(new Insets(5,5,5,5));
                             Label labelScore = new Label("Vainqueur");
                             labelScore.setPadding(new Insets(5,5,5,5));
@@ -101,14 +102,20 @@ public class IHMAffichageTournoi extends Application {
                             this.scoresWB.add(textFieldScore);
                         }
                     } else {
+                        Equipe equipeP = listeMatchs.get(nbMatch).getPerdant();
                         Label labelEquipe = new Label(equipe.getNom());
-                        labelEquipe.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
                         labelEquipe.setTextFill(Color.WHITE);
                         labelEquipe.setPadding(new Insets(5,5,5,5));
                         Label labelScore = new Label(""+ tour.getScore(equipe).getScore());
                         labelScore.setPadding(new Insets(5,5,5,5));
                         HBox hBoxMatch = new HBox();
                         hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+                        if(equipeP == equipe) {
+                            labelEquipe.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+                            labelScore.setBackground(new Background(new BackgroundFill(Color.DARKGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+                        } else {
+                            labelEquipe.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+                        }
                         hBoxMatch.getChildren().addAll(labelEquipe, labelScore);
                         gridMatch.addColumn(nbTour,hBoxMatch);
                     }
@@ -168,15 +175,21 @@ public class IHMAffichageTournoi extends Application {
                                 this.scoresLB.add(textFieldScore);
                             }
                         } else {
+                            Equipe equipeP = listeMatchs.get(nbMatch).getPerdant();
                             listeMatch.setLayoutX(xLB + 100);
                             Label labelEquipe = new Label(equipe.getNom());
                             labelEquipe.setTextFill(Color.WHITE);
-                            labelEquipe.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
                             labelEquipe.setPadding(new Insets(5,5,5,5));
                             Label labelScore = new Label(""+ tourLB.getScore(equipe).getScore());
                             labelScore.setPadding(new Insets(5,5,5,5));
                             HBox hBoxMatch = new HBox();
                             hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+                            if(equipeP == equipe) {
+                                labelEquipe.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+                                labelScore.setBackground(new Background(new BackgroundFill(Color.DARKGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+                            } else {
+                                labelEquipe.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+                            }
                             hBoxMatch.getChildren().addAll(labelEquipe, labelScore);
                             gridMatch.addColumn(nbTourLB,hBoxMatch);
                         }
@@ -192,47 +205,51 @@ public class IHMAffichageTournoi extends Application {
 
         }
 
-        Button btnConfirmer = new Button();
-        btnConfirmer.setLayoutX(TAILLE_ECRAN_X - TAILLE_BTN_X * 2 - TAILLE_ECRAN_X * 0.10);
-        btnConfirmer.setLayoutY(25);
-        btnConfirmer.setPrefSize(TAILLE_BTN_X, TAILLE_BTN_Y);
-        btnConfirmer.setText("Confirmer");
-        btnConfirmer.setFont(new Font("Cambria", 10));
-        btnConfirmer.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
+        if(!tournoi.isFerme()) {
+            Button btnConfirmer = new Button();
+            btnConfirmer.setLayoutX(TAILLE_ECRAN_X - TAILLE_BTN_X * 2 - TAILLE_ECRAN_X * 0.10);
+            btnConfirmer.setLayoutY(25);
+            btnConfirmer.setPrefSize(TAILLE_BTN_X, TAILLE_BTN_Y);
+            btnConfirmer.setText("Confirmer");
+            btnConfirmer.setFont(new Font("Cambria", 10));
+            btnConfirmer.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
 
-                int[] scoresEquipesWB;
-                int[] scoresEquipesLB;
+                    int[] scoresEquipesWB;
+                    int[] scoresEquipesLB;
 
-                scoresEquipesWB = new int[scoresWB.size()];
-                scoresEquipesLB = new int[scoresLB.size()];
+                    scoresEquipesWB = new int[scoresWB.size()];
+                    scoresEquipesLB = new int[scoresLB.size()];
 
-                for(int i = 0; i < scoresWB.size() ; i++) {
+                    for(int i = 0; i < scoresWB.size() ; i++) {
 
-                    scoresEquipesWB[i] = "".equals(scoresWB.get(i).getText()) ? 0 : (int) Integer.parseInt(scoresWB.get(i).getText());
+                        scoresEquipesWB[i] = "".equals(scoresWB.get(i).getText()) ? 0 : (int) Integer.parseInt(scoresWB.get(i).getText());
+                    }
+
+                    for(int i = 0; i < scoresLB.size() ; i++) {
+
+                        scoresEquipesLB[i] = "".equals(scoresLB.get(i).getText()) ? 0 : (int) Integer.parseInt(scoresLB.get(i).getText());
+                    }
+
+                    new GestionTournoiController().affecterScores(stage, tournoi,scoresEquipesWB);
+                    if(tournoi instanceof LoserBracket && !((LoserBracket) tournoi).getLoserBracket().isFerme() && ((LoserBracket)tournoi).getLoserBracket().getTourCourant() != null) {
+                        new GestionTournoiController().affecterScores(stage, ((LoserBracket)tournoi).getLoserBracket(),scoresEquipesLB);
+                    }
+                    new GestionTournoiController().gererTournoi(stage, tournoi);
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Confirmation");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Les scores du tour courant ont bien été enregistrés. Un nouveau tour a été créé. ");
+
+                    alert.showAndWait();
+
                 }
+            });
+            page.getChildren().add(btnConfirmer);
+        }
 
-                for(int i = 0; i < scoresLB.size() ; i++) {
-
-                    scoresEquipesLB[i] = "".equals(scoresLB.get(i).getText()) ? 0 : (int) Integer.parseInt(scoresLB.get(i).getText());
-                }
-
-                new GestionTournoiController().affecterScores(stage, tournoi,scoresEquipesWB);
-                if(tournoi instanceof LoserBracket && !((LoserBracket) tournoi).getLoserBracket().isFerme() && ((LoserBracket)tournoi).getLoserBracket().getTourCourant() != null) {
-                    new GestionTournoiController().affecterScores(stage, ((LoserBracket)tournoi).getLoserBracket(),scoresEquipesLB);
-                }
-                new GestionTournoiController().gererTournoi(stage, tournoi);
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Confirmation");
-                alert.setHeaderText(null);
-                alert.setContentText("Les scores du tour courant ont bien été enregistrés. Un nouveau tour a été créé. ");
-
-                alert.showAndWait();
-
-            }
-        });
 
         Button btnAnnuler = new Button();
         btnAnnuler.setLayoutX(TAILLE_ECRAN_X - TAILLE_BTN_X - TAILLE_ECRAN_X * 0.05);
@@ -254,7 +271,7 @@ public class IHMAffichageTournoi extends Application {
             new GestionApplicationController().fermerApplication();
         });
 
-        page.getChildren().addAll(titre, btnConfirmer, btnAnnuler);
+        page.getChildren().addAll(titre, btnAnnuler);
         root.setContent(page);
         stage.setScene(scene);
         stage.setResizable(false);
