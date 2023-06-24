@@ -142,17 +142,31 @@ public class IHMAffichageTournoi extends Application {
                     gridMatch.setVgap(2);
                     gridMatch.setPadding(new Insets(10,10,10,10));
                     for(model.equipe.Equipe equipe : listeMatchs.get(nbMatch).getEquipes() ) {
-                        if(tourLB == tournoiLB.getTourCourant()) {
-                            HBox hBoxMatch = new HBox();
-                            hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-                            hBoxMatch.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-                            Label labelEquipe = new Label(equipe.getNom());
-                            labelEquipe.setTextFill(Color.WHITE);
-                            labelEquipe.setPadding(new Insets(5,5,5,5));
-                            TextField textFieldScore = new TextField();
-                            hBoxMatch.getChildren().addAll(labelEquipe, textFieldScore);
-                            gridMatch.addColumn(nbTourLB,hBoxMatch);
-                            this.scoresLB.add(textFieldScore);
+                        if(tourLB == tournoiLB.getTourCourant() && !tournoiLB.isFerme()) {
+                            if(tournoi.isFerme()) {
+                                listeMatch.setLayoutX(x + 100);
+                                Label labelEquipe = new Label(equipe.getNom());
+                                labelEquipe.setTextFill(Color.WHITE);
+                                labelEquipe.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+                                labelEquipe.setPadding(new Insets(5,5,5,5));
+                                Label labelScore = new Label("Vainqueur");
+                                labelScore.setPadding(new Insets(5,5,5,5));
+                                HBox hBoxMatch = new HBox();
+                                hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+                                hBoxMatch.getChildren().addAll(labelEquipe, labelScore);
+                                gridMatch.addColumn(nbTour,hBoxMatch);
+                            } else {
+                                HBox hBoxMatch = new HBox();
+                                hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+                                hBoxMatch.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+                                Label labelEquipe = new Label(equipe.getNom());
+                                labelEquipe.setTextFill(Color.WHITE);
+                                labelEquipe.setPadding(new Insets(5, 5, 5, 5));
+                                TextField textFieldScore = new TextField();
+                                hBoxMatch.getChildren().addAll(labelEquipe, textFieldScore);
+                                gridMatch.addColumn(nbTourLB, hBoxMatch);
+                                this.scoresLB.add(textFieldScore);
+                            }
                         } else {
                             listeMatch.setLayoutX(xLB + 100);
                             Label labelEquipe = new Label(equipe.getNom());
@@ -205,7 +219,7 @@ public class IHMAffichageTournoi extends Application {
                 }
 
                 new GestionTournoiController().affecterScores(stage, tournoi,scoresEquipesWB);
-                if(tournoi instanceof LoserBracket && ((LoserBracket)tournoi).getLoserBracket().getTourCourant() != null) {
+                if(tournoi instanceof LoserBracket && !((LoserBracket) tournoi).getLoserBracket().isFerme() && ((LoserBracket)tournoi).getLoserBracket().getTourCourant() != null) {
                     new GestionTournoiController().affecterScores(stage, ((LoserBracket)tournoi).getLoserBracket(),scoresEquipesLB);
                 }
                 new GestionTournoiController().gererTournoi(stage, tournoi);
