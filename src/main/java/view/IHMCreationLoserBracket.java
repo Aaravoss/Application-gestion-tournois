@@ -23,6 +23,11 @@ import static utils.BusinessConstants.*;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Carolane Pulval-Dady
+ */
+
 public class IHMCreationLoserBracket extends Application {
 
     private LoserBracket tournoi;
@@ -130,7 +135,7 @@ public class IHMCreationLoserBracket extends Application {
             }
         });
 
-        // quand on quitte (l'application ? ou la fenêtre ?), la fermeture est lancée
+        // quand on quitte l'application, la fermeture est lancée
         stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, e -> {
             new GestionApplicationController().fermerApplication();
         });

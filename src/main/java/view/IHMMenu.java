@@ -18,6 +18,11 @@ import static utils.BusinessConstants.TAILLE_ECRAN_X;
 import static utils.BusinessConstants.TAILLE_ECRAN_Y;
 import static utils.BusinessConstants.TAILLE_TITRE;
 
+/**
+ *
+ * @author Carolane Pulval-Dady
+ */
+
 public class IHMMenu extends Application {
 
     @Override
@@ -61,7 +66,7 @@ public class IHMMenu extends Application {
             }
         });
 
-        // quand on quitte (l'application ? ou la fenêtre ?), la fermeture est lancée
+        // quand on quitte l'application, la fermeture est lancée
         stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, e -> {
             new GestionApplicationController().fermerApplication();
         });

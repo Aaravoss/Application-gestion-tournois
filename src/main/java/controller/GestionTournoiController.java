@@ -45,10 +45,28 @@ public class GestionTournoiController {
                 }
             } else {
                 if (tournoi.getTourCourant().getMatchs().size() > 1
-                    && tournoi.getTourCourant().getMatchs().size() == ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().size()) {
+                    && (((LoserBracket) tournoi).getLoserBracket().getTourCourant() == null || tournoi.getTourCourant().getMatchs().size() == ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().size())
+                ) {
                     perdantsPourLoserBracket = creerNouveauTour(tournoi);
                 } else if (tournoi.getTourCourant().getMatchs().size() == 1
-                        && tournoi.getTourCourant().getMatchs().size() == ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().size()) {
+                        && tournoi.getTourCourant().getMatchs().size() == ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().size()
+                        && !((LoserBracket) tournoi).getLoserBracket().isFerme()
+                ) {
+
+                    Equipe[] finalistes = new Equipe[tournoi.getNbEquipesParMatch()]; // 2 pour les LooserBracket
+                    Tour nouveauTour;
+
+                    finalistes[0] = tournoi.getTourCourant().getMatchs().get(0).getVainqueur();// le gagnant de la WinnerBracket
+                    finalistes[1] = ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().get(0).getVainqueur();// le gagnant de la LooserBracket
+
+                    nouveauTour = new Tour("Tour " + (tournoi.getTours().size() + 1));
+                    nouveauTour.setMatchs(finalistes ,tournoi.getNbEquipesParMatch());
+
+                    tournoi.addNewTour(nouveauTour);
+                    ((LoserBracket) tournoi).getLoserBracket().fermer();
+
+                } else if (tournoi.getTourCourant().getMatchs().size() == 1
+                        && ((LoserBracket) tournoi).getLoserBracket().isFerme()) {
                     determinerFinale(tournoi);
                 }
             }
@@ -82,10 +100,6 @@ public class GestionTournoiController {
 
         tournoi.addNewTour(nouveauTour);
         tournoi.fermer();
-
-        if (tournoi instanceof LoserBracket && ((LoserBracket) tournoi).getLoserBracket() != null){
-            determinerFinale(((LoserBracket) tournoi).getLoserBracket());
-        }
     }
 
     public void affecterScores(Stage stage, Tournoi tournoi, int[] scores){
