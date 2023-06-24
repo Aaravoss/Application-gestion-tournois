@@ -11,19 +11,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import controller.CreationTournoiController;
 import javafx.stage.WindowEvent;
 import model.tournoi.type.Classique;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import static utils.BusinessConstants.*;
 
 import java.util.ArrayList;
+
+/**
+ *
+ * @author Carolane Pulval-Dady
+ */
 
 public class IHMCreationTournoiClassique extends Application {
 	

@@ -4,8 +4,6 @@ import controller.GestionApplicationController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,6 +20,11 @@ import model.tournoi.type.LoserBracket;
 import java.util.ArrayList;
 
 import static utils.BusinessConstants.*;
+
+/**
+ *
+ * @author Carolane Pulval-Dady
+ */
 
 public class IHMGestion extends Application {
 
@@ -66,7 +69,7 @@ public class IHMGestion extends Application {
                     @Override
                     public void handle(ActionEvent actionEvent) {
                         if (tournoi instanceof model.tournoi.type.LoserBracket) {
-                            view.IHMAffichageLoserBracket page = new view.IHMAffichageLoserBracket(tournoi);
+                            IHMAffichageTournoi page = new IHMAffichageTournoi(tournoi);
                             page.start(stage);
                         }
                     }
@@ -91,7 +94,7 @@ public class IHMGestion extends Application {
                     @Override
                     public void handle(ActionEvent actionEvent) {
                         if (tournoiC instanceof Classique) {
-                            IHMAffichageTournoiClassique page = new IHMAffichageTournoiClassique(tournoiC);
+                            IHMAffichageTournoi page = new IHMAffichageTournoi(tournoiC);
                             page.start(stage);
                         }
                     }
@@ -113,7 +116,7 @@ public class IHMGestion extends Application {
             }
         });
 
-        // quand on quitte (l'application ? ou la fenêtre ?), la fermeture est lancée
+        // quand on quitte l'application, la fermeture est lancée
         stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, e -> {
             new GestionApplicationController().fermerApplication();
         });

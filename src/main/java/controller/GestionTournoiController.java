@@ -45,7 +45,7 @@ public class GestionTournoiController {
                 }
             } else {
                 if (tournoi.getTourCourant().getMatchs().size() > 1
-                    && tournoi.getTourCourant().getMatchs().size() == ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().size()) {
+                    && (((LoserBracket) tournoi).getLoserBracket().getTourCourant() == null || tournoi.getTourCourant().getMatchs().size() == ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().size())) {
                     perdantsPourLoserBracket = creerNouveauTour(tournoi);
                 } else if (tournoi.getTourCourant().getMatchs().size() == 1
                         && tournoi.getTourCourant().getMatchs().size() == ((LoserBracket) tournoi).getLoserBracket().getTourCourant().getMatchs().size()) {

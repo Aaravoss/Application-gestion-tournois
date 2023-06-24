@@ -153,4 +153,8 @@ public abstract class Tournoi implements Serializable {
 	public List<Tour> getTours() {
 		return this.tours;
 	}
+
+	public Boolean isFerme() {
+		return this.dateFermeture != null;
+	}
 }

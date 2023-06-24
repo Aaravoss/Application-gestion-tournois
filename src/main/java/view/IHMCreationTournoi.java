@@ -20,6 +20,11 @@ import javafx.stage.WindowEvent;
 
 import static utils.BusinessConstants.*;
 
+/**
+ *
+ * @author Carolane Pulval-Dady
+ */
+
 public class IHMCreationTournoi extends Application {
 
     private static final Font TEXTE = new Font("Cambria", 30);
@@ -138,7 +143,7 @@ public class IHMCreationTournoi extends Application {
             }
         });
 
-        // quand on quitte (l'application ? ou la fenêtre ?), la fermeture est lancée
+        // quand on quitte l'application, la fermeture est lancée
         stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, e -> {
             new GestionApplicationController().fermerApplication();
         });
