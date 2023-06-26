@@ -82,13 +82,8 @@ public class IHMCreationTournoiClassique extends Application {
         stage.setTitle("Création d'un tournoi classique");
         Group root = new Group();
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
-        String imagePath = "src/main/java/view/creationImg.jpeg";
-        Image image = null;
-        try {
-            image = new Image(new FileInputStream(imagePath));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        String imagePath = "/creationImg.jpeg";
+        Image image = new Image(this.getClass().getResourceAsStream(imagePath));
         ImageView backgroundImageView = new ImageView(image);
         backgroundImageView.setFitWidth(TAILLE_ECRAN_X);
         backgroundImageView.setFitHeight(TAILLE_ECRAN_Y);
