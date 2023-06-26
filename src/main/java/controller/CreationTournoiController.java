@@ -17,7 +17,13 @@ import static utils.BusinessConstants.TYPE_LOSER_BRACKET;
 import static utils.BusinessConstants.TYPE_CLASSIQUE;
 
 /**
- * 
+ * Classe de Création de tout tournoi. S'occupe de créer et d'instancier l'état initial des tournois de tout type.
+ *
+ * Fonctionnalités :
+ * Création d'un tournoi
+ * Attribution de ses équipes
+ * Attribution de ses matchs
+ *
  * @author Morgan Nayet
  */
 public class CreationTournoiController {
@@ -29,6 +35,8 @@ public class CreationTournoiController {
 	 * @param nom du tournoi
 	 * @param nombreEquipeACreer composant le tournoi
 	 * @param stage l'état de l'application transféré
+	 * @throws TournoiException si le type de tournoi renseigné n'existe pas (attention : fournir une constante pour le type)
+	 *
 	 * @author Morgan Nayet
 	 */
 	public void creerTournoi(String typeTournoi, String nom, 
@@ -51,11 +59,14 @@ public class CreationTournoiController {
 	}
 	
 	/**
-	 * Attribue les équipes au tournoi
-	 * 
-	 * @param stage 
-	 * @param tournoi en cour de création
+	 * Création des objets équipes et attribution de ces objets au tournoi
+	 *
+	 * @param nbEquipesParMatch nombre de candidats (équipe) par match
+	 * @param nbGagnantParMatch nombre de gagnants pour 1 match donné
 	 * @param nomEquipes ensemble des noms de toutes les équipes du tournoi
+	 * @param stage l'état de l'application transféré
+	 * @param tournoi en cour de création
+	 *
 	 * @author Morgan Nayet
 	 */
 	public void attribuerEquipes(Stage stage, Tournoi tournoi, String[] nomEquipes,
@@ -79,7 +90,9 @@ public class CreationTournoiController {
 	
 	/**
 	 * Répartition des équipes dans les différents matchs qui se dérouleront au 1er tour
+	 *
 	 * @param tournoi en cours de création
+	 *
 	 * @author Morgan Nayet
 	 */
 	public void atribuerMatchs1erTour(Tournoi tournoi) {
@@ -90,6 +103,4 @@ public class CreationTournoiController {
 		tour.setMatchs(tournoi.getEquipes(), tournoi.getNbEquipesParMatch());
 		tournoi.addNewTour(tour);
 	}
-
-
 }

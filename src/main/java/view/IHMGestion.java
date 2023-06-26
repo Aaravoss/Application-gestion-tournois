@@ -1,5 +1,6 @@
 package view;
 
+import app.GestionTournois;
 import controller.GestionApplicationController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -11,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import app.GestionTournois;
 import javafx.stage.WindowEvent;
 import model.tournoi.Tournoi;
 import model.tournoi.type.Classique;
@@ -22,25 +22,31 @@ import java.util.ArrayList;
 import static utils.BusinessConstants.*;
 
 /**
+ * IHM liée à la gestion des tournois
  *
  * @author Carolane Pulval-Dady
  */
-
 public class IHMGestion extends Application {
 
     private ArrayList<Tournoi> tournois;
 
-    //stub
+    /**
+     * Constructeur par défaut lié à l'IHMGestion
+     *
+     * @author Carolane Pulval-Dady
+     */
     public IHMGestion() {
 
         this.tournois = GestionTournois.getTournois();
     }
-	
-	/*
-    public IHMGestion(ArrayList<Tournoi> tournois) {
-    	this.tournois = tournois;
-    }*/
 
+    /**
+     * Modélisation de l'IHM
+     *
+     * @param stage état de l'application
+     *
+     * @author Carolane Pulval-Dady
+     */
     @Override
     public void start(Stage stage) {
         stage.setTitle("Gestion des tournois");
@@ -127,6 +133,13 @@ public class IHMGestion extends Application {
         stage.show();
     }
 
+    /**
+     * Lance l'IHM
+     *
+     * @param args non utilisé
+     *
+     * @author Carolane Pulval-Dady
+     */
     public static void main (String[]args){
         launch();
     }

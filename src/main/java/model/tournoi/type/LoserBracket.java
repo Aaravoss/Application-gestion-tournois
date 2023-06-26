@@ -11,6 +11,8 @@ import model.tournoi.Tournoi;
 import java.util.Calendar;
 
 /**
+ * Gestion de la donnée du tournoi LooserBracket
+ * Donnée de l'application sérialisable.
  *
  * @author Morgan Nayet
  */
@@ -24,7 +26,8 @@ public class LoserBracket extends Tournoi {
 	 * créé est un exposant de 2 et seule la moitié est perdante
 	 *
 	 * @param nom du tournoi
-	 * @param nombreDEquipeACreer
+	 * @param nombreDEquipeACreer au total
+	 *
 	 * @author Morgan Nayet
 	 */
 	public LoserBracket(String nom, int nombreDEquipeACreer) {
@@ -36,9 +39,10 @@ public class LoserBracket extends Tournoi {
 	/**
 	 * Constructeur d'un tournoi de type looserBracket
 	 *
-	 * @param nom
-	 * @param nombreDEquipeACreer
+	 * @param nom du tournoi
+	 * @param nombreDEquipeACreer au total
 	 * @param tournoiPerdants param supplémentaire pour différencier le constructeur des WinnerBracket et LooserBracket
+	 *
 	 * @author Morgan Nayet
 	 */
 	private LoserBracket(String nom, int nombreDEquipeACreer, boolean tournoiPerdants){
@@ -48,7 +52,11 @@ public class LoserBracket extends Tournoi {
 
 	/**
 	 * Getter de l'attribut tournoisPerdants
-	 * @return le tournois des perdants
+	 *
+	 * @return le tournois des perdants <br>
+	 * 		   null si inexistant
+	 *
+	 * @author Morgan Nayet
 	 */
 	public LoserBracket getLoserBracket(){
 
@@ -57,7 +65,10 @@ public class LoserBracket extends Tournoi {
 
 	/**
 	 * Effectue la fermeture du tournoi WinnerBracket et de son tournoi LooserBracket
+	 *
+	 * @author Morgan Nayet
 	 */
+	@Override
 	public void fermer() {
 
 		super.fermer();

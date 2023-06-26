@@ -1,22 +1,31 @@
 package controller;
 
-import model.tour.Tour;
+import java.io.*;
 import model.tournoi.Tournoi;
 
-import java.io.*;
-import java.util.List;
-
+/**
+ * Classe de gestion des fonctionnalités de l'application.
+ *
+ * Fonctionnalités :
+ *  - Initialisation de l'application
+ *  - Fermeture de l'application
+ */
 public class GestionApplicationController {
 
     /**
-     * Charge les tournois enregistrés dans le fichier de sauvegarde
-     * ou créé ce fichier s'il est introuvable
+     * Initialise l'état de l'application lors de la dernière utilisation de l'utilisateur
+     *
+     * Fonctionnalités :
+     *  - Chargement des données
      */
     public void initialisationApplication() {
 
         chargerDonnees();
     }
 
+    /**
+     * Charge les tournois enregistrés dans le fichier de sauvegarde
+     */
     private void chargerDonnees() {
 
         try {
@@ -38,11 +47,19 @@ public class GestionApplicationController {
         }
     }
 
+    /**
+     * Actions effectuées lors de la fermeture de l'application :
+     *  - Sauvegarder l'état de l'application
+     */
     public void fermerApplication() {
 
         sauvegarderEtatApplication();
     }
 
+    /**
+     * Sauvegarde les données lors de la fermeture de l'application en les sérialisant et en les stockant dans un fichier
+     * binaire "sauv"
+     */
     private void sauvegarderEtatApplication() {
 
         try {
