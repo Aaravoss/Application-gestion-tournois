@@ -34,7 +34,8 @@ import static utils.BusinessConstants.*;
 /**
  * IHM liée à la création d'un tournoi de type LooserBracket
  *
- * @author Carolane Pulval-Dady,Touria SAYAGH
+ * @author Carolane Pulval-Dady
+ * @author Touria SAYAGH
  */
 public class IHMCreationLoserBracket extends Application {
 
