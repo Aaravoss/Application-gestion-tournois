@@ -117,8 +117,9 @@ public class IHMGestion extends Application {
                         }
                     }
                 });
+                nbTournoi++;
             }
-            nbTournoi++;
+
         }
 
         GridPane listeTournoiC = new GridPane();
@@ -155,6 +156,7 @@ public class IHMGestion extends Application {
                         }
                     }
                 });
+                nbTournoiC++;
             }
         }
 
