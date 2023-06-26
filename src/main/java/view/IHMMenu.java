@@ -28,7 +28,8 @@ import static utils.BusinessConstants.*;
 /**
  * IHM liée à l'affichage du menu principal
  *
- * @author Carolane Pulval-Dady, Touria SAYAGH
+ * @author Carolane Pulval-Dady
+ * @author Touria SAYAGH
  */
 public class IHMMenu extends Application {
 
