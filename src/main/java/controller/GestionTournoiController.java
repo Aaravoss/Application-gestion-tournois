@@ -4,6 +4,7 @@
  */
 package controller;
 
+import java.util.List;
 import javafx.stage.Stage;
 import model.equipe.Equipe;
 import model.match.Match;
@@ -12,10 +13,12 @@ import model.tour.Tour;
 import model.tournoi.Tournoi;
 import model.tournoi.type.LoserBracket;
 
-import java.util.List;
-
 /**
- * 
+ * Gère un tournoi jusqu'à sa fermeture
+ * Fonctionnalités :
+ *  - Gérer un tournoi
+ *  - Affecter les scores à un tournoi
+ *
  * @author Morgan Nayet
  */
 public class GestionTournoiController {
@@ -26,6 +29,7 @@ public class GestionTournoiController {
      *
      * @param stage page de l'IHM de l'application
      * @param tournoi dont on va mettre les scores à jour
+     *
      * @author Morgan Nayet
      */
     public void gererTournoi(Stage stage, Tournoi tournoi) {
@@ -87,6 +91,13 @@ public class GestionTournoiController {
         page.start(stage);
     }
 
+    /**
+     *  Vérification et désignation du gagnant du tournoi
+     *
+     * @param tournoi courant
+     *
+     * @author Morgan Nayet
+     */
     private void determinerFinale(Tournoi tournoi){
 
         Tour nouveauTour;
@@ -102,6 +113,15 @@ public class GestionTournoiController {
         tournoi.fermer();
     }
 
+    /**
+     *  Récupère les scores fournis par l'IHM pour les affecter au tour courant du tournoi
+     *
+     * @param stage Etat de l'application
+     * @param tournoi courant
+     * @param scores à affecter
+     *
+     * @author Morgan Nayet
+     */
     public void affecterScores(Stage stage, Tournoi tournoi, int[] scores){
 
         int indice;
@@ -119,9 +139,13 @@ public class GestionTournoiController {
     }
 
     /**
+     * Création d'un nouveau tour pour le tournoi fourni avec les équipes gagnantes du précédent tour.
      *
-     * @param tournoi
-     * @return les équipes perdantes
+     * @param tournoi courant
+     *
+     * @return les équipes perdantes du tour courant
+     *
+     * @author Morgan Nayet
      */
     private Equipe[] creerNouveauTour(Tournoi tournoi){
 
@@ -155,6 +179,15 @@ public class GestionTournoiController {
         return perdants;
     }
 
+    /**
+     * Méthode propre aux tournois LooserBracket créer un nouveau tour avec les équipes gagnantes du LooserBracket
+     * et perdantes du WinnerBracket
+     *
+     * @param equipesAAjouterAuTournoi équipes ayant perdues le WinnerBracket
+     * @param tournoi LooserBracket du tournoi courant
+     *
+     * @author Morgan Nayet
+     */
     private void creerNouveauTourLooserBracket(Tournoi tournoi, Equipe[] equipesAAjouterAuTournoi) {
 
         Tour nouveauTour;
@@ -197,6 +230,14 @@ public class GestionTournoiController {
         tournoi.addNewTour(nouveauTour);
     }
 
+    /**
+     * Vérifie si, pour tout les matchs, tous les scores des équipes ont été modifiés
+     *
+     * @param tournoi courant
+     *
+     * @return true si tous les scores ont été modifiés
+     *         false sinon
+     */
     private boolean isTousLesScoresModifies(Tournoi tournoi){
 
         if (tournoi.getTourCourant() == null) return true; //cas du looserbracket lors du premier tour de son tournoi

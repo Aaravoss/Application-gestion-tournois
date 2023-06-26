@@ -7,7 +7,9 @@ package model.equipe;
 import java.io.Serializable;
 
 /**
- * 
+ * Gestion de la donnée Equipe
+ * Donnée de l'application sérialisable.
+ *
  * @author Morgan Nayet
  */
 public class Equipe implements Serializable {
@@ -18,12 +20,21 @@ public class Equipe implements Serializable {
 	 * Créé une équipe participant au tournoi
 	 * 
 	 * @param nom de l'équipe
+	 *
+	 * @author Morgan Nayet
 	 */
 	public Equipe(String nom) {
 
 		this.nom = nom;
 	}
 
+	/**
+	 * Getter du nom d'équipe
+	 *
+	 * @return le nom de l'équipe
+	 *
+	 * @author Morgan Nayet
+	 */
 	public String getNom() {
 		return this.nom;
 	}

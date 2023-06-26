@@ -11,7 +11,9 @@ import model.equipe.Equipe;
 import model.score.Score;
 
 /**
- * 
+ * Gestion de la donnée Match
+ * Donnée de l'application sérialisable.
+ *
  * @author Morgan Nayet
  */
 public class Match implements Serializable {
@@ -21,6 +23,8 @@ public class Match implements Serializable {
 	
 	/**
 	 * Créer un nouveau match par défaut
+	 *
+	 * @author Morgan Nayet
 	 */
 	public Match() {
 		this.equipes = new ArrayList<Equipe>();
@@ -29,13 +33,23 @@ public class Match implements Serializable {
 	
 	/**
 	 * Setter des équipes particiants au match
+	 *
 	 * @param equipe ajoutée au match
+	 *
+	 * @author Morgan Nayet
 	 */
 	public void addEquipeAndScore(Equipe equipe) {
 		this.equipes.add(equipe);
 		this.scores.add(new Score(equipe));
 	}
 
+	/**
+	 * Getter des scores
+	 *
+	 * @return une liste des scores du match
+	 *
+	 * @author Morgan Nayet
+	 */
 	public List<Score> getScores() { return this.scores;}
 
 	public Score getScore(Equipe equipe) {
@@ -47,8 +61,22 @@ public class Match implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Getter des équipes
+	 *
+	 * @return une liste des équipes du match
+	 *
+	 * @author Morgan Nayet
+	 */
 	public List<Equipe> getEquipes() { return this.equipes; }
 
+	/**
+	 * Fournit en retour l'équipe vaincqueure du match après affectation des nouveaux scores
+	 *
+	 * @return le vaincqueur du match
+	 *
+	 * @author Morgan Nayet
+	 */
 	public Equipe getVainqueur(){
 
 		Equipe vainqueur;
@@ -67,6 +95,7 @@ public class Match implements Serializable {
 	 * Utilisable en l'état que pour les tournois de type LooserBracket
 	 *
 	 * @return le perdant avec le score le plus bas
+	 *
 	 * @author Morgan Nayet
 	 */
 	public Equipe getPerdant(){

@@ -11,8 +11,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.geometry.Insets;
 
@@ -20,19 +23,22 @@ import javafx.geometry.Insets;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import static utils.BusinessConstants.TAILLE_BTN_MENU_X;
-import static utils.BusinessConstants.TAILLE_BTN_MENU_Y;
-import static utils.BusinessConstants.TAILLE_ECRAN_X;
-import static utils.BusinessConstants.TAILLE_ECRAN_Y;
-import static utils.BusinessConstants.TAILLE_TITRE;
+import static utils.BusinessConstants.*;
 
 /**
+ * IHM liée à l'affichage du menu principal
  *
  * @author Carolane Pulval-Dady, Touria SAYAGH
  */
-
 public class IHMMenu extends Application {
 
+    /**
+     * Modélisation de l'IHM
+     *
+     * @param stage état de l'application
+     *
+     * @author Carolane Pulval-Dady
+     */
     @Override
     public void start(Stage stage) {
         stage.setTitle("Menu");
@@ -115,6 +121,13 @@ public class IHMMenu extends Application {
         stage.show();
     }
 
+    /**
+     * Lance l'IHM
+     *
+     * @param args non utilisé
+     *
+     * @author Carolane Pulval-Dady
+     */
     public static void main(String[] args) {
         launch();
     }
