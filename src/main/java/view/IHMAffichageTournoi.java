@@ -71,7 +71,7 @@ public class IHMAffichageTournoi extends Application {
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
         Image image = null;
         try {
-            image = new Image(new FileInputStream("src/main/java/view/fond2.jpg"));
+            image = new Image(new FileInputStream("src/main/java/view/fond.jpg"));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -81,11 +81,8 @@ public class IHMAffichageTournoi extends Application {
         mv.setPreserveRatio(true);
         page.getChildren().add(mv);
         Label titre = new Label("Tournoi  " + this.tournoi.getNom());
-        titre.setFont(Font.font("Verdana", FontWeight.EXTRA_LIGHT, TAILLE_TITRE));
-        DropShadow ds = new DropShadow();
-        ds.setOffsetY(3);
-        ds.setColor(Color.color(0.4, 0.4, 0.4));
-        titre.setEffect(ds);
+        titre.setTextFill(Color.WHITE);
+        titre.setFont(new Font("Cambria", TAILLE_TITRE));
         titre.setLayoutX(20);
         titre.setLayoutY(10);
 
@@ -99,6 +96,7 @@ public class IHMAffichageTournoi extends Application {
             listeMatch.setLayoutY(50);
             List<model.match.Match> listeMatchs = tour.getMatchs();
             Label labelTour = new Label(tour.getNom());
+            labelTour.setTextFill(Color.WHITE);
             labelTour.setStyle("-fx-font-weight: bold");
             listeMatch.addColumn(nbTour, labelTour);
             for (int nbMatch = 0; nbMatch < listeMatchs.size(); nbMatch++) {
@@ -109,13 +107,13 @@ public class IHMAffichageTournoi extends Application {
                 for(model.equipe.Equipe equipe : listeMatchs.get(nbMatch).getEquipes() ) {
                     if(tour == tournoi.getTourCourant()) {
                         if(tournoi.isFerme()) {
-                            listeMatch.setLayoutX(x + 50);
                             Label labelEquipe = new Label(equipe.getNom());
                             labelEquipe.setTextFill(Color.WHITE);
                             labelEquipe.setMinWidth(20);
                             labelEquipe.setBackground(new Background(new BackgroundFill(Color.GOLDENROD, new CornerRadii(5), Insets.EMPTY)));
                             labelEquipe.setPadding(new Insets(5,5,5,5));
                             Label labelScore = new Label("Vainqueur");
+                            labelScore.setTextFill(Color.WHITE);
                             labelScore.setPadding(new Insets(5,5,5,5));
                             HBox hBoxMatch = new HBox();
                             hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(2))));
@@ -142,13 +140,14 @@ public class IHMAffichageTournoi extends Application {
                         labelEquipe.setTextFill(Color.WHITE);
                         labelEquipe.setPadding(new Insets(5,5,5,5));
                         Label labelScore = new Label(""+ tour.getScore(equipe).getScore());
+                        labelScore.setTextFill(Color.WHITE);
                         labelScore.setPadding(new Insets(5,5,5,5));
                         HBox hBoxMatch = new HBox();
                         hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(2))));
                         if(equipeP == equipe) {
                             labelEquipe.setBackground(new Background(new BackgroundFill(Color.web("#989998"), new CornerRadii(5), Insets.EMPTY)));
                         } else {
-                            labelEquipe.setBackground(new Background(new BackgroundFill(Color.web("#43BF05"), new CornerRadii(5), Insets.EMPTY)));
+                            labelEquipe.setBackground(new Background(new BackgroundFill(Color.web("#09AD94"), new CornerRadii(5), Insets.EMPTY)));
                         }
                         hBoxMatch.getChildren().addAll(labelEquipe, labelScore);
                         gridMatch.addColumn(nbTour,hBoxMatch);
@@ -175,6 +174,7 @@ public class IHMAffichageTournoi extends Application {
                 listeMatch.setLayoutY(50);
                 List<model.match.Match> listeMatchs = tourLB.getMatchs();
                 Label labelTour = new Label(tourLB.getNom());
+                labelTour.setTextFill(Color.WHITE);
                 labelTour.setStyle("-fx-font-weight: bold");
                 listeMatch.addColumn(nbTourLB, labelTour);
                 for (int nbMatch = 0; nbMatch < listeMatchs.size(); nbMatch++) {
@@ -192,6 +192,7 @@ public class IHMAffichageTournoi extends Application {
                                 labelEquipe.setBackground(new Background(new BackgroundFill(Color.BLACK, new CornerRadii(5), Insets.EMPTY)));
                                 labelEquipe.setPadding(new Insets(5,5,5,5));
                                 Label labelScore = new Label("Vainqueur");
+                                labelScore.setTextFill(Color.WHITE);
                                 labelScore.setPadding(new Insets(5,5,5,5));
                                 HBox hBoxMatch = new HBox();
                                 hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(2))));
@@ -219,12 +220,13 @@ public class IHMAffichageTournoi extends Application {
                             labelEquipe.setPadding(new Insets(5,5,5,5));
                             Label labelScore = new Label(""+ tourLB.getScore(equipe).getScore());
                             labelScore.setPadding(new Insets(5,5,5,5));
+                            labelScore.setTextFill(Color.WHITE);
                             HBox hBoxMatch = new HBox();
                             hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(2))));
                             if(equipeP == equipe) {
                                 labelEquipe.setBackground(new Background(new BackgroundFill(Color.web("#989998"), new CornerRadii(5), Insets.EMPTY)));
                             } else {
-                                labelEquipe.setBackground(new Background(new BackgroundFill(Color.web("#43BF05"), new CornerRadii(5), Insets.EMPTY)));
+                                labelEquipe.setBackground(new Background(new BackgroundFill(Color.web("#09AD94"), new CornerRadii(5), Insets.EMPTY)));
                             }
                             hBoxMatch.getChildren().addAll(labelEquipe, labelScore);
                             gridMatch.addColumn(nbTourLB,hBoxMatch);
@@ -248,10 +250,16 @@ public class IHMAffichageTournoi extends Application {
             btnConfirmer.setPrefSize(TAILLE_BTN_X, TAILLE_BTN_Y);
             btnConfirmer.setText("Confirmer");
             btnConfirmer.setFont(new Font("Cambria", 10));
-            btnConfirmer.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
+            btnConfirmer.setBackground(new Background(new BackgroundFill(Color.web("A0E4FE"), CornerRadii.EMPTY, Insets.EMPTY)));
             btnConfirmer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-            btnConfirmer.setOnMousePressed(event ->{
-                btnConfirmer.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+            btnConfirmer.setOnMouseEntered(e -> {
+                btnConfirmer.setBackground(new Background(new BackgroundFill(Color.web("#036991"), CornerRadii.EMPTY, Insets.EMPTY)));
+                btnConfirmer.setTextFill(Color.WHITE);
+            });
+
+            btnConfirmer.setOnMouseExited(e -> {
+                btnConfirmer.setBackground(new Background(new BackgroundFill(Color.web("#A0E4FE"), CornerRadii.EMPTY, Insets.EMPTY)));
+                btnConfirmer.setTextFill(Color.BLACK);
             });
             btnConfirmer.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -298,10 +306,16 @@ public class IHMAffichageTournoi extends Application {
         btnAnnuler.setPrefSize(TAILLE_BTN_X, TAILLE_BTN_Y);
         btnAnnuler.setText("Annuler");
         btnAnnuler.setFont(new Font("Cambria", 10));
-        btnAnnuler.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
+        btnAnnuler.setBackground(new Background(new BackgroundFill(Color.web("A0E4FE"), CornerRadii.EMPTY, Insets.EMPTY)));
         btnAnnuler.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        btnAnnuler.setOnMousePressed(event ->{
-            btnAnnuler.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+        btnAnnuler.setOnMouseEntered(e -> {
+            btnAnnuler.setBackground(new Background(new BackgroundFill(Color.web("#036991"), CornerRadii.EMPTY, Insets.EMPTY)));
+            btnAnnuler.setTextFill(Color.WHITE);
+        });
+
+        btnAnnuler.setOnMouseExited(e -> {
+            btnAnnuler.setBackground(new Background(new BackgroundFill(Color.web("#A0E4FE"), CornerRadii.EMPTY, Insets.EMPTY)));
+            btnAnnuler.setTextFill(Color.BLACK);
         });
         btnAnnuler.setOnAction(new EventHandler<ActionEvent>() {
             @Override

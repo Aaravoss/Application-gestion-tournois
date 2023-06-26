@@ -146,6 +146,7 @@ public class IHMCreationLoserBracket extends Application {
         btnConfirmer.setPrefSize(TAILLE_BTN_X, TAILLE_BTN_Y);
         btnConfirmer.setText("Confirmer");
         btnConfirmer.setFont(new Font("Cambria", 10));
+
         btnConfirmer.setOnMouseEntered(e -> {
             btnConfirmer.setStyle("-fx-background-color: #BA27C5FF; -fx-text-fill: #ffffff;");
         });
