@@ -10,16 +10,21 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import model.equipe.Equipe;
 import model.tour.Tour;
 import model.tournoi.Tournoi;
 import model.tournoi.type.LoserBracket;
-
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,12 +69,25 @@ public class IHMAffichageTournoi extends Application {
         stage.setTitle("Affichage tournoi Loser Bracket");
         Group page = new Group();
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
-
+        Image image = null;
+        try {
+            image = new Image(new FileInputStream("src/main/java/view/fond2.jpg"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        ImageView mv = new ImageView(image);
+        mv.setFitWidth(2500);
+        mv.setFitHeight(2500);
+        mv.setPreserveRatio(true);
+        page.getChildren().add(mv);
         Label titre = new Label("Tournoi  " + this.tournoi.getNom());
-        titre.setFont(new Font("Cambria", TAILLE_TITRE));
-        titre.setLayoutX(0);
+        titre.setFont(Font.font("Verdana", FontWeight.EXTRA_LIGHT, TAILLE_TITRE));
+        DropShadow ds = new DropShadow();
+        ds.setOffsetY(3);
+        ds.setColor(Color.color(0.4, 0.4, 0.4));
+        titre.setEffect(ds);
+        titre.setLayoutX(20);
         titre.setLayoutY(10);
-
 
         int x = 10;
         int nbTour = 0;
@@ -78,7 +96,7 @@ public class IHMAffichageTournoi extends Application {
             listeMatch.setPadding(new Insets(50,50,50,50));
             listeMatch.setAlignment(Pos.CENTER);
             listeMatch.setLayoutX(x);
-            listeMatch.setLayoutY(30);
+            listeMatch.setLayoutY(50);
             List<model.match.Match> listeMatchs = tour.getMatchs();
             Label labelTour = new Label(tour.getNom());
             labelTour.setStyle("-fx-font-weight: bold");
@@ -91,25 +109,28 @@ public class IHMAffichageTournoi extends Application {
                 for(model.equipe.Equipe equipe : listeMatchs.get(nbMatch).getEquipes() ) {
                     if(tour == tournoi.getTourCourant()) {
                         if(tournoi.isFerme()) {
-                            listeMatch.setLayoutX(x + 100);
+                            listeMatch.setLayoutX(x + 50);
                             Label labelEquipe = new Label(equipe.getNom());
                             labelEquipe.setTextFill(Color.WHITE);
-                            labelEquipe.setBackground(new Background(new BackgroundFill(Color.GOLDENROD, CornerRadii.EMPTY, Insets.EMPTY)));
+                            labelEquipe.setMinWidth(20);
+                            labelEquipe.setBackground(new Background(new BackgroundFill(Color.GOLDENROD, new CornerRadii(5), Insets.EMPTY)));
                             labelEquipe.setPadding(new Insets(5,5,5,5));
                             Label labelScore = new Label("Vainqueur");
                             labelScore.setPadding(new Insets(5,5,5,5));
                             HBox hBoxMatch = new HBox();
-                            hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+                            hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(2))));
                             hBoxMatch.getChildren().addAll(labelEquipe, labelScore);
                             gridMatch.addColumn(nbTour,hBoxMatch);
                         } else {
                             HBox hBoxMatch = new HBox();
-                            hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-                            hBoxMatch.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+                            hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(2))));
+                            hBoxMatch.setBackground(new Background(new BackgroundFill(Color.web("#59A1D0"), new CornerRadii(5), Insets.EMPTY)));
                             Label labelEquipe = new Label(equipe.getNom());
+                            labelEquipe.setMinWidth(20);
                             labelEquipe.setPadding(new Insets(5,5,5,5));
                             labelEquipe.setTextFill(Color.WHITE);
                             TextField textFieldScore = new TextField();
+                            textFieldScore.setMaxWidth(50);
                             hBoxMatch.getChildren().addAll(labelEquipe, textFieldScore);
                             gridMatch.addColumn(nbTour,hBoxMatch);
                             this.scoresWB.add(textFieldScore);
@@ -117,17 +138,17 @@ public class IHMAffichageTournoi extends Application {
                     } else {
                         Equipe equipeP = listeMatchs.get(nbMatch).getPerdant();
                         Label labelEquipe = new Label(equipe.getNom());
+                        labelEquipe.setMinWidth(20);
                         labelEquipe.setTextFill(Color.WHITE);
                         labelEquipe.setPadding(new Insets(5,5,5,5));
                         Label labelScore = new Label(""+ tour.getScore(equipe).getScore());
                         labelScore.setPadding(new Insets(5,5,5,5));
                         HBox hBoxMatch = new HBox();
-                        hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+                        hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(2))));
                         if(equipeP == equipe) {
-                            labelEquipe.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-                            labelScore.setBackground(new Background(new BackgroundFill(Color.DARKGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+                            labelEquipe.setBackground(new Background(new BackgroundFill(Color.web("#989998"), new CornerRadii(5), Insets.EMPTY)));
                         } else {
-                            labelEquipe.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+                            labelEquipe.setBackground(new Background(new BackgroundFill(Color.web("#43BF05"), new CornerRadii(5), Insets.EMPTY)));
                         }
                         hBoxMatch.getChildren().addAll(labelEquipe, labelScore);
                         gridMatch.addColumn(nbTour,hBoxMatch);
@@ -151,7 +172,7 @@ public class IHMAffichageTournoi extends Application {
                 listeMatch.setPadding(new Insets(50,50,50,50));
                 listeMatch.setAlignment(Pos.CENTER);
                 listeMatch.setLayoutX(xLB);
-                listeMatch.setLayoutY(30);
+                listeMatch.setLayoutY(50);
                 List<model.match.Match> listeMatchs = tourLB.getMatchs();
                 Label labelTour = new Label(tourLB.getNom());
                 labelTour.setStyle("-fx-font-weight: bold");
@@ -167,22 +188,24 @@ public class IHMAffichageTournoi extends Application {
                                 listeMatch.setLayoutX(x + 100);
                                 Label labelEquipe = new Label(equipe.getNom());
                                 labelEquipe.setTextFill(Color.WHITE);
-                                labelEquipe.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+                                labelEquipe.setMinWidth(20);
+                                labelEquipe.setBackground(new Background(new BackgroundFill(Color.BLACK, new CornerRadii(5), Insets.EMPTY)));
                                 labelEquipe.setPadding(new Insets(5,5,5,5));
                                 Label labelScore = new Label("Vainqueur");
                                 labelScore.setPadding(new Insets(5,5,5,5));
                                 HBox hBoxMatch = new HBox();
-                                hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+                                hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(2))));
                                 hBoxMatch.getChildren().addAll(labelEquipe, labelScore);
                                 gridMatch.addColumn(nbTour,hBoxMatch);
                             } else {
                                 HBox hBoxMatch = new HBox();
-                                hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-                                hBoxMatch.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+                                hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(2))));
+                                hBoxMatch.setBackground(new Background(new BackgroundFill(Color.web("#59A1D0"), new CornerRadii(5), Insets.EMPTY)));
                                 Label labelEquipe = new Label(equipe.getNom());
                                 labelEquipe.setTextFill(Color.WHITE);
                                 labelEquipe.setPadding(new Insets(5, 5, 5, 5));
                                 TextField textFieldScore = new TextField();
+                                textFieldScore.setMaxWidth(50);
                                 hBoxMatch.getChildren().addAll(labelEquipe, textFieldScore);
                                 gridMatch.addColumn(nbTourLB, hBoxMatch);
                                 this.scoresLB.add(textFieldScore);
@@ -192,16 +215,16 @@ public class IHMAffichageTournoi extends Application {
                             listeMatch.setLayoutX(xLB + 100);
                             Label labelEquipe = new Label(equipe.getNom());
                             labelEquipe.setTextFill(Color.WHITE);
+                            labelEquipe.setMinWidth(20);
                             labelEquipe.setPadding(new Insets(5,5,5,5));
                             Label labelScore = new Label(""+ tourLB.getScore(equipe).getScore());
                             labelScore.setPadding(new Insets(5,5,5,5));
                             HBox hBoxMatch = new HBox();
-                            hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+                            hBoxMatch.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(2))));
                             if(equipeP == equipe) {
-                                labelEquipe.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-                                labelScore.setBackground(new Background(new BackgroundFill(Color.DARKGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+                                labelEquipe.setBackground(new Background(new BackgroundFill(Color.web("#989998"), new CornerRadii(5), Insets.EMPTY)));
                             } else {
-                                labelEquipe.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+                                labelEquipe.setBackground(new Background(new BackgroundFill(Color.web("#43BF05"), new CornerRadii(5), Insets.EMPTY)));
                             }
                             hBoxMatch.getChildren().addAll(labelEquipe, labelScore);
                             gridMatch.addColumn(nbTourLB,hBoxMatch);
@@ -225,6 +248,11 @@ public class IHMAffichageTournoi extends Application {
             btnConfirmer.setPrefSize(TAILLE_BTN_X, TAILLE_BTN_Y);
             btnConfirmer.setText("Confirmer");
             btnConfirmer.setFont(new Font("Cambria", 10));
+            btnConfirmer.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
+            btnConfirmer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+            btnConfirmer.setOnMousePressed(event ->{
+                btnConfirmer.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+            });
             btnConfirmer.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
@@ -270,6 +298,11 @@ public class IHMAffichageTournoi extends Application {
         btnAnnuler.setPrefSize(TAILLE_BTN_X, TAILLE_BTN_Y);
         btnAnnuler.setText("Annuler");
         btnAnnuler.setFont(new Font("Cambria", 10));
+        btnAnnuler.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
+        btnAnnuler.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        btnAnnuler.setOnMousePressed(event ->{
+            btnAnnuler.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+        });
         btnAnnuler.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
