@@ -13,7 +13,9 @@ import model.match.Match;
 import model.score.Score;
 
 /**
- * 
+ * Gestion de la donnée Tour
+ * Donnée de l'application sérialisable.
+ *
  * @author Morgan Nayet
  */
 public class Tour implements Serializable {
@@ -25,6 +27,7 @@ public class Tour implements Serializable {
 	 * Créer un nouveau tour
 	 * 
 	 * @param nom du tour
+	 *
 	 * @author Morgan Nayet
 	 */
 	public Tour(String nom) {
@@ -35,8 +38,11 @@ public class Tour implements Serializable {
 
 	/**
 	 * Setter des matchs du tour courant
+	 *
 	 * @param equipes participants au tour courant
 	 * @param nbEquipesParMatch nombre d'équipes participant à chaque match
+	 *
+	 * @author Morgan Nayet
 	 */
 	public void setMatchs(Equipe[] equipes, int nbEquipesParMatch) {
 		
@@ -54,15 +60,38 @@ public class Tour implements Serializable {
 		}
 	}
 
+	/**
+	 * Getter des matchs du tour
+	 *
+	 * @return une liste des matchs du tour
+	 *
+	 * @author Morgan Nayet
+	 */
 	public List<Match> getMatchs() {
 
 		return this.matchs;
 	}
 
+	/**
+	 * Getter du nom
+	 *
+	 * @return le nom du tour
+	 *
+	 * @author Morgan Nayet
+	 */
 	public String getNom() {
 		return this.nom;
 	}
 
+	/**
+	 * Getter du score d'une équipe
+	 *
+	 * @param equipe souhaitée
+	 *
+	 * @return l'objet Score lié à l'équipe souhaitée
+	 *
+	 * @author Morgan Nayet
+	 */
 	public Score getScore(Equipe equipe) {
 		for(Object match : this.matchs) {
 			if(((Match)match).getScore(equipe) != null ) {

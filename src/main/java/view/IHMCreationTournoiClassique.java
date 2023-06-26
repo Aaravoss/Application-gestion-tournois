@@ -1,5 +1,6 @@
 package view;
 
+import controller.CreationTournoiController;
 import controller.GestionApplicationController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -11,32 +12,47 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import controller.CreationTournoiController;
 import javafx.stage.WindowEvent;
 import model.tournoi.type.Classique;
-import javafx.scene.layout.*;
-import static utils.BusinessConstants.*;
 
 import java.util.ArrayList;
 
+import static utils.BusinessConstants.*;
+
 /**
+ * IHM liée à la création d'un tournoi Classique
  *
  * @author Carolane Pulval-Dady
  */
-
 public class IHMCreationTournoiClassique extends Application {
 	
     private Classique tournoi;
     private ArrayList<TextField> participants;
     private static Font TEXTE = new Font("Cambria", 30);
 
+    /**
+     * Constructeur de l'IHMCreationTournoiClassique
+     *
+     * @param tournoi à créer
+     *
+     * @author Carolane Pulval-Dady
+     */
     public IHMCreationTournoiClassique(Classique tournoi) {
         this.tournoi = tournoi;
         this.participants = new ArrayList<>();
     }
 
+    /**
+     * Vérifie si tous les champs sont remplis
+     *
+     * @return  true si tous les matchs sont remplis <br>
+     *          false sinon
+     *
+     * @author Carolane Pulval-Dady
+     */
     private boolean isMatchsRemplis() {
     	
     	for(TextField tf : this.participants) {
@@ -46,7 +62,14 @@ public class IHMCreationTournoiClassique extends Application {
     	}
     	return true;
     }
-    
+
+    /**
+     * Modélisation de l'IHM
+     *
+     * @param stage état de l'application
+     *
+     * @author Carolane Pulval-Dady
+     */
     @Override
     public void start(Stage stage)  {
 
@@ -138,6 +161,13 @@ public class IHMCreationTournoiClassique extends Application {
         stage.show();
     }
 
+    /**
+     * Lance l'IHM
+     *
+     * @param args non utilisé
+     *
+     * @author Carolane Pulval-Dady
+     */
     public static void main(String[] args) {
         launch();
     }
