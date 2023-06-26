@@ -4,12 +4,20 @@ import controller.GestionApplicationController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import app.GestionTournois;
 import javafx.stage.WindowEvent;
@@ -46,25 +54,47 @@ public class IHMGestion extends Application {
         stage.setTitle("Gestion des tournois");
         Group root = new Group();
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
-
+        Image image = new Image("C:/Users/Carolane/Documents/Miage/javafx/fond2.jpg");
+        ImageView mv = new ImageView(image);
+        mv.setFitWidth(1240);
+        mv.setFitHeight(724);
+        root.getChildren().add(mv);
         Label titre = new Label("Listes des tournois existants");
         titre.setFont(new Font("Cambria", TAILLE_TITRE));
+        DropShadow ds = new DropShadow();
+        ds.setOffsetY(3);
+        ds.setColor(Color.color(0.4, 0.4, 0.4));
+        titre.setEffect(ds);
         titre.setLayoutX(TAILLE_ECRAN_X / 5);
         titre.setLayoutY(50);
 
         GridPane listeTournoiLB = new GridPane();
         listeTournoiLB.setLayoutY(150);
         listeTournoiLB.setLayoutX(10);
+        listeTournoiLB.setHgap(10);
+        listeTournoiLB.setVgap(10);
         Label labelLB = new Label("Tournois LoserBracket");
-        labelLB.setStyle("-fx-font-weight: bold");
+        labelLB.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         listeTournoiLB.addRow(0, labelLB);
+        int nbTournoi = 1;
         for (Tournoi tournoi : this.tournois) {
             if (tournoi instanceof LoserBracket) {
                 Button btnTournoi = new Button();
-                btnTournoi.setPrefSize(200, 100);
+                btnTournoi.setPrefSize(180, 100);
                 btnTournoi.setText(tournoi.getNom());
-                btnTournoi.setFont(new Font("Cambria", 10));
-                listeTournoiLB.addRow(1, btnTournoi);
+                btnTournoi.setFont(new Font("Cambria", 15));
+                btnTournoi.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, new CornerRadii(20), Insets.EMPTY)));
+                btnTournoi.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(20), new BorderWidths(2))));
+                btnTournoi.setOnMousePressed(event ->{
+                    btnTournoi.setBackground(new Background(new BackgroundFill(Color.web("#5290B9"), new CornerRadii(20), Insets.EMPTY)));
+                });
+                if(nbTournoi < 7) {
+                    listeTournoiLB.addRow(1, btnTournoi);
+                } else {
+                    listeTournoiLB.addRow(2, btnTournoi);
+                }
+
+
                 btnTournoi.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
@@ -75,21 +105,34 @@ public class IHMGestion extends Application {
                     }
                 });
             }
+            nbTournoi++;
         }
 
         GridPane listeTournoiC = new GridPane();
         listeTournoiC.setLayoutY(400);
         listeTournoiC.setLayoutX(20);
+        listeTournoiC.setHgap(10);
+        listeTournoiC.setVgap(10);
         Label labelC = new Label("Tournois classiques");
-        labelC.setStyle("-fx-font-weight: bold");
+        labelC.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         listeTournoiC.addRow(0, labelC);
+        int nbTournoiC = 1;
         for (Tournoi tournoiC : this.tournois) {
             if (tournoiC instanceof Classique) {
                 Button btnTournoi = new Button();
-                btnTournoi.setPrefSize(200, 100);
+                btnTournoi.setPrefSize(180, 100);
                 btnTournoi.setText(tournoiC.getNom());
-                btnTournoi.setFont(new Font("Cambria", 10));
-                listeTournoiC.addRow(1, btnTournoi);
+                btnTournoi.setFont(new Font("Cambria", 15));
+                btnTournoi.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, new CornerRadii(20), Insets.EMPTY)));
+                btnTournoi.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(20), new BorderWidths(2))));
+                btnTournoi.setOnMousePressed(event ->{
+                    btnTournoi.setBackground(new Background(new BackgroundFill(Color.DARKCYAN, new CornerRadii(20), Insets.EMPTY)));
+                });
+                if(nbTournoiC < 7) {
+                    listeTournoiC.addRow(1, btnTournoi);
+                } else {
+                    listeTournoiC.addRow(2, btnTournoi);
+                }
                 btnTournoi.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
@@ -108,6 +151,11 @@ public class IHMGestion extends Application {
         btnAnnuler.setPrefSize(TAILLE_BTN_X, TAILLE_BTN_Y);
         btnAnnuler.setText("Annuler");
         btnAnnuler.setFont(new Font("Cambria", 10));
+        btnAnnuler.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
+        btnAnnuler.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        btnAnnuler.setOnMousePressed(event ->{
+            btnAnnuler.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+        });
         btnAnnuler.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
