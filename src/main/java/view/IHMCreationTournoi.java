@@ -7,17 +7,26 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import static utils.BusinessConstants.*;
 
@@ -25,6 +34,8 @@ import static utils.BusinessConstants.*;
  * IHM liée à la création d'un tournoi
  *
  * @author Carolane Pulval-Dady
+ * @author Touria SAYAGH
+ *
  */
 public class IHMCreationTournoi extends Application {
 
@@ -39,55 +50,80 @@ public class IHMCreationTournoi extends Application {
      */
     @Override
     public void start(Stage stage)  {
-
         stage.setTitle("Création d'un tournoi");
         Group root = new Group();
+        String imagePath = "src/main/java/view/creationImg.jpeg";
+        Image image = null;
+        try {
+            image = new Image(new FileInputStream(imagePath));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        ImageView backgroundImageView = new ImageView(image);
+        backgroundImageView.setFitWidth(TAILLE_ECRAN_X);
+        backgroundImageView.setFitHeight(TAILLE_ECRAN_Y);
+        root.getChildren().add(backgroundImageView);
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
 
 
-        Label titre = new Label("Création d'un tournoi");
-        titre.setFont(new Font("Cambria", TAILLE_TITRE));
-        titre.setLayoutX(TAILLE_ECRAN_X /5);
+
+        Label titre = new Label("Créer un tournoi");
+        titre.setFont(new Font("Cambria", 80));
+        titre.layoutXProperty().bind(scene.widthProperty().subtract(titre.widthProperty()).divide(2));
         titre.setLayoutY(100);
+        titre.setTextFill(Color.WHITE);
+
 
         VBox vbox = new VBox();
+        //vbox.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
         vbox.setPrefWidth(TAILLE_ECRAN_X - TAILLE_ECRAN_X*0.2);
-        vbox.setSpacing(100);
+        vbox.setPadding(new Insets(35,0,35,0));
+        vbox.setSpacing(80);
         vbox.setLayoutX(TAILLE_ECRAN_X * 0.1);
         vbox.setLayoutY(TAILLE_ECRAN_Y/3);
-
         HBox hboxNomT = new HBox();
-        hboxNomT.setSpacing(250);
+        hboxNomT.setSpacing(110);
+        hboxNomT.setAlignment(Pos.CENTER);
+
         Label labelNomT = new Label("Nom du tournoi");
         labelNomT.setFont(TEXTE);
+        labelNomT.setTextFill(Color.WHITE);
         TextField textFieldNomT = new TextField();
-        textFieldNomT.setPrefWidth(350);
+        textFieldNomT.setPrefWidth(320);
         textFieldNomT.setPrefHeight(15);
         textFieldNomT.setFont(new Font("Cambria", 20));
         textFieldNomT.setPadding(new Insets(5,5,5,5));
         hboxNomT.getChildren().addAll(labelNomT, textFieldNomT);
 
         HBox hboxTypeT = new HBox();
-        hboxTypeT.setSpacing(250);
-        Label labelTypeT = new Label("Nom du tournoi");
+        hboxTypeT.setSpacing(110);
+        hboxTypeT.setAlignment(Pos.CENTER);
+        Label labelTypeT = new Label("Type de tournoi");
+        labelTypeT.setTextFill(Color.WHITE);
         labelTypeT.setFont(TEXTE);
         ComboBox<String> comboBoxTypeT = new ComboBox<String>();
-        comboBoxTypeT.setPrefWidth(350);
+        comboBoxTypeT.setPrefWidth(320);
         comboBoxTypeT.setPrefHeight(30);
         comboBoxTypeT.setPadding(new Insets(5,5,5,5));
         comboBoxTypeT.getItems().addAll(TYPE_CLASSIQUE, TYPE_LOSER_BRACKET);
         hboxTypeT.getChildren().addAll(labelTypeT,comboBoxTypeT);
         vbox.getChildren().addAll(hboxNomT, hboxTypeT);
+
         HBox hboxParticipants = new HBox();
-        hboxParticipants.setSpacing(150);
-        Label labelNbParticipants = new Label("Nombre de participants");
+        hboxParticipants.setSpacing(50);
+        hboxParticipants.setAlignment(Pos.CENTER);
+        Label labelNbParticipants = new Label("Nombre Participants");
+        labelNbParticipants.setTextFill(Color.WHITE);
         labelNbParticipants.setFont(TEXTE);
         ComboBox<Integer> comboBoxNbParticipants= new ComboBox<Integer>();
+        comboBoxNbParticipants.setPrefWidth(320);
+        comboBoxNbParticipants.setPrefHeight(30);
+
+
         comboBoxTypeT.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                comboBoxNbParticipants.setPrefWidth(350);
-                comboBoxNbParticipants.setPrefHeight(30);
+
                 comboBoxNbParticipants.setPadding(new Insets(5,5,5,5));
                 ObservableList tampon = comboBoxNbParticipants.getItems();
 
@@ -109,6 +145,14 @@ public class IHMCreationTournoi extends Application {
         btnConfirmer.setPrefSize(TAILLE_BTN_X, TAILLE_BTN_Y);
         btnConfirmer.setText("Confirmer");
         btnConfirmer.setFont(new Font("Cambria", 10));
+
+        btnConfirmer.setOnMouseEntered(e -> {
+            btnConfirmer.setStyle("-fx-background-color: #BA27C5FF; -fx-text-fill: #ffffff;");
+        });
+
+        btnConfirmer.setOnMouseExited(e -> {
+            btnConfirmer.setStyle("-fx-background-color: #B4B5B7FF; -fx-text-fill: #0A2544FF;");
+        });
         btnConfirmer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -143,6 +187,14 @@ public class IHMCreationTournoi extends Application {
         btnAnnuler.setPrefSize(TAILLE_BTN_X, TAILLE_BTN_Y);
         btnAnnuler.setText("Annuler");
         btnAnnuler.setFont(new Font("Cambria", 10));
+
+        btnAnnuler.setOnMouseEntered(e -> {
+            btnAnnuler.setStyle("-fx-background-color: #BA27C5FF; -fx-text-fill: #ffffff;");
+        });
+
+        btnAnnuler.setOnMouseExited(e -> {
+            btnAnnuler.setStyle("-fx-background-color: #B4B5B7FF; -fx-text-fill: #0A2544FF;");
+        });
         btnAnnuler.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
