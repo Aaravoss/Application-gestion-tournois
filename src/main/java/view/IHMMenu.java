@@ -5,12 +5,20 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.WindowEvent;
+import javafx.geometry.Insets;
+
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import static utils.BusinessConstants.TAILLE_BTN_MENU_X;
 import static utils.BusinessConstants.TAILLE_BTN_MENU_Y;
@@ -20,7 +28,7 @@ import static utils.BusinessConstants.TAILLE_TITRE;
 
 /**
  *
- * @author Carolane Pulval-Dady
+ * @author Carolane Pulval-Dady, Touria SAYAGH
  */
 
 public class IHMMenu extends Application {
@@ -30,38 +38,68 @@ public class IHMMenu extends Application {
         stage.setTitle("Menu");
         Group root = new Group();
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
-
-        Label titre = new Label("Bienvenue sur l'application \n de gestion de tournoi");
+        String imagePath = "src/main/java/view/MenuImg.jpeg";
+        Image image = null;
+        try {
+            image = new Image(new FileInputStream(imagePath));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        ImageView backgroundImageView = new ImageView(image);
+        backgroundImageView.setFitWidth(TAILLE_ECRAN_X);
+        backgroundImageView.setFitHeight(TAILLE_ECRAN_Y);
+        root.getChildren().add(backgroundImageView);
+        Label titre = new Label("Bienvenue sur l'application \n Gestion de tournoi");
+        titre.setTextFill(Color.rgb(10,37,68));
         titre.setFont(new Font("Cambria", TAILLE_TITRE));
-        titre.setLayoutX(TAILLE_ECRAN_X /5);
-        titre.setLayoutY(50);
+        titre.setLayoutX(TAILLE_ECRAN_X /9);
+        titre.setLayoutY(10);
 
 
-        Button btnGestion = new Button();
-        btnGestion.setLayoutX(TAILLE_ECRAN_X /6);
-        btnGestion.setLayoutY(TAILLE_ECRAN_Y /2);
-        btnGestion.setPrefSize(TAILLE_BTN_MENU_X, TAILLE_BTN_MENU_Y);
-        btnGestion.setText("Gérer les tournois");
-        btnGestion.setFont(new Font("Cambria", 30));
-        btnGestion.setOnAction(new EventHandler<ActionEvent>() {
+
+
+        Button btnCreation = new Button();
+        btnCreation.setLayoutX(TAILLE_ECRAN_X /6 - 100 );
+        btnCreation.setLayoutY(TAILLE_ECRAN_Y /4 + TAILLE_BTN_MENU_Y);
+        btnCreation.setPrefSize(TAILLE_BTN_MENU_X, TAILLE_BTN_MENU_Y);
+        btnCreation.setText("Créer un tournoi");
+        btnCreation.setFont(new Font("Cambria", 30));
+        btnCreation.setStyle("-fx-background-color: #0A2544FF; -fx-text-fill: #ffffff;");
+        btnCreation.setOnMouseEntered(e -> {
+            btnCreation.setStyle("-fx-background-color: #0A2544FF; -fx-text-fill: #ffffff;");
+        });
+
+        btnCreation.setOnMouseExited(e -> {
+            btnCreation.setStyle("-fx-background-color: transparent; -fx-text-fill: #0A2544FF;");
+        });
+        btnCreation.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                view.IHMGestion page = new view.IHMGestion();
+                view.IHMCreationTournoi page = new view.IHMCreationTournoi();
                 page.start(stage);
             }
         });
 
 
-        Button btnCreation = new Button();
-        btnCreation.setLayoutX(TAILLE_ECRAN_X - TAILLE_ECRAN_X /6 - TAILLE_BTN_MENU_X);
-        btnCreation.setLayoutY(TAILLE_ECRAN_Y /2);
-        btnCreation.setPrefSize(TAILLE_BTN_MENU_X, TAILLE_BTN_MENU_Y);
-        btnCreation.setText("Créer un tournoi");
-        btnCreation.setFont(new Font("Cambria", 30));
-        btnCreation.setOnAction(new EventHandler<ActionEvent>() {
+        Button btnGestion = new Button();
+        btnGestion.setLayoutX(TAILLE_ECRAN_X /6 -100);
+        btnGestion.setLayoutY(TAILLE_ECRAN_Y /4);
+        btnGestion.setPrefSize(TAILLE_BTN_MENU_X, TAILLE_BTN_MENU_Y);
+        btnGestion.setText("Gérer les tournois");
+        btnGestion.setFont(new Font("Cambria", 30));
+        btnGestion.setStyle("-fx-background-color: transparent; -fx-text-fill: #0A2544FF;");
+        btnGestion.setOnMouseEntered(e -> {
+            btnGestion.setStyle("-fx-background-color: #0A2544FF; -fx-text-fill: #ffffff;");
+        });
+
+        btnGestion.setOnMouseExited(e -> {
+            btnGestion.setStyle("-fx-background-color: transparent; -fx-text-fill: #0A2544FF;");
+        });
+
+        btnGestion.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                view.IHMCreationTournoi page = new view.IHMCreationTournoi();
+                view.IHMGestion page = new view.IHMGestion();
                 page.start(stage);
             }
         });
