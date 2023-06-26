@@ -45,13 +45,8 @@ public class IHMMenu extends Application {
         stage.setTitle("Menu");
         Group root = new Group();
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
-        String imagePath = "src/main/java/view/MenuImg.jpeg";
-        Image image = null;
-        try {
-            image = new Image(new FileInputStream(imagePath));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        String imagePath = "/MenuImg.jpeg";
+        Image image = new Image(this.getClass().getResourceAsStream(imagePath));
         ImageView backgroundImageView = new ImageView(image);
         backgroundImageView.setFitWidth(TAILLE_ECRAN_X);
         backgroundImageView.setFitHeight(TAILLE_ECRAN_Y);

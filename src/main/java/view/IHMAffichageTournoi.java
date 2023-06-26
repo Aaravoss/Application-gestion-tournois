@@ -69,12 +69,7 @@ public class IHMAffichageTournoi extends Application {
         stage.setTitle("Affichage tournoi Loser Bracket");
         Group page = new Group();
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
-        Image image = null;
-        try {
-            image = new Image(new FileInputStream("src/main/java/view/fond.jpg"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        Image image = new Image(this.getClass().getResourceAsStream("/fond.jpg"));
         ImageView mv = new ImageView(image);
         mv.setFitWidth(2500);
         mv.setFitHeight(2500);
