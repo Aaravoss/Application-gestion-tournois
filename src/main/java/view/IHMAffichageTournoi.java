@@ -14,29 +14,35 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.equipe.Equipe;
 import model.tour.Tour;
-import javafx.stage.WindowEvent;
 import model.tournoi.Tournoi;
 import model.tournoi.type.LoserBracket;
-
-import static utils.BusinessConstants.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static utils.BusinessConstants.*;
+
 /**
+ * IHM liée à l'affichage de tout type de tournoi
  *
  * @author Carolane Pulval-Dady
  */
-
-
 public class IHMAffichageTournoi extends Application {
 
     private Tournoi tournoi;
     private ArrayList<TextField> scoresWB;
     private ArrayList<TextField> scoresLB;
 
+    /**
+     * Constructeur de l'IHMAffichageTournoi
+     *
+     * @param tournoi à afficher
+     *
+     * @author Carolane Pulval-Dady
+     */
     public IHMAffichageTournoi(model.tournoi.Tournoi tournoi) {
 
         this.tournoi = tournoi;
@@ -44,6 +50,13 @@ public class IHMAffichageTournoi extends Application {
         this.scoresLB = new ArrayList<>();
     }
 
+    /**
+     * Modélisation de l'IHM utilisé selon le type de tournoi
+     *
+     * @param stage état de l'application
+     *
+     * @author Carolane Pulval-Dady
+     */
     @Override
     public void start(Stage stage) {
         ScrollPane root = new ScrollPane();
@@ -278,6 +291,13 @@ public class IHMAffichageTournoi extends Application {
         stage.show();
     }
 
+    /**
+     * Lance l'IHM
+     *
+     * @param args non utilisé
+     *
+     * @author Carolane Pulval-Dady
+     */
     public static void main(String[] args) {
         launch();
     }}

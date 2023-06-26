@@ -1,34 +1,42 @@
 package view;
 
+import controller.CreationTournoiController;
 import controller.GestionApplicationController;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import controller.CreationTournoiController;
-import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.stage.WindowEvent;
 
 import static utils.BusinessConstants.*;
 
 /**
+ * IHM liée à la création d'un tournoi
  *
  * @author Carolane Pulval-Dady
  */
-
 public class IHMCreationTournoi extends Application {
 
     private static final Font TEXTE = new Font("Cambria", 30);
 
+    /**
+     * Modélisation de l'IHM
+     *
+     * @param stage état de l'application
+     *
+     * @author Carolane Pulval-Dady
+     */
     @Override
     public void start(Stage stage)  {
 
@@ -154,6 +162,13 @@ public class IHMCreationTournoi extends Application {
         stage.show();
     }
 
+    /**
+     * Lance l'IHM
+     *
+     * @param args non utilisé
+     *
+     * @author Carolane Pulval-Dady
+     */
     public static void main(String[] args) {
         launch();
     }
