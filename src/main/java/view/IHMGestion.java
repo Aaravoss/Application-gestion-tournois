@@ -64,7 +64,7 @@ public class IHMGestion extends Application {
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
         Image image = null;
         try {
-            image = new Image(new FileInputStream("src/main/java/view/fond2.jpg"));
+            image = new Image(new FileInputStream("src/main/java/view/fond.jpg"));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -74,10 +74,7 @@ public class IHMGestion extends Application {
         root.getChildren().add(mv);
         Label titre = new Label("Listes des tournois existants");
         titre.setFont(new Font("Cambria", TAILLE_TITRE));
-        DropShadow ds = new DropShadow();
-        ds.setOffsetY(3);
-        ds.setColor(Color.color(0.4, 0.4, 0.4));
-        titre.setEffect(ds);
+        titre.setTextFill(Color.WHITE);
         titre.setLayoutX(TAILLE_ECRAN_X / 5);
         titre.setLayoutY(50);
 
@@ -88,6 +85,7 @@ public class IHMGestion extends Application {
         listeTournoiLB.setVgap(10);
         Label labelLB = new Label("Tournois LoserBracket");
         labelLB.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        labelLB.setTextFill(Color.WHITE);
         listeTournoiLB.addRow(0, labelLB);
         int nbTournoi = 1;
         for (Tournoi tournoi : this.tournois) {
@@ -96,10 +94,15 @@ public class IHMGestion extends Application {
                 btnTournoi.setPrefSize(180, 100);
                 btnTournoi.setText(tournoi.getNom());
                 btnTournoi.setFont(new Font("Cambria", 15));
-                btnTournoi.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, new CornerRadii(20), Insets.EMPTY)));
+                btnTournoi.setBackground(new Background(new BackgroundFill(Color.web("C4EAF9"), new CornerRadii(20), Insets.EMPTY)));
                 btnTournoi.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(20), new BorderWidths(2))));
-                btnTournoi.setOnMousePressed(event ->{
-                    btnTournoi.setBackground(new Background(new BackgroundFill(Color.web("#5290B9"), new CornerRadii(20), Insets.EMPTY)));
+                btnTournoi.setOnMouseEntered(e -> {
+                    btnTournoi.setBackground(new Background(new BackgroundFill(Color.web("#036991"), new CornerRadii(20), Insets.EMPTY)));
+                    btnTournoi.setTextFill(Color.WHITE);
+                });
+                btnTournoi.setOnMouseExited(e -> {
+                    btnTournoi.setBackground(new Background(new BackgroundFill(Color.web("#C4EAF9"), new CornerRadii(20), Insets.EMPTY)));
+                    btnTournoi.setTextFill(Color.BLACK);
                 });
                 if(nbTournoi < 7) {
                     listeTournoiLB.addRow(1, btnTournoi);
@@ -129,6 +132,7 @@ public class IHMGestion extends Application {
         listeTournoiC.setVgap(10);
         Label labelC = new Label("Tournois classiques");
         labelC.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+        labelC.setTextFill(Color.WHITE);
         listeTournoiC.addRow(0, labelC);
         int nbTournoiC = 1;
         for (Tournoi tournoiC : this.tournois) {
@@ -137,10 +141,15 @@ public class IHMGestion extends Application {
                 btnTournoi.setPrefSize(180, 100);
                 btnTournoi.setText(tournoiC.getNom());
                 btnTournoi.setFont(new Font("Cambria", 15));
-                btnTournoi.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, new CornerRadii(20), Insets.EMPTY)));
+                btnTournoi.setBackground(new Background(new BackgroundFill(Color.web("C4EAF9"), new CornerRadii(20), Insets.EMPTY)));
                 btnTournoi.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(20), new BorderWidths(2))));
-                btnTournoi.setOnMousePressed(event ->{
-                    btnTournoi.setBackground(new Background(new BackgroundFill(Color.DARKCYAN, new CornerRadii(20), Insets.EMPTY)));
+                btnTournoi.setOnMouseEntered(e -> {
+                    btnTournoi.setBackground(new Background(new BackgroundFill(Color.web("#036991"), new CornerRadii(20), Insets.EMPTY)));
+                    btnTournoi.setTextFill(Color.WHITE);
+                });
+                btnTournoi.setOnMouseExited(e -> {
+                    btnTournoi.setBackground(new Background(new BackgroundFill(Color.web("#C4EAF9"), new CornerRadii(20), Insets.EMPTY)));
+                    btnTournoi.setTextFill(Color.BLACK);
                 });
                 if(nbTournoiC < 7) {
                     listeTournoiC.addRow(1, btnTournoi);
@@ -166,10 +175,16 @@ public class IHMGestion extends Application {
         btnAnnuler.setPrefSize(TAILLE_BTN_X, TAILLE_BTN_Y);
         btnAnnuler.setText("Annuler");
         btnAnnuler.setFont(new Font("Cambria", 10));
-        btnAnnuler.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
+        btnAnnuler.setBackground(new Background(new BackgroundFill(Color.web("A0E4FE"), CornerRadii.EMPTY, Insets.EMPTY)));
         btnAnnuler.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        btnAnnuler.setOnMousePressed(event ->{
-            btnAnnuler.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+        btnAnnuler.setOnMouseEntered(e -> {
+            btnAnnuler.setBackground(new Background(new BackgroundFill(Color.web("#036991"), CornerRadii.EMPTY, Insets.EMPTY)));
+            btnAnnuler.setTextFill(Color.WHITE);
+        });
+
+        btnAnnuler.setOnMouseExited(e -> {
+            btnAnnuler.setBackground(new Background(new BackgroundFill(Color.web("#A0E4FE"), CornerRadii.EMPTY, Insets.EMPTY)));
+            btnAnnuler.setTextFill(Color.BLACK);
         });
         btnAnnuler.setOnAction(new EventHandler<ActionEvent>() {
             @Override
