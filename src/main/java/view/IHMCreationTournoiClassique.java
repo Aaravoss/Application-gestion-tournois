@@ -30,7 +30,8 @@ import static utils.BusinessConstants.*;
 /**
  * IHM liée à la création d'un tournoi Classique
  *
- * @author Carolane Pulval-Dady,Touria SAYAGH
+ * @author Carolane Pulval-Dady
+ * @author Touria SAYAGH
  */
 public class IHMCreationTournoiClassique extends Application {
 	
