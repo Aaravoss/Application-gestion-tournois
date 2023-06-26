@@ -25,6 +25,8 @@ import model.tournoi.Tournoi;
 import model.tournoi.type.Classique;
 import model.tournoi.type.LoserBracket;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static utils.BusinessConstants.*;
@@ -50,11 +52,16 @@ public class IHMGestion extends Application {
     }*/
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage)  {
         stage.setTitle("Gestion des tournois");
         Group root = new Group();
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
-        Image image = new Image("C:/Users/Carolane/Documents/Miage/javafx/fond2.jpg");
+        Image image = null;
+        try {
+            image = new Image(new FileInputStream("src/main/java/view/fond2.jpg"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         ImageView mv = new ImageView(image);
         mv.setFitWidth(1240);
         mv.setFitHeight(724);

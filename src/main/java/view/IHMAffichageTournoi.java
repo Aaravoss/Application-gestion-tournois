@@ -26,6 +26,8 @@ import model.tournoi.type.LoserBracket;
 
 import static utils.BusinessConstants.*;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +57,12 @@ public class IHMAffichageTournoi extends Application {
         stage.setTitle("Affichage tournoi Loser Bracket");
         Group page = new Group();
         Scene scene = new Scene(root, TAILLE_ECRAN_X, TAILLE_ECRAN_Y);
-        Image image = new Image("C:/Users/Carolane/Documents/Miage/javafx/fond2.jpg");
+        Image image = null;
+        try {
+            image = new Image(new FileInputStream("src/main/java/view/fond2.jpg"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         ImageView mv = new ImageView(image);
         mv.setFitWidth(2500);
         mv.setFitHeight(2500);
