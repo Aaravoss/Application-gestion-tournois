@@ -13,7 +13,9 @@ import model.equipe.Equipe;
 import model.tour.Tour;
 
 /**
- * 
+ * Gestion de la donnée tournoi
+ * Donnée de l'application sérialisable.
+ *
  * @author Morgan Nayet
  */
 public abstract class Tournoi implements Serializable {
@@ -32,6 +34,7 @@ public abstract class Tournoi implements Serializable {
 	 * 
 	 * @param nom du tournoi
 	 * @param nombreDEquipeACreer
+	 *
 	 * @author Morgan Nayet
 	 */
 	protected Tournoi(String nom, int nombreDEquipeACreer) {
@@ -42,7 +45,14 @@ public abstract class Tournoi implements Serializable {
 		this.tours = new ArrayList<Tour>();
 		this.equipes = new Equipe[nombreDEquipeACreer];
 	}
-	
+
+	/**
+	 *
+	 * @param nom
+	 * @param nombreDEquipeACreer
+	 * @param nbEquipesParMatch
+	 * @param nbGagnantParMatch
+	 */
 	protected Tournoi(String nom, int nombreDEquipeACreer, int nbEquipesParMatch, 
 			int nbGagnantParMatch) {
 		this(nom, nombreDEquipeACreer);
@@ -52,7 +62,10 @@ public abstract class Tournoi implements Serializable {
 	
 	/**
 	 * Clôture le tournoi
+	 *
 	 * @throws Error si la date de clôture est antérieure à celle d'ouverture
+	 *
+	 * @author Morgan Nayet
 	 */
 	public void fermer() {
 		
@@ -67,7 +80,10 @@ public abstract class Tournoi implements Serializable {
 
 	/**
 	 * Getter du nom
+	 *
 	 * @return le nom du tournoi
+	 *
+	 * @author Morgan Nayet
 	 */
 	public String getNom() {
 		return this.nom;
@@ -75,7 +91,10 @@ public abstract class Tournoi implements Serializable {
 
 	/**
 	 * Getter de la date d'ouverture
+	 *
 	 * @return un nouvelle copie de dateOuverture
+	 *
+	 * @author Morgan Nayet
 	 */
 	public Calendar getDateOuverture() {
 		
@@ -84,8 +103,11 @@ public abstract class Tournoi implements Serializable {
 
 	/**
 	 * Getter de la date de fermeture
-	 * @return une nouvelle copie la dateFermeture
+	 *
+	 * @return une nouvelle copie la dateFermeture <br>
 	 * 		   ou null si le tournoi n'est pas terminé
+	 *
+	 * @author Morgan Nayet
 	 */
 	public Calendar getDateFermeture() {
 		
@@ -97,7 +119,10 @@ public abstract class Tournoi implements Serializable {
 
 	/**
 	 * Getter des equipes
-	 * @return the equipes
+	 *
+	 * @return un tableau des équipes du tournoi
+	 *
+	 * @author Morgan Nayet
 	 */
 	public Equipe[] getEquipes() {
 		return this.equipes;
@@ -108,7 +133,9 @@ public abstract class Tournoi implements Serializable {
 	 * Insère 1 à 1 les nouvelles équipes 
 	 * dans la limite disponible dans le tournoi
 	 * 
-	 * @param nouvsEquipes
+	 * @param nouvsEquipes à insérer dans le tournoi
+	 *
+	 * @author Morgan Nayet
 	 */
 	public void setEquipes(String[] nouvsEquipes) {
 		
@@ -117,6 +144,14 @@ public abstract class Tournoi implements Serializable {
 		}
 	}
 
+	/**
+	 * Setter des équipes
+	 * Ecrase les anciennes équipes pour les remplacer par les nouvelles
+	 *
+	 * @param nouvsEquipes du tournoi
+	 *
+	 * @author Morgan Nayet
+	 */
 	public void setEquipes(Equipe[] nouvsEquipes){
 
 		this.equipes = nouvsEquipes;
@@ -124,7 +159,10 @@ public abstract class Tournoi implements Serializable {
 	
 	/**
 	 * Setter pour ajouter un nouveau tour
-	 * @param tour
+	 *
+	 * @param tour à ajouter au tournoi
+	 *
+	 * @author Morgan Nayet
 	 */
 	public void addNewTour(Tour tour) {
 		
@@ -132,28 +170,45 @@ public abstract class Tournoi implements Serializable {
 	}
 
 	/** 
-	 * tours attribute getter
+	 * Getter du tour courant
 	 * 
-	 * @return le dernier tour
-	 * 		   ou null si pas de tours créés
+	 * @return le dernier tour <br>
+	 * 		   null si pas de tours créés
+	 *
+	 * @author Morgan Nayet
 	 */
 	public Tour getTourCourant() {
 		return this.tours.size() == 0 ? null : (Tour) this.tours.get(this.tours.size()-1);
 	}
 
 	/** 
-	 * nbEquipesParMatch attribute getter
+	 * Getter du nombre d'équipes par match
 	 * 
 	 * @return the nbEquipesParMatch
+	 *
+	 * @author Morgan Nayet
 	 */
 	public int getNbEquipesParMatch() {
 		return this.nbEquipesParMatch;
 	}
 
+	/**
+	 * Getter des tours du tournoi
+	 *
+	 * @return une liste avec tous les tours du tournoi
+	 *
+	 * @author Morgan Nayet
+	 */
 	public List<Tour> getTours() {
 		return this.tours;
 	}
 
+	/**
+	 * Vérifie si le tournoi est fermé
+	 *
+	 * @return true si le tournoi a une date de fermeture <br>
+	 * 		   false sinon
+	 */
 	public Boolean isFerme() {
 		return this.dateFermeture != null;
 	}
